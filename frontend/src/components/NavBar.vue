@@ -53,6 +53,18 @@
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
         href="#"
+        >Meet the team</a
+      >
+      <a
+        class="nav-link active text-primary d-flex collapse-size"
+        aria-current="page"
+        href="#"
+        >Careers</a
+      >
+      <a
+        class="nav-link active text-primary d-flex collapse-size"
+        aria-current="page"
+        href="#"
         >Login</a
       >
     </div>
