@@ -35,7 +35,7 @@ $secondary: #020222;
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 .vh {
-  height: 92.5vh;
+  height: 100vh;
 }
 
 .nav-link:hover {
