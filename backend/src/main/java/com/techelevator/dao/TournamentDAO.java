@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.techelevator.model.Tournament;
 
-public interface TournamnetDAO {
+public interface TournamentDAO {
 	
 	List<Tournament> listAllTournaments();
 	
@@ -12,6 +12,6 @@ public interface TournamnetDAO {
 	
 	Tournament createTournament(Tournament tournament);
 	
-	Void deleteTournament(int tournamentId);
+	void deleteTournament(int tournamentId);
 
 }
