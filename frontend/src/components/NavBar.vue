@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-primary bg-dark p-0">
     <a href="#">
       <img
-        src="..\assets\vectorBlueLogoXTourney.png"
+        src="../assets/vectorBlueLogoXTourney.png"
         alt=""
         class="image-size p-0 m-0"
       />
