@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-primary bg-dark p-0">
     <a href="#">
       <img
-        src="..\assets\vectorBlueLogoXTourney.png"
+        src="../assets/vectorBlueLogoXTourney.png"
         alt=""
         class="image-size p-0 m-0"
       />
@@ -49,6 +49,18 @@
           <a class="nav-link text-primary" href="#">My Tournaments</a>
         </li>
       </ul>
+      <a
+        class="nav-link active text-primary d-flex collapse-size"
+        aria-current="page"
+        href="#"
+        >Meet the team</a
+      >
+      <a
+        class="nav-link active text-primary d-flex collapse-size"
+        aria-current="page"
+        href="#"
+        >Careers</a
+      >
       <a
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
