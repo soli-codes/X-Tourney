@@ -15,10 +15,70 @@ public class User {
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
+   
+   
+   
+   
+   
+   
+   
+   
+   //X-tourney team additions to class below
+   private int wins;
+   private int losses;
+   private int tournamentWins;
+   private int tournamentsEntered;
 
-   public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+
+public User() { }
+
+
+public int getWins() {
+	return wins;
+}
+
+public void setWins(int wins) {
+	this.wins = wins;
+}
+
+public int getLosses() {
+	return losses;
+}
+
+public void setLosses(int losses) {
+	this.losses = losses;
+}
+
+public int getTournamentWins() {
+	return tournamentWins;
+}
+
+public void setTournamentWins(int tournamentWins) {
+	this.tournamentWins = tournamentWins;
+}
+
+public int getTournamentsEntered() {
+	return tournamentsEntered;
+}
+
+public void setTournamentsEntered(int tournamentsEntered) {
+	this.tournamentsEntered = tournamentsEntered;
+}
+
+//end of X-tourney additions to the class
+
+
+
+
+
+
+
+   
+
+
+
+public User(Long id, String username, String password, String authorities) {
       this.id = id;
       this.username = username;
       this.password = password;
