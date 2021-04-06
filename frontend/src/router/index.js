@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Home from '../views/Home.vue';
 import TheMainHelp from '../views/TheMainHelp.vue';
 import Login from '../views/Login.vue';
 import Logout from '../views/Logout.vue';
@@ -24,9 +25,9 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: TheMainHelp,
+      component: Home,
       meta: {
-        requiresAuth: false,
+        requiresAuth: true,
       },
     },
     {
@@ -53,6 +54,14 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    {
+      path: '/help',
+      name: 'help',
+      component: TheMainHelp,
+      meta: {
+        requiresAuth: false,
+      },
+    },
   ],
 });
 
@@ -62,7 +71,7 @@ router.beforeEach((to, from, next) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    next('/login');
+    next('/help');
   } else {
     // Else let them go to their next destination
     next();
