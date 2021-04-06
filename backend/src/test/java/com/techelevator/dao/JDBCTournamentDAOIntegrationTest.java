@@ -24,6 +24,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 	@Before
 	public void setup() {
 		
+		
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		tournamentDao = new JDBCTournamentDAO(jdbcTemplate);
 		
@@ -45,7 +46,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentOne.setSignUpClose(date);
 		
 		tournamentTwo.setTournamentId(2);
-		tournamentTwo.setGameTypeId(2);
+		tournamentTwo.setGameTypeId(1);
 		tournamentTwo.setName("Two");
 		tournamentTwo.setDescription("TwoTwo");
 		tournamentTwo.setPrivate(true);
@@ -58,7 +59,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentTwo.setSignUpClose(date);
 		
 		tournamentThree.setTournamentId(3);
-		tournamentThree.setGameTypeId(3);
+		tournamentThree.setGameTypeId(1);
 		tournamentThree.setName("Three");
 		tournamentThree.setDescription("ThreeThree");
 		tournamentThree.setPrivate(true);
