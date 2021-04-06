@@ -9,12 +9,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
-public abstract class DAOIntegrationTest {
+public class DAOIntegrationTest {
 
     /* Using this particular implementation of DataSource so that
      * every database interaction is part of the same database
      * session and hence the same database transaction */
-    private static SingleConnectionDataSource dataSource;
+    static SingleConnectionDataSource dataSource;
 
     /* Before any tests are run, this method initializes the datasource for testing. */
     @BeforeClass
