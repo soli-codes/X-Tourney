@@ -32,7 +32,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentTwo = new Tournament();
 		tournamentThree = new Tournament();
 		
-		tournamentOne.setTournamentId(1);
+		//tournamentOne.setTournamentId(100);
 		tournamentOne.setGameTypeId(1);
 		tournamentOne.setName("One");
 		tournamentOne.setDescription("OneOne");
@@ -45,7 +45,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentOne.setSignUpOpen(date);
 		tournamentOne.setSignUpClose(date);
 		
-		tournamentTwo.setTournamentId(2);
+		//tournamentTwo.setTournamentId(200);
 		tournamentTwo.setGameTypeId(1);
 		tournamentTwo.setName("Two");
 		tournamentTwo.setDescription("TwoTwo");
@@ -58,7 +58,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentTwo.setSignUpOpen(date);
 		tournamentTwo.setSignUpClose(date);
 		
-		tournamentThree.setTournamentId(3);
+		//tournamentThree.setTournamentId(300);
 		tournamentThree.setGameTypeId(1);
 		tournamentThree.setName("Three");
 		tournamentThree.setDescription("ThreeThree");
@@ -88,7 +88,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		Tournament resultTwo = tournamentDao.createTournament(tournamentTwo);
 		Tournament resultThree = tournamentDao.createTournament(tournamentThree);
 		
-		allTournaments =tournamentDao.listAllTournaments();
+		allTournaments = tournamentDao.listAllTournaments();
 		
 		//Assert
 		Assert.assertEquals(3, allTournaments.size());
@@ -99,26 +99,31 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 	@Test
 	public void  listAllTournaments_successfully_retrieves_all_tournaments() {
 		//Arrange
-		
+		List<Tournament> beforeCreate = new ArrayList<>();
+		Tournament resultOne = tournamentDao.createTournament(tournamentOne);
+		Tournament resultTwo = tournamentDao.createTournament(tournamentTwo);
+		Tournament resultThree = tournamentDao.createTournament(tournamentThree);
 		
 		//Act
-		
-		
+		List<Tournament> test = new ArrayList<>();
+		test = tournamentDao.listAllTournaments();		
 		//Assert
-		
+		Assert.assertEquals(beforeCreate.size() + 3, test.size());
 		
 	}
 	
 	@Test
 	public void  getTournamentById_retrieves_the_correct_tournament() {
 		//Arrange
-		
+		Tournament resultOne = tournamentDao.createTournament(tournamentOne);
+		Tournament test = new Tournament();
 		
 		//Act
-		
+		test = tournamentDao.getTournamentById(resultOne.getTournamentId());
+		String name = test.getName();
 		
 		//Assert
-		
+		Assert.assertEquals(resultOne.getName(), name);
 		
 	}
 	
@@ -126,12 +131,16 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 	public void  deleteTournament_deletes_the_correct_tournament() {
 		//Arrange
 		
-		
+		Tournament resultOne = tournamentDao.createTournament(tournamentOne);
+		List<Tournament> afterCreate = new ArrayList<>();
+		List<Tournament> afterDelete = new ArrayList<>();
 		//Act
-		
+		afterCreate = tournamentDao.listAllTournaments();
+		tournamentDao.deleteTournament(resultOne.getTournamentId());
+		afterDelete = tournamentDao.listAllTournaments();
 		
 		//Assert
-		
+		Assert.assertEquals(afterCreate.size() - 1, afterDelete.size());
 		
 	}
 }
