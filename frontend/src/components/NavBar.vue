@@ -36,7 +36,11 @@
               <a class="dropdown-item text-primary" href="#">Teams</a>
             </li>
             <li>
-              <a class="dropdown-item text-primary" href="#">Tournaments</a>
+              <router-link
+                :to="{ name: 'tournaments' }"
+                class="dropdown-item text-primary"
+                >Tournaments</router-link
+              >
             </li>
           </ul>
         </li>

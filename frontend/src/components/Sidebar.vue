@@ -1,10 +1,10 @@
 <template>
   <div class="p-4 text-white bg-dark">
-    <ul class="nav nav-pills flex-column position-sticky">
+    <ul class="nav nav-pills flex-column position-sticky padding">
       <li class="nav-item">
-        <a href="#" class="nav-link text-primary">
+        <router-link :to="{ name: 'help' }" class="nav-link text-primary">
           FAQ/Help
-        </a>
+        </router-link>
       </li>
       <li>
         <a href="#" class="nav-link text-primary">
@@ -42,5 +42,9 @@
   position: sticky;
   top: 86vh;
   align-items: center;
+}
+
+.padding {
+  padding-top: 100px;
 }
 </style>
