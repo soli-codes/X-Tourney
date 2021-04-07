@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 text-white bg-dark">
-    <ul class="nav nav-pills flex-column mb-auto position-sticky">
+    <ul class="nav nav-pills flex-column position-sticky">
       <li class="nav-item">
         <a href="#" class="nav-link text-primary">
           FAQ/Help
@@ -27,7 +27,7 @@
         </a>
       </li>
       <div class="d-flex align-items-left flex-column">
-        <div class="position-absolute fixed">
+        <div class="fixed">
           <a href="#" class="text-primary nav-link">
             Toggle Display
           </a>

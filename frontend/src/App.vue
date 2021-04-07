@@ -4,7 +4,7 @@
       <NavBar />
       <div class="d-flex vh">
         <sidebar class="sidebar" />
-        <div class="flex-fill">
+        <div class="flex-fill bg-secondary text-info navbar-margin">
           <router-view />
         </div>
       </div>
@@ -31,16 +31,20 @@ $info: #00fff2;
 $danger: #ff2a8d;
 $muted: #005678;
 $secondary: #020222;
-// $gray-200: #111; - Dropdown hover color
+$gray-200: #01012b;
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 .vh {
-  height: 92.5vh;
+  height: 100vh;
 }
 
-.nav-link:hover {
-  color: #00fff2 !important;
+.text-primary:hover {
+  color: #ff2a8d !important;
   transition-duration: 400ms;
+}
+
+.navbar-margin {
+  margin-top: 112px;
 }
 
 .sizing {
