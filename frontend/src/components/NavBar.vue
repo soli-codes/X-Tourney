@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-primary bg-dark p-0">
+  <nav class="navbar navbar-expand-lg navbar-primary bg-dark fixed-top">
     <a href="#">
       <img
         src="../assets/vectorBlueLogoXTourney.png"
         alt=""
-        class="image-size p-0 m-0"
+        class="image-size p-0 m-0 spinny"
       />
     </a>
     <button
@@ -36,7 +36,11 @@
               <a class="dropdown-item text-primary" href="#">Teams</a>
             </li>
             <li>
-              <a class="dropdown-item text-primary" href="#">Tournaments</a>
+              <router-link
+                :to="{ name: 'tournaments' }"
+                class="dropdown-item text-primary"
+                >Tournaments</router-link
+              >
             </li>
           </ul>
         </li>
@@ -72,11 +76,6 @@
 </template>
 
 <style scoped>
-.text-primary:hover {
-  color: #00fff2 !important;
-  transition-duration: 400ms;
-}
-
 .sizing {
   width: 150px;
   text-align: center;
@@ -91,5 +90,9 @@
     text-align: left;
     padding: 0.2rem 0.2rem;
   }
+}
+.spinny:hover {
+  transform: rotate(360deg);
+  transition-duration: 750ms;
 }
 </style>
