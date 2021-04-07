@@ -6,6 +6,7 @@ public class TeamName {
 	private int losses;
 	private int tournamentWins;
 	private int tournamentsEntered;
+	private String teamImage;
 	
 	public TeamName() {
 	}
@@ -50,5 +51,12 @@ public class TeamName {
 		this.tournamentsEntered = tournamentsEntered;
 	}
 	
+	public String getTeamImage() {
+		return teamImage;
+	}
+	
+	public void setTeamImage(String teamImage) {
+		this.teamImage = teamImage;
+	}
 	
 }

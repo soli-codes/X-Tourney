@@ -79,16 +79,16 @@ CREATE TABLE tournament (
     game_type_id integer NOT NULL,
     host_id integer NOT NULL,
     name varchar(100) NOT NULL,
-    description varchar(1000),
+    description varchar(10000),
     is_private boolean NOT NULL,
     is_open boolean NOT NULL,
     max_teams integer NOT NULL,
     elimination_type varchar(50) NOT NULL,
-    start_date date NOT NULL,
-    start_time time NOT NULL,
-    end_date date NOT NULL,
-    signup_open date NOT NULL,
-    signup_close date NOT NULL,
+    start_date varchar(50) NOT NULL,
+    start_time varchar(50) NOT NULL,
+    end_date varchar(50) NOT NULL,
+    signup_open varchar(50) NOT NULL,
+    signup_close varchar(50) NOT NULL,
     tournament_image varchar(1000) NOT NULL DEFAULT '../assets/vectorBlueLogoXTourney.png',
 
     CONSTRAINT PK_tournament_id PRIMARY KEY (tournament_id),
@@ -116,8 +116,8 @@ CREATE TABLE matches (
     losing_team_id integer,
     winning_team_score integer,
     losing_team_score integer,
-    match_date date,
-    match_time time,
+    match_date varchar(50),
+    match_time varchar(50),
 
     CONSTRAINT FK_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
 );
