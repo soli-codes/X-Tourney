@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-primary d-flex justify-content-around">
         <div v-for="tournament in tournaments" :key="tournament.tournamentId">
             <tournament-card :tournament="tournament" />
         </div>
@@ -28,5 +28,12 @@ export default {
 </script>
 
 <style scoped>
+
+.d-flex {
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+
 
 </style>

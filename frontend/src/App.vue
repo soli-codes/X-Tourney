@@ -39,7 +39,7 @@ $secondary: #020222;
 }
 
 .nav-link:hover {
-  color: #00fff2 !important;
+  color: #ff455d !important;
   transition-duration: 400ms;
 }
 

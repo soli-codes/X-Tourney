@@ -77,6 +77,8 @@ export default {
 
 <style scoped>
 
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+
 .image {
     height: 175px;
     width: 175px;
@@ -84,11 +86,11 @@ export default {
 
 .border {
     border-radius: 25px !important;
-    box-shadow: 0px 0px 2px 2px #ff2aa8;
+    box-shadow: 0px 0px 2px 2px #ff455d;
 }
 
 .border:hover {
-    box-shadow: 0px 0px 5px 5px #ff2aa8;
+    box-shadow: 0px 0px 5px 5px #ff455d;
     transition-duration: 100ms;
 }
 
