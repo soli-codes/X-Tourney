@@ -80,7 +80,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	private Tournament mapTournamentFromRowSet(SqlRowSet rowset) {
 		Tournament theTournament = new Tournament();
 		
-		int tournamentId = rowset.getInt("tournement_id");
+		int tournamentId = rowset.getInt("tournament_id");
 		theTournament.setTournamentId(tournamentId);
 		
 		int gameTypeId = rowset.getInt("game_type_id");
