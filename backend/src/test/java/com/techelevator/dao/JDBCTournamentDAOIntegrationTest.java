@@ -18,7 +18,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 	private Tournament tournamentOne;
 	private Tournament tournamentTwo;
 	private Tournament tournamentThree;
-	private String date = "01/01/2021";
+	private String date = "2021-01-01";
 	
 	
 	@Before
