@@ -40,8 +40,8 @@
 <style scoped>
 .fixed {
   position: sticky;
-  top: 86vh;
   align-items: center;
+  padding-top: 72vh;
 }
 
 .padding {

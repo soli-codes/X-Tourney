@@ -28,7 +28,7 @@ export default {
 $dark: #01012b;
 $primary: #d1f7ff;
 $info: #00fff2;
-$danger: #ff2a8d;
+$danger: #ff455d;
 $muted: #005678;
 $secondary: #020222;
 $gray-200: #01012b;
@@ -39,7 +39,7 @@ $gray-200: #01012b;
 }
 
 .text-primary:hover {
-  color: #ff2a8d !important;
+  color: #ff455d !important;
   transition-duration: 400ms;
 }
 
