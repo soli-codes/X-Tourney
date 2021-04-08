@@ -47,12 +47,12 @@ export default {
 
 .border {
   border-radius: 25px !important;
-  box-shadow: 0px 0px 5px 5px #ff455d;
+  /* box-shadow: 0px 0px 5px 2px #ff455d; */
 }
 
 .border:hover {
-  box-shadow: 0px 0px 5px 5px #ff455d;
-  animation: flicker 0.2s infinite alternate;
+  box-shadow: 0px 0px 5px 2px #ff455d;
+  animation: flicker 1.5s infinite alternate;
 }
 
 @keyframes flicker {
