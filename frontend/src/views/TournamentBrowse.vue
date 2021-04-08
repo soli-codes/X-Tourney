@@ -4,14 +4,16 @@
             <input type="text" v-model="filter.name" placeholder="Filter by Name" />
             <input type="text" v-model="filter.startDate" placeholder="Start Date" />
             <input type="text" v-model="filter.description" placeholder="Filter by Description" />
-            <p class="ms-1">Sort By:</p>
+            <p class="ms-1 text-center">Sort By:</p>
             <select class="form-select ms-1" v-model="sortBy">
-                <option>Open Enrollment</option>
-                <option>Private Enrollment</option>
+                <option>Display All</option>
+                <option>Accepting Enrollment</option>
+                <option>Public Sign-Up</option>
+                <option>Invitation Only</option>
                 <option>Start Date</option>
-                <option>Sign Up By</option>
-                <option>Max Teams Asc</option>
-                <option>Max Teams Desc</option>
+                <option>Sign Up Deadline</option>
+                <option>Max Teams Low to High</option>
+                <option>Max Teams High to Low</option>
             </select>
         </div>
         <div class="bg-primary d-flex justify-content-around">
@@ -46,9 +48,11 @@ export default {
         this.tournaments = response.data});
   },
 
+
   computed: {
       filteredList() {
           let filteredTournaments = this.tournaments;
+
           if (this.filter.name != "") {
               filteredTournaments = filteredTournaments.filter( (tournament) => {
                   return tournament.name.toLowerCase().includes(this.filter.name.toLowerCase());
@@ -68,14 +72,67 @@ export default {
               });
           }
 
-          if (this.sortBy == "Open Enrollment") {
+          if (this.sortBy == "Accepting Enrollment") {
               filteredTournaments = filteredTournaments.filter( (tournament) => {
                   return tournament.open;
               });
           }
-           console.log(filteredTournaments.length);
-            return filteredTournaments;
+
+          if (this.sortBy == "Public Sign-Up") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return !tournament.private;
+              });
+          }
+
+          if (this.sortBy == "Invitation Only") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.private;
+              });
+          }
+
+          if (this.sortBy == "Start Date") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.startDate > b.startDate) {
+                      return 1;
+                  }
+                  if (a.startDate < b.startDate) {
+                      return -1;
+                  }
+                  return 0;
+              });
+              
+          }
+
+          if (this.sortBy == "Sign Up Deadline") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.signUpClose > b.signUpClose) {
+                      return 1;
+                  } else return -1;
+              });
+              
+          }
+
+          if (this.sortBy == "Max Teams Low to High") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.maxTeamCount > b.maxTeamCount) {
+                      return 1;
+                  } else return -1;
+              });
+              
+          }
+
+          if (this.sortBy == "Max Teams High to Low") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.maxTeamCount < b.maxTeamCount) {
+                      return 1;
+                  } else return -1;
+              });
+              
+          }
+
+        return filteredTournaments;
       }
+  
   }
     
 }
@@ -89,9 +146,7 @@ export default {
 }
 
 .form-select {
-    width: 10%;
+    width: 15%;
 }
-
-
 
 </style>

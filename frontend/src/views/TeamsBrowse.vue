@@ -4,6 +4,11 @@
             <input type="text" v-model="filter.name" placeholder="Filter by Name" />
             <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
             <input type="text" v-model="filter.losses" placeholder="Losses <= Than" />
+            <select class="form-select ms-1" v-model="sortBy">
+                <option>Wins</option>
+                <option>Losses</option>
+                <option>W / L Ratio</option>
+            </select>
         </div>
         <div class="d-flex justify-content-around">
             <div v-for="team in filteredTeams" :key="team.teamId">
