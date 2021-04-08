@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary text-primary">
+  <div class="bg-primary text-primary pt-2">
     <!-- make each div into a row flexbox // each will be a StepX button-->
     <router-link
       to="#"
