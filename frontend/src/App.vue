@@ -4,7 +4,7 @@
       <NavBar />
       <div class="d-flex vh row">
         <sidebar class="sidebar position-fixed vh-100 sidebar" />
-        <div class="flex-fill bg-secondary text-info navbar-margin">
+        <div class="flex-fill text-info navbar-margin bg-secondary">
           <router-view />
         </div>
       </div>
@@ -33,6 +33,14 @@ $muted: #005678;
 $secondary: #020222;
 $gray-200: #01012b;
 @import '../node_modules/bootstrap/scss/bootstrap';
+
+html {
+  background-color: #070222 !important;
+}
+
+.navigation-color {
+  background-color: #020222;
+}
 
 .vh {
   height: 100vh;

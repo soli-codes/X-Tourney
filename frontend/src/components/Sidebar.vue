@@ -1,5 +1,5 @@
 <template>
-  <div class="p-1 text-white bg-dark">
+  <div class="p-1 text-white navigation-color">
     <ul class="nav nav-pills flex-column padding">
       <li class="nav-item">
         <router-link :to="{ name: 'help' }" class="nav-link text-primary">

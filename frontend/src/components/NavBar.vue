@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-primary navbar-dark bg-dark fixed-top"
+    class="navbar navbar-expand-lg navbar-primary navbar-dark navigation-color fixed-top"
   >
     <a href="#">
       <img
