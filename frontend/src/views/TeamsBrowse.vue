@@ -1,6 +1,6 @@
 <template>
     <div class="bg-primary">
-        <div class="d-flex flex-start">
+        <div class="d-flex flex-start bg-dark">
             <input type="text" v-model="filter.name" placeholder="Filter by Name" />
             <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
             <input type="text" v-model="filter.losses" placeholder="Losses <= Than" />
