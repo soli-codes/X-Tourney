@@ -1,6 +1,8 @@
 package com.techelevator.dao;
 
 import java.util.Date;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,12 +57,14 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public Tournament createTournament(Tournament tournament) {
 		String sqlInsertTournament = "INSERT INTO tournament (game_type_id, name, description, is_private, "
-				+ "is_open, max_teams, elimination_type, start_date, end_date, signup_open, signup_close)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING tournament_id;";
+				+ "is_open, max_teams, elimination_type, start_date, end_date, signup_open, signup_close"
+				+ "host_id, start_time, tournament_image)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING tournament_id;";
 		
 		int tournamentId = jdbcTemplate.queryForObject(sqlInsertTournament, Integer.class, tournament.getGameTypeId(), tournament.getName(), 
 				tournament.getDescription(), tournament.isPrivate(), tournament.isOpen(), tournament.getMaxTeamCount(), tournament.getEliminationType(),
-				tournament.getStartDate(), tournament.getEndDate(), tournament.getSignUpOpen(), tournament.getSignUpClose());
+				tournament.getStartDate(), tournament.getEndDate(), tournament.getSignUpOpen(), tournament.getSignUpClose(), tournament.getHostId(),
+				tournament.getStartTime(), tournament.getTournamentImage());
 		
 		
 		tournament.setTournamentId(tournamentId);
@@ -104,17 +108,26 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		String eliminationType = rowset.getString("elimination_type");
 		theTournament.setEliminationType(eliminationType);
 		
-		Date startDate = rowset.getDate("start_date");
+		String startDate = rowset.getString("start_date");
 		theTournament.setStartDate(startDate);
 		
-		Date endDate = rowset.getDate("end_date");
+		String endDate = rowset.getString("end_date");
 		theTournament.setEndDate(endDate);
 		
-		Date signUpOpen = rowset.getDate("signup_open");
+		String signUpOpen = rowset.getString("signup_open");
 		theTournament.setSignUpOpen(signUpOpen);
 		
-		Date signUpClose = rowset.getDate("signup_close");
+		String signUpClose = rowset.getString("signup_close");
 		theTournament.setSignUpClose(signUpClose);
+		
+		String startTime = rowset.getString("start_time");
+		theTournament.setStartTime(startTime);
+		
+		int hostId = rowset.getInt("host_id");
+		theTournament.setHostId(hostId);
+		
+		String tournamentImage = rowset.getString("tournament_image");
+		theTournament.setTournamentImage(tournamentImage);
 		
 		return theTournament;
 		

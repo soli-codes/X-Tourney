@@ -1,21 +1,21 @@
 package com.techelevator.model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Tournament {
 	private int tournamentId;
 	private boolean isOpen;
 	private String eliminationType; 
-	private Date startDate;
-	private Date endDate;
-	private Date signUpOpen;
-	private Date signUpClose;
+	private String startDate;
+	private String endDate;
+	private String signUpOpen;
+	private String signUpClose;
 	private boolean isPrivate;
 	private String name;
 	private String description;
 	private int gameTypeId;
 	private int maxTeamCount;
+	private int hostId;
+	private String startTime;
+	private String tournamentImage;
 	
 	
 
@@ -54,35 +54,35 @@ public class Tournament {
 		this.eliminationType = eliminationType;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public Date getSignUpOpen() {
+	public String getSignUpOpen() {
 		return signUpOpen;
 	}
 
-	public void setSignUpOpen(Date signUpOpen) {
+	public void setSignUpOpen(String signUpOpen) {
 		this.signUpOpen = signUpOpen;
 	}
 
-	public Date getSignUpClose() {
+	public String getSignUpClose() {
 		return signUpClose;
 	}
 
-	public void setSignUpClose(Date signUpClose) {
+	public void setSignUpClose(String signUpClose) {
 		this.signUpClose = signUpClose;
 	}
 
@@ -118,5 +118,28 @@ public class Tournament {
 		this.gameTypeId = gameTypeId;
 	}
 	
+	public int getHostId() {
+		return hostId;
+	}
+	
+	public void setHostId(int hostId) {
+		this.hostId = hostId;
+	}
+	
+	public String getStartTime() {
+		return startTime;
+	}
+	
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getTournamentImage() {
+		return tournamentImage;
+	}
+	
+	public void setTournamentImage(String tournamentImage) {
+		this.tournamentImage = tournamentImage;
+	}
 	
 }
