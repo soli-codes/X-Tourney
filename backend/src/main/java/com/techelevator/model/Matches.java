@@ -1,9 +1,5 @@
 package com.techelevator.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-
 public class Matches {
 	private int tournamentId;
 	private int teamOneId;
@@ -12,8 +8,9 @@ public class Matches {
 	private int losingTeamId;
 	private int winningTeamScore;
 	private int losingTeamScore;
-	private LocalDate matchDate;
-	private LocalTime matchTime;
+	private String matchDate;
+	private String matchTime;
+	
 	
 	public Matches() {
 	}
@@ -74,19 +71,19 @@ public class Matches {
 		this.losingTeamScore = losingTeamScore;
 	}
 
-	public LocalDate getMatchDate() {
+	public String getMatchDate() {
 		return matchDate;
 	}
 
-	public void setMatchDate(LocalDate matchDate) {
+	public void setMatchDate(String matchDate) {
 		this.matchDate = matchDate;
 	}
 
-	public LocalTime getMatchTime() {
+	public String getMatchTime() {
 		return matchTime;
 	}
 
-	public void setTime(LocalTime matchTime) {
+	public void setTime(String matchTime) {
 		this.matchTime = matchTime;
 	}
 	

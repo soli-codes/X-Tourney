@@ -28,6 +28,7 @@ public class User {
    private int losses;
    private int tournamentWins;
    private int tournamentsEntered;
+   private String userImage;
 
 
 
@@ -64,6 +65,14 @@ public int getTournamentsEntered() {
 
 public void setTournamentsEntered(int tournamentsEntered) {
 	this.tournamentsEntered = tournamentsEntered;
+}
+
+public String getUserImage() {
+	return userImage;
+}
+
+public void setUserImage(String userImage) {
+	this.userImage = userImage;
 }
 
 //end of X-tourney additions to the class
