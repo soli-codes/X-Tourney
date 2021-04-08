@@ -16,13 +16,6 @@ public class User {
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
    
-   
-   
-   
-   
-   
-   
-   
    //X-tourney team additions to class below
    private int wins;
    private int losses;
@@ -76,15 +69,6 @@ public void setUserImage(String userImage) {
 }
 
 //end of X-tourney additions to the class
-
-
-
-
-
-
-
-   
-
 
 
 public User(Long id, String username, String password, String authorities) {
