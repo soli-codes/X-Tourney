@@ -1,68 +1,77 @@
 <template>
-  <div class="bg-secondary">
-    <div class="d-flex flex-start bg-secondary">
-      <input type="text" v-model="filter.name" placeholder="Filter by Name" />
-      <input type="text" v-model="filter.startDate" placeholder="Start Date" />
-      <input
-        type="text"
-        v-model="filter.description"
-        placeholder="Filter by Description"
-      />
-      <p class="ms-1">Sort By:</p>
-      <select class="form-select ms-1" v-model="sortBy">
-        <option>Open Enrollment</option>
-        <option>Private Enrollment</option>
-        <option>Start Date</option>
-        <option>Sign Up By</option>
-        <option>Max Teams Asc</option>
-        <option>Max Teams Desc</option>
-      </select>
+    <div>
+        <div class="d-flex flex-start bg-dark">
+            <input type="text" v-model="filter.name" placeholder="Filter by Name" />
+            <input type="text" v-model="filter.startDate" placeholder="Start Date" />
+            <input type="text" v-model="filter.description" placeholder="Filter by Description" />
+            <p class="ms-1 text-center">Sort By:</p>
+            <select class="form-select ms-1" v-model="sortBy">
+                <option>Display All</option>
+                <option>Accepting Enrollment</option>
+                <option>Public Sign-Up</option>
+                <option>Invitation Only</option>
+                <option>Start Date</option>
+                <option>Sign Up Deadline</option>
+                <option>Max Teams Low to High</option>
+                <option>Max Teams High to Low</option>
+            </select>
+            <p class="ms-1 text-center">Game Type:</p>
+            <select class="form-select ms-1" v-model="filter.gameType">
+                <option>Display All</option>
+                <option v-for="gameType in gameTypes" :value="gameType.gameTypeId" :key="gameType.gameTypeId">
+                    {{ gameType.gameType }}
+                </option>
+            </select>
+        </div>
+        <div class="bg-primary d-flex justify-content-around">
+            <div v-for="tournament in filteredList" :key="tournament.tournamentId">
+                <tournament-card :tournament="tournament" />
+            </div>
+        </div>
     </div>
-    <div
-      class="justify-content-around row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"
-    >
-      <div v-for="tournament in filteredList" :key="tournament.tournamentId">
-        <tournament-card :tournament="tournament" />
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-import TournamentCard from '../components/TournamentCard.vue';
-import TournamentService from '../services/TournamentsService.js';
+import TournamentCard from '../components/TournamentCard.vue'
+import TournamentService from '../services/TournamentsService.js'
+import GamesService from '../services/GamesService.js'
 
 export default {
   components: { TournamentCard },
 
   data() {
-    return {
-      tournaments: [],
-      filter: {
-        name: '',
-        startDate: '',
-        description: '',
-      },
-      sortBy: '',
-    };
+      return {
+          tournaments: [],
+          gameTypes: [],
+          filter: {
+              name: "",
+              startDate: "",
+              description: "",
+              gameType: "",
+          },
+          sortBy: "",
+      };
   },
 
   created() {
-    TournamentService.getTournaments().then((response) => {
-      this.tournaments = response.data;
-    });
+      TournamentService.getTournaments().then(response => {
+        this.tournaments = response.data});
+
+    GamesService.getGames().then(response => {
+        this.gameTypes = response.data});
   },
 
+
   computed: {
-    filteredList() {
-      let filteredTournaments = this.tournaments;
-      if (this.filter.name != '') {
-        filteredTournaments = filteredTournaments.filter((tournament) => {
-          return tournament.name
-            .toLowerCase()
-            .includes(this.filter.name.toLowerCase());
-        });
-      }
+      filteredList() {
+          let filteredTournaments = this.tournaments;
+
+          if (this.filter.name != "") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.name.toLowerCase().includes(this.filter.name.toLowerCase());
+                 
+              });
+          }
 
       if (this.filter.startDate != '') {
         filteredTournaments = filteredTournaments.filter((tournament) => {
@@ -80,16 +89,77 @@ export default {
         });
       }
 
-      if (this.sortBy == 'Open Enrollment') {
-        filteredTournaments = filteredTournaments.filter((tournament) => {
-          return tournament.open;
-        });
+          if (this.sortBy == "Accepting Enrollment") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.open;
+              });
+          }
+
+          if (this.sortBy == "Public Sign-Up") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return !tournament.private;
+              });
+          }
+
+          if (this.sortBy == "Invitation Only") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.private;
+              });
+          }
+
+          if (this.sortBy == "Start Date") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.startDate > b.startDate) {
+                      return 1;
+                  }
+                  if (a.startDate < b.startDate) {
+                      return -1;
+                  }
+                  return 0;
+              });
+              
+          }
+
+          if (this.sortBy == "Sign Up Deadline") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.signUpClose > b.signUpClose) {
+                      return 1;
+                  } else return -1;
+              });
+              
+          }
+
+          if (this.sortBy == "Max Teams Low to High") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.maxTeamCount > b.maxTeamCount) {
+                      return 1;
+                  } else return -1;
+              });
+              
+          }
+
+          if (this.sortBy == "Max Teams High to Low") {
+              filteredTournaments.sort( ( a,b ) => {
+                  if (a.maxTeamCount < b.maxTeamCount) {
+                      return 1;
+                  } else return -1;
+              });
+              
+          }
+
+          if (this.filter.gameType != "") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.gameTypeId == this.filter.gameType;
+              });
+
+        
       }
-      console.log(filteredTournaments.length);
-      return filteredTournaments;
-    },
-  },
-};
+    return filteredTournaments;
+    }
+  }
+    
+}
+
 </script>
 
 <style scoped>
@@ -99,6 +169,7 @@ export default {
 }
 
 .form-select {
-  width: 10%;
+    width: 15%;
 }
+
 </style>
