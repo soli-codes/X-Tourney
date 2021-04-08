@@ -85,6 +85,24 @@ public class UserSqlDAO implements UserDAO {
 
         return userCreated;
     }
+    
+	@Override
+	public void updateUser(User user) {
+		String sqlUpdateUser = "UPDATE users SET wins = ?, losses = ?, tournament_wins = ?"
+				+ "tournaments_entered = ?, user_image = ? WHERE user_id = ?;";
+		
+		jdbcTemplate.update(sqlUpdateUser, user.getWins(), user.getLosses(), user.getTournamentWins(), 
+				user.getTournamentsEntered(), user.getUserImage(), user.getId());
+		
+	}
+
+	@Override
+	public void deleteUser(int userId) {
+		String sqlDeleteUser = "DELETE FROM users WHERE user_id = ?";
+		
+		jdbcTemplate.update(sqlDeleteUser);
+		
+	}
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
@@ -93,6 +111,13 @@ public class UserSqlDAO implements UserDAO {
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
         user.setActivated(true);
+        user.setWins(rs.getInt("wins"));
+        user.setLosses(rs.getInt("losses"));
+        user.setTournamentWins(rs.getInt("tournament_wins"));
+        user.setTournamentsEntered(rs.getInt("tournaments_entered"));
+        user.setUserImage(rs.getString("user_image"));
         return user;
     }
+
+
 }
