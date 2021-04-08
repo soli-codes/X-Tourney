@@ -15,6 +15,13 @@
                 <option>Max Teams Low to High</option>
                 <option>Max Teams High to Low</option>
             </select>
+            <p class="ms-1 text-center">Game Type:</p>
+            <select class="form-select ms-1" v-model="filter.gameType">
+                <option>Display All</option>
+                <option v-for="gameType in gameTypes" :value="gameType.gameTypeId" :key="gameType.gameTypeId">
+                    {{ gameType.gameType }}
+                </option>
+            </select>
         </div>
         <div class="bg-primary d-flex justify-content-around">
             <div v-for="tournament in filteredList" :key="tournament.tournamentId">
@@ -27,6 +34,7 @@
 <script>
 import TournamentCard from '../components/TournamentCard.vue'
 import TournamentService from '../services/TournamentsService.js'
+import GamesService from '../services/GamesService.js'
 
 export default {
   components: { TournamentCard },
@@ -34,10 +42,12 @@ export default {
   data() {
       return {
           tournaments: [],
+          gameTypes: [],
           filter: {
               name: "",
               startDate: "",
               description: "",
+              gameType: "",
           },
           sortBy: "",
       };
@@ -46,6 +56,9 @@ export default {
   created() {
       TournamentService.getTournaments().then(response => {
         this.tournaments = response.data});
+
+    GamesService.getGames().then(response => {
+        this.gameTypes = response.data});
   },
 
 
@@ -130,12 +143,19 @@ export default {
               
           }
 
-        return filteredTournaments;
+          if (this.filter.gameType != "") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.gameTypeId == filter.gameType;
+              });
+
+        
       }
-  
+    return filteredTournaments;
+    }
   }
     
 }
+
 </script>
 
 <style scoped>
