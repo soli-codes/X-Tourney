@@ -1,20 +1,23 @@
 <template>
-  <div class="p-4 text-white bg-dark">
-    <ul class="nav nav-pills flex-column position-sticky padding">
+  <div class="p-1 text-white navigation-color">
+    <ul class="nav nav-pills flex-column padding">
       <li class="nav-item">
         <router-link :to="{ name: 'help' }" class="nav-link text-primary">
           FAQ/Help
         </router-link>
       </li>
       <li>
-        <a href="#" class="nav-link text-primary">
+        <router-link
+          :to="{ name: 'tournaments' }"
+          class="nav-link text-primary"
+        >
           Browse Tournaments
-        </a>
+        </router-link>
       </li>
       <li>
-        <a href="#" class="nav-link text-primary">
-          My Tournaments
-        </a>
+        <router-link :to="{ name: 'create' }" class="nav-link text-primary">
+          Create Tournament
+        </router-link>
       </li>
       <li>
         <a href="#" class="nav-link text-primary">
@@ -26,22 +29,18 @@
           Customers
         </a>
       </li>
-      <div class="d-flex align-items-left flex-column">
-        <div class="fixed">
-          <a href="#" class="text-primary nav-link">
-            Toggle Display
-          </a>
-        </div>
-      </div>
+      <li>
+        <a href="#" class="text-primary nav-link">
+          Toggle Display
+        </a>
+      </li>
     </ul>
   </div>
 </template>
 
 <style scoped>
 .fixed {
-  position: sticky;
-  top: 86vh;
-  align-items: center;
+  display: inline;
 }
 
 .padding {
