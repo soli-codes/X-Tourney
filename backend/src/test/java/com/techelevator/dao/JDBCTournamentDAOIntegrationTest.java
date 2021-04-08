@@ -34,7 +34,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentTwo = new Tournament();
 		tournamentThree = new Tournament();
 		
-		//tournamentOne.setTournamentId(100);
+		tournamentOne.setTournamentId(100);
 		tournamentOne.setGameTypeId(1);
 		tournamentOne.setName("One");
 		tournamentOne.setDescription("OneOne");
@@ -50,7 +50,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentOne.setTournamentImage(image);
 		tournamentOne.setHostId(1);
 		
-		//tournamentTwo.setTournamentId(200);
+		tournamentTwo.setTournamentId(200);
 		tournamentTwo.setGameTypeId(1);
 		tournamentTwo.setName("Two");
 		tournamentTwo.setDescription("TwoTwo");
@@ -66,7 +66,7 @@ public class JDBCTournamentDAOIntegrationTest extends DAOIntegrationTest {
 		tournamentTwo.setTournamentImage(image);
 		tournamentTwo.setHostId(1);
 		
-		//tournamentThree.setTournamentId(300);
+		tournamentThree.setTournamentId(300);
 		tournamentThree.setGameTypeId(1);
 		tournamentThree.setName("Three");
 		tournamentThree.setDescription("ThreeThree");
