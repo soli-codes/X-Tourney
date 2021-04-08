@@ -4,16 +4,15 @@
             <input type="text" v-model="filter.name" placeholder="Filter by Name" />
             <input type="text" v-model="filter.startDate" placeholder="Start Date" />
             <input type="text" v-model="filter.description" placeholder="Filter by Description" />
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sort By
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Wins</a></li>
-                    <li><a class="dropdown-item" href="#">Losses</a></li>
-                    <li><a class="dropdown-item" href="#">W/L Ratio</a></li>
-                </ul>
-            </div>
+            <p class="ms-1">Sort By:</p>
+            <select class="form-select ms-1" v-model="sortBy">
+                <option>Open Enrollment</option>
+                <option>Private Enrollment</option>
+                <option>Start Date</option>
+                <option>Sign Up By</option>
+                <option>Max Teams Asc</option>
+                <option>Max Teams Desc</option>
+            </select>
         </div>
         <div class="bg-primary d-flex justify-content-around">
             <div v-for="tournament in filteredList" :key="tournament.tournamentId">
@@ -37,7 +36,8 @@ export default {
               name: "",
               startDate: "",
               description: "",
-          }
+          },
+          sortBy: "",
       };
   },
 
@@ -67,6 +67,12 @@ export default {
                   return tournament.description.toLowerCase().includes(this.filter.description.toLowerCase());
               });
           }
+
+          if (this.sortBy == "Open Enrollment") {
+              filteredTournaments = filteredTournaments.filter( (tournament) => {
+                  return tournament.open;
+              });
+          }
            console.log(filteredTournaments.length);
             return filteredTournaments;
       }
@@ -80,6 +86,10 @@ export default {
 .justify-content-around {
     height: 100vh;
     flex-wrap: wrap;
+}
+
+.form-select {
+    width: 10%;
 }
 
 
