@@ -18,5 +18,7 @@ public interface UserDAO {
     
     void updateUser(User user);
     
-    void deleteUser(int userId);
+//	Does not work because it violates multiple foreign key constraints
+//	may set up a new role (DEAVTIVATED) that removes all abilities instead of deleting the user.
+//    void deleteUser(int userId);
 }

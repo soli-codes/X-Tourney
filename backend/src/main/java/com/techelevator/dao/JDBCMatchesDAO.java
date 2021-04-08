@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Matches;
 
+@Component
 public class JDBCMatchesDAO implements MatchesDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -60,7 +62,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 
 	@Override
 	public void updateMatch(Matches match) {
-		String sqlUpdateMatch = "UPDATE matches SET winningTeam_id = ?, losing_team_id = ?, "
+		String sqlUpdateMatch = "UPDATE matches SET winning_team_id = ?, losing_team_id = ?, "
 				+ "winning_team_score = ?, losing_team_score = ?, match_date = ?, match_time = ?"
 				+ "WHERE match_id = ?;";
 		

@@ -40,9 +40,11 @@ public class UserController {
 		dao.updateUser(user);
 	}
 	
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@RequestMapping( path = "/users/{id}", method = RequestMethod.DELETE)
-	public void deleteUser(@PathVariable int id) {
-		dao.deleteUser(id);
-	}
+//	Does not work because it violates multiple foreign key constraints
+//	may set up a new role (DEAVTIVATED) that removes all abilities instead of deleting the user.
+//	@ResponseStatus(HttpStatus.NO_CONTENT)
+//	@RequestMapping( path = "/users/{id}", method = RequestMethod.DELETE)
+//	public void deleteUser(@PathVariable int id) {
+//		dao.deleteUser(id);
+//	}
 }

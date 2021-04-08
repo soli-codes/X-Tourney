@@ -88,7 +88,7 @@ public class UserSqlDAO implements UserDAO {
     
 	@Override
 	public void updateUser(User user) {
-		String sqlUpdateUser = "UPDATE users SET wins = ?, losses = ?, tournament_wins = ?"
+		String sqlUpdateUser = "UPDATE users SET wins = ?, losses = ?, tournament_wins = ?, "
 				+ "tournaments_entered = ?, user_image = ? WHERE user_id = ?;";
 		
 		jdbcTemplate.update(sqlUpdateUser, user.getWins(), user.getLosses(), user.getTournamentWins(), 
@@ -96,13 +96,15 @@ public class UserSqlDAO implements UserDAO {
 		
 	}
 
-	@Override
-	public void deleteUser(int userId) {
-		String sqlDeleteUser = "DELETE FROM users WHERE user_id = ?";
-		
-		jdbcTemplate.update(sqlDeleteUser);
-		
-	}
+//	Does not work because it violates multiple foreign key constraints
+//	may set up a new role (DEAVTIVATED) that removes all abilities instead of deleting the user.
+//	@Override
+//	public void deleteUser(int userId) {
+//		String sqlDeleteUser = "DELETE FROM users WHERE user_id = ?;";
+//		
+//		jdbcTemplate.update(sqlDeleteUser, userId);
+//		
+//	}
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
