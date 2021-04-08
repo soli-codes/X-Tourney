@@ -1,5 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-primary bg-dark fixed-top">
+  <nav
+    class="navbar navbar-expand-lg navbar-primary navbar-dark bg-dark fixed-top"
+  >
     <a href="#">
       <img
         src="../assets/vectorBlueLogoXTourney.png"

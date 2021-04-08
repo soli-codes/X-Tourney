@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary text-primary">
+  <div class="bg-primary">
     <!-- make each div into a row flexbox // each will be a StepX button-->
     <router-link
       to="#"
@@ -17,7 +17,7 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Create a Profile</h2>
-        <p>
+        <p class="text-primary">
           Show off your stats and become eligible to join teams, participate in
           tournaments and more as an official X-Tourney Community Member
         </p>
@@ -45,7 +45,7 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column align-items-center">
         <h2>Scout the Opposition</h2>
-        <p>lorem ipsum</p>
+        <p class="text-primary">lorem ipsum</p>
       </div>
       <div>
         <img
@@ -70,7 +70,7 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Manage a Team</h2>
-        <p>
+        <p class="text-primary">
           Ready to manage your very own squad? Ourcreation tool makes it easy to
           build, manage, and enroll your team in competitions.
         </p>
@@ -98,7 +98,7 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Host a Tournament</h2>
-        <p>lorem ipsum</p>
+        <p class="text-primary">lorem ipsum</p>
       </div>
       <div>
         <img
@@ -117,7 +117,6 @@ export default {
 </script>
 
 <style scoped>
-
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 
 .image {
@@ -126,13 +125,13 @@ export default {
 }
 
 .border {
-    border-radius: 25px !important;
-    box-shadow: 0px 0px 2px 2px #ff455d;
+  border-radius: 25px !important;
+  box-shadow: 0px 0px 2px 2px #ff455d;
 }
 
 .border:hover {
-    box-shadow: 0px 0px 5px 5px #ff455d;
-    transition-duration: 100ms;
+  box-shadow: 0px 0px 5px 5px #ff455d;
+  transition-duration: 100ms;
 }
 
 .border-left {

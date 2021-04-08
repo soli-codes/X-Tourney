@@ -74,7 +74,7 @@ const router = new Router({
     },
     {
       path: '/create',
-      name: 'createTournament',
+      name: 'create',
       component: TournamentCreate,
       meta: {
         requiresAuth: false, // Change to true on prod

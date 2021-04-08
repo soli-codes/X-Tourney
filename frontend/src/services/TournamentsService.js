@@ -20,9 +20,4 @@ export default {
   deleteTournament(tournamentID) {
     return axios.delete(`/tournaments/${tournamentID}`);
   },
-
-  // get all game types and names
-  getGames() {
-    return axios.get('/gametype');
-  },
 };

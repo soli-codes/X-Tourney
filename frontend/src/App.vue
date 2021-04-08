@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="navigation">
+    <div class="container-fluid">
       <NavBar />
-      <div class="d-flex vh">
-        <sidebar class="sidebar" />
+      <div class="d-flex vh row">
+        <sidebar class="sidebar position-fixed vh-100 sidebar" />
         <div class="flex-fill bg-secondary text-info navbar-margin">
           <router-view />
         </div>
@@ -45,6 +45,7 @@ $gray-200: #01012b;
 
 .navbar-margin {
   margin-top: 112px;
+  margin-left: 200px;
 }
 
 .sizing {
@@ -56,10 +57,18 @@ $gray-200: #01012b;
   width: 100px;
   height: 100px;
 }
+
+.sidebar {
+  width: 200px;
+  padding: 0px;
+}
 @media (max-width: 991px) {
   .collapse-size {
     text-align: left;
     padding: 0.2rem 0.2rem;
+  }
+  .navbar-margin {
+    margin-left: 0px;
   }
   .sidebar {
     display: none;
