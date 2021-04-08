@@ -3,11 +3,29 @@
     <div class="form-group">
       <select
         class="form-select"
-        v-model="tournament.gameType"
+        v-model="tournament.gameTypeId"
         aria-label="Select a game"
         id="gameOptions"
       >
-        <option>Select a game</option>
+        <option value="1">Select a game</option>
+        <option value="2">Test</option>
+        <option value="3">Test</option>
+        <option value="4">Test</option>
+        <option value="5">Test</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select
+        class="form-select"
+        v-model="tournament.eliminationType"
+        aria-label="Select a game"
+        id="eliminationType"
+      >
+        <option value="1">Select an elimination type</option>
+        <option value="2">Test</option>
+        <option value="3">Test</option>
+        <option value="4">Test</option>
+        <option value="5">Test</option>
       </select>
     </div>
     <div class="form-group">
@@ -76,6 +94,15 @@
       ></textarea>
     </div>
     <div class="form-group">
+      <label for="Open registration">Open registration</label>
+      <input
+        type="checkbox"
+        name="Open registration"
+        id="openRegistration"
+        v-model="tournament.open"
+      />
+    </div>
+    <div class="form-group">
       <label for="Open tournament">Open Tournament</label>
       <input
         type="checkbox"
@@ -98,7 +125,7 @@
 </template>
 
 <script>
-// import TournamentService from '../services/TournamentsService.js';
+import TournamentService from '../services/TournamentsService.js';
 import GamesService from '../services/GamesService.js';
 export default {
   data() {
@@ -113,7 +140,9 @@ export default {
         endDate: '',
         signupOpen: '',
         signupClose: '',
-        gameType: '',
+        gameTypeId: '',
+        eliminationType: '',
+        private: '',
         tournamentID: null,
       },
       gameTypes: [],
@@ -125,24 +154,26 @@ export default {
         name: this.tournament.name,
         description: this.tournament.description,
         open: this.tournament.open,
+        private: this.tournament.private,
         maxTeams: this.tournament.maxTeams,
         startDate: this.tournament.startDate,
         startTime: this.tournament.startTime,
         endDate: this.tournament.endDate,
-        signupOpen: this.tournament.signupOpen,
-        signupClose: this.tournament.signupClose,
-        gameType: this.tournament.gameType,
+        signUpOpen: this.tournament.signupOpen,
+        signUpClose: this.tournament.signupClose,
+        gameTypeId: this.tournament.gameTypeId,
+        eliminationType: this.tournament.eliminationType,
       };
       console.log(newTournament);
-      // TournamentService.createTournament(newTournament)
-      //   .then((response) => {
-      //     if (response.status === 201) {
-      //       this.$router.push(`/tournaments/${this.tournament.tournamentID}`);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      TournamentService.createTournament(newTournament)
+        .then((response) => {
+          if (response.status === 201) {
+            this.$router.push(`/tournaments/${this.tournament.tournamentID}`);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   created() {
@@ -151,11 +182,14 @@ export default {
     });
   },
   mounted() {
-    document.getElementById('gameOptions').insertAdjacentHTML(
-      'beforeend',
-      `<option value="1">Valorant</option>
-          <option value="2">Golf</option>`
-    );
+    this.gameTypes.forEach((game) => {
+      document
+        .getElementById('gameOptions')
+        .insertAdjacentHTML(
+          'beforeend',
+          `<option value="${game.game_type_id}">${game.game_type}</option>`
+        );
+    });
   },
 };
 </script>
