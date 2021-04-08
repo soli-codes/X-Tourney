@@ -8,7 +8,7 @@ export default {
 
   // create tournament
   createTournament(tournament) {
-    return axios.post('/tournaments', tournament);
+    return axios.post('/tournaments/create', tournament);
   },
 
   // update tournament

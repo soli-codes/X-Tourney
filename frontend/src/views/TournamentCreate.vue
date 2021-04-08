@@ -7,11 +7,14 @@
         aria-label="Select a game"
         id="gameOptions"
       >
-        <option value="1">Select a game</option>
-        <option value="2">Test</option>
-        <option value="3">Test</option>
-        <option value="4">Test</option>
-        <option value="5">Test</option>
+        <option value="0">Select a game</option>
+        <option
+          v-for="game in gameTypes"
+          :key="game.gameTypeId"
+          :value="game.gameTypeId"
+        >
+          {{ game.gameType }}
+        </option>
       </select>
     </div>
     <div class="form-group">
@@ -22,10 +25,8 @@
         id="eliminationType"
       >
         <option value="1">Select an elimination type</option>
-        <option value="2">Test</option>
-        <option value="3">Test</option>
-        <option value="4">Test</option>
-        <option value="5">Test</option>
+        <option value="2">Single Elimination</option>
+        <option value="3">Double Elimination</option>
       </select>
     </div>
     <div class="form-group">
@@ -99,7 +100,7 @@
         type="checkbox"
         name="Open registration"
         id="openRegistration"
-        v-model="tournament.open"
+        v-model="tournament.private"
       />
     </div>
     <div class="form-group">
@@ -107,7 +108,7 @@
       <input
         type="checkbox"
         name="Open Tournament"
-        id="open-tournament"
+        id="openTournament"
         v-model="tournament.open"
       />
     </div>
@@ -151,24 +152,28 @@ export default {
   methods: {
     createTournament() {
       const newTournament = {
-        name: this.tournament.name,
-        description: this.tournament.description,
-        open: this.tournament.open,
-        private: this.tournament.private,
-        maxTeams: this.tournament.maxTeams,
+        eliminationType: this.tournament.eliminationType,
         startDate: this.tournament.startDate,
-        startTime: this.tournament.startTime,
         endDate: this.tournament.endDate,
         signUpOpen: this.tournament.signupOpen,
         signUpClose: this.tournament.signupClose,
+        name: this.tournament.name,
+        description: this.tournament.description,
         gameTypeId: this.tournament.gameTypeId,
-        eliminationType: this.tournament.eliminationType,
+        maxTeamCount: this.tournament.maxTeams,
+        hostId: 4,
+        startTime: this.tournament.startTime,
+        open: this.tournament.open,
+        private: this.tournament.private,
       };
+      if (newTournament.tournamentImage == null) {
+        newTournament.tournamentImage = '..src/assets/X-Tourney_Logo.png';
+      }
       console.log(newTournament);
       TournamentService.createTournament(newTournament)
         .then((response) => {
           if (response.status === 201) {
-            this.$router.push(`/tournaments/${this.tournament.tournamentID}`);
+            console.log('wow we did it');
           }
         })
         .catch((error) => {
@@ -177,7 +182,7 @@ export default {
     },
   },
   created() {
-    GamesService.getGames.then((response) => {
+    GamesService.getGames().then((response) => {
       this.gameTypes = response.data;
     });
   },
@@ -187,7 +192,7 @@ export default {
         .getElementById('gameOptions')
         .insertAdjacentHTML(
           'beforeend',
-          `<option value="${game.game_type_id}">${game.game_type}</option>`
+          `<option value="${game.gameTypeId}">${game.gameType}</option>`
         );
     });
   },

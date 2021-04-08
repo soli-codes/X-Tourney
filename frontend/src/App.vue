@@ -38,10 +38,27 @@ html {
   background-color: #070222 !important;
 }
 
-.navigation-color {
-  background-color: #020222;
+.top-nav-color {
+  background: rgb(0, 11, 24);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 11, 24, 1) 0%,
+    rgba(0, 23, 45, 1) 25%,
+    rgba(0, 38, 77, 1) 50%,
+    rgba(2, 56, 110, 1) 100%
+  );
 }
 
+.side-nav-color {
+  background: rgb(0, 11, 24);
+  background: linear-gradient(
+    30deg,
+    rgba(0, 11, 24, 1) 0%,
+    rgba(0, 23, 45, 1) 25%,
+    rgba(0, 38, 77, 1) 50%,
+    rgba(2, 56, 110, 1) 100%
+  );
+}
 .vh {
   height: 100vh;
 }
