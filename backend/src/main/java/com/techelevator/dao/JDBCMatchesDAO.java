@@ -1,41 +1,79 @@
 package com.techelevator.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.Matches;
 
 public class JDBCMatchesDAO implements MatchesDAO {
 
+	private JdbcTemplate jdbcTemplate;
+	
+	public JDBCMatchesDAO (JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	
 	@Override
 	public List<Matches> getAllMatches() {
-		// TODO Auto-generated method stub
-		return null;
+		String sqlGetAllMatches = "SELECT * FROM matches;";
+		
+		List<Matches> allMatches = new ArrayList<>();
+		
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetAllMatches);
+		
+		while (rowSet.next()) {
+			Matches match = mapMatchFromRowSet(rowSet);
+			allMatches.add(match);
+		}
+		return allMatches;
 	}
 
 	@Override
 	public Matches getMatchById(int matchId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sqlGetMatchById = "SELECT * FROM matches WHERE match_id = ?;";
+		
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetMatchById, matchId);
+		
+		Matches match = new Matches();
+		
+		while (rowSet.next()) {
+			match = mapMatchFromRowSet(rowSet);
+		}
+		return match;
 	}
 
 	@Override
 	public Matches createMatch(Matches match) {
-		// TODO Auto-generated method stub
-		return null;
+		String sqlCreateMatch = "INSERT INTO matches (tournament_id, team_1_id, team_2_id) "
+				+ "VALUES (?, ?, ?) RETURNING match_id;";
+		
+		int matchId = jdbcTemplate.queryForObject(sqlCreateMatch, Integer.class, 
+				match.getTournamentId(), match.getTeamOneId(), match.getTeamTwoId());
+		
+		match.setMatchId(matchId);
+		
+		return match;
 	}
 
 	@Override
-	public void updateMatch(Matches Match) {
-		// TODO Auto-generated method stub
+	public void updateMatch(Matches match) {
+		String sqlUpdateMatch = "UPDATE matches SET winningTeam_id = ?, losing_team_id = ?, "
+				+ "winning_team_score = ?, losing_team_score = ?, match_date = ?, match_time = ?"
+				+ "WHERE match_id = ?;";
 		
+		jdbcTemplate.update(sqlUpdateMatch, match.getWinningTeamId(), match.getLosingTeamId(), 
+				match.getWinningTeamScore(), match.getLosingTeamScore(), match.getMatchDate(), 
+				match.getMatchTime(), match.getMatchId());
 	}
 
 	@Override
 	public void deleteMatch(int matchId) {
-		// TODO Auto-generated method stub
+		String sqlDeleteMatch = "DELETE FROM matches WHERE match_id = ?;";
 		
+		jdbcTemplate.update(sqlDeleteMatch, matchId);
 	}
 	
 	//I'm not sure if this will cause an error/null values if it tries to map values that

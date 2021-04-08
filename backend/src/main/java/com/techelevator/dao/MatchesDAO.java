@@ -12,7 +12,7 @@ public interface MatchesDAO {
 	
 	Matches createMatch(Matches match);
 	
-	void updateMatch(Matches Match);
+	void updateMatch(Matches match);
 	
 	void deleteMatch(int matchId);
 }
