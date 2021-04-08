@@ -1,5 +1,5 @@
 <template>
-  <div class="p-1 text-white navigation-color">
+  <div class="p-1 text-white side-nav-color">
     <ul class="nav nav-pills flex-column padding">
       <li class="nav-item">
         <router-link :to="{ name: 'help' }" class="nav-link text-primary">
@@ -44,6 +44,6 @@
 }
 
 .padding {
-  padding-top: 100px;
+  padding-top: 112px;
 }
 </style>
