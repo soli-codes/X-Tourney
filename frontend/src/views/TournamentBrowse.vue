@@ -73,17 +73,21 @@ export default {
               });
           }
 
-          if (this.filter.startDate != "") {
-              filteredTournaments = filteredTournaments.filter( (tournament) => {
-                  return tournament.startDate.toLowerCase().includes(this.filter.startDate.toLowerCase());
-              });
-          }
+      if (this.filter.startDate != '') {
+        filteredTournaments = filteredTournaments.filter((tournament) => {
+          return tournament.startDate
+            .toLowerCase()
+            .includes(this.filter.startDate.toLowerCase());
+        });
+      }
 
-          if (this.filter.description != "") {
-              filteredTournaments = filteredTournaments.filter( (tournament) => {
-                  return tournament.description.toLowerCase().includes(this.filter.description.toLowerCase());
-              });
-          }
+      if (this.filter.description != '') {
+        filteredTournaments = filteredTournaments.filter((tournament) => {
+          return tournament.description
+            .toLowerCase()
+            .includes(this.filter.description.toLowerCase());
+        });
+      }
 
           if (this.sortBy == "Accepting Enrollment") {
               filteredTournaments = filteredTournaments.filter( (tournament) => {
@@ -145,7 +149,7 @@ export default {
 
           if (this.filter.gameType != "") {
               filteredTournaments = filteredTournaments.filter( (tournament) => {
-                  return tournament.gameTypeId == filter.gameType;
+                  return tournament.gameTypeId == this.filter.gameType;
               });
 
         
@@ -159,10 +163,9 @@ export default {
 </script>
 
 <style scoped>
-
 .justify-content-around {
-    height: 100vh;
-    flex-wrap: wrap;
+  height: 100vh;
+  flex-wrap: wrap;
 }
 
 .form-select {

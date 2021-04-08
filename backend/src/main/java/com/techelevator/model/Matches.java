@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 public class Matches {
+	private int matchId;
 	private int tournamentId;
 	private int teamOneId;
 	private int teamTwoId;
@@ -13,6 +14,14 @@ public class Matches {
 	
 	
 	public Matches() {
+	}
+	
+	public int getMatchId() {
+		return matchId;
+	}
+	
+	public void setMatchId(int matchId) {
+		this.matchId = matchId;
 	}
 
 	public int getTournamentId() {
@@ -83,7 +92,7 @@ public class Matches {
 		return matchTime;
 	}
 
-	public void setTime(String matchTime) {
+	public void setMatchTime(String matchTime) {
 		this.matchTime = matchTime;
 	}
 	

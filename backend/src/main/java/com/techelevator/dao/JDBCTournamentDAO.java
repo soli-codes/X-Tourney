@@ -1,8 +1,5 @@
 package com.techelevator.dao;
 
-import java.util.Date;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +54,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public Tournament createTournament(Tournament tournament) {
 		String sqlInsertTournament = "INSERT INTO tournament (game_type_id, name, description, is_private, "
-				+ "is_open, max_teams, elimination_type, start_date, end_date, signup_open, signup_close"
+				+ "is_open, max_teams, elimination_type, start_date, end_date, signup_open, signup_close,"
 				+ "host_id, start_time, tournament_image)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING tournament_id;";
 		

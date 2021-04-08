@@ -7,7 +7,7 @@ import Logout from '../views/Logout.vue';
 import Register from '../views/Register.vue';
 import store from '../store/index';
 import TournamentBrowse from '../views/TournamentBrowse.vue';
-import TeamsBrowse from '../views/TeamsBrowse.vue';
+import TournamentCreate from '../views/TournamentCreate.vue';
 
 Vue.use(Router);
 
@@ -73,13 +73,13 @@ const router = new Router({
       },
     },
     {
-      path: '/teams',
-      name: 'teams',
-      component: TeamsBrowse,
+      path: '/create',
+      name: 'create',
+      component: TournamentCreate,
       meta: {
-        requiresAuth: false,
+        requiresAuth: false, // Change to true on prod
       },
-    }
+    },
   ],
 });
 
@@ -89,7 +89,7 @@ router.beforeEach((to, from, next) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    next('/help');
+    next('/login');
   } else {
     // Else let them go to their next destination
     next();
