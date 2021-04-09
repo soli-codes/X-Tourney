@@ -7,7 +7,7 @@
         aria-label="Select a game"
         id="gameOptions"
       >
-        <option value="0">Select a game</option>
+        <option disabled selected value="">Select a game</option>
         <option
           v-for="game in gameTypes"
           :key="game.gameTypeId"
@@ -24,7 +24,7 @@
         aria-label="Select a game"
         id="eliminationType"
       >
-        <option value="1">Select an elimination type</option>
+        <option disabled selected value="">Select an elimination type</option>
         <option value="2">Single Elimination</option>
         <option value="3">Double Elimination</option>
       </select>
@@ -112,15 +112,19 @@
         v-model="tournament.open"
       />
     </div>
-    <div class="form-group">
-      <label for="Max Teams">Max Teams</label>
-      <input
-        type="number"
-        name="max-teams"
-        id="max-teams"
-        v-model="tournament.maxTeams"
-      />
-    </div>
+    <select
+      class="form-select"
+      v-model="tournament.maxTeams"
+      aria-label="Select a max amount of teams"
+      id="maxTeams"
+    >
+      <option disabled selected value="">Select the max amount of teams</option>
+      <option>4</option>
+      <option>8</option>
+      <option>16</option>
+      <option>32</option>
+      <option>64</option>
+    </select>
     <button type="submit">Submit</button>
   </form>
 </template>
@@ -184,16 +188,6 @@ export default {
   created() {
     GamesService.getGames().then((response) => {
       this.gameTypes = response.data;
-    });
-  },
-  mounted() {
-    this.gameTypes.forEach((game) => {
-      document
-        .getElementById('gameOptions')
-        .insertAdjacentHTML(
-          'beforeend',
-          `<option value="${game.gameTypeId}">${game.gameType}</option>`
-        );
     });
   },
 };
