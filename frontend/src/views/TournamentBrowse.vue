@@ -33,7 +33,9 @@
     </div>
     <div class="d-flex justify-content-around">
       <div v-for="tournament in filteredList" :key="tournament.tournamentId">
-        <tournament-card :tournament="tournament" />
+        <router-link :to="{ name: 'tournamentDetails', params: { tournamentId: tournament.tournamentId }}">
+          <tournament-card :tournament="tournament" />
+        </router-link>
       </div>
     </div>
   </div>

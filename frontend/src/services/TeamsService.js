@@ -2,10 +2,12 @@ import axios from 'axios';
 
 export default {
 
-    // return all team
+    // return all teams
     getTeams() {
         return axios.get('/teams');
     },
+
+   
 
     // create team
     createTeam(team) {

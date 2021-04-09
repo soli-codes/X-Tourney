@@ -6,6 +6,16 @@ export default {
     return axios.get('/tournaments');
   },
 
+  // return tournament by id
+  getTournamentById(tournamentId) {
+    return axios.get(`/tournaments/${tournamentId}`)
+  },
+
+   // return teams by tournamentId
+   getTournamentTeams(tournamentId) {
+    return axios.get(`/teams/${tournamentId}`) // ask Korry for proper end point
+  },
+
   // create tournament
   createTournament(tournament) {
     return axios.post('/tournaments/create', tournament);

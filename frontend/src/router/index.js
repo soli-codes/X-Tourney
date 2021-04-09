@@ -9,6 +9,7 @@ import store from '../store/index';
 import TournamentBrowse from '../views/TournamentBrowse.vue';
 import TournamentCreate from '../views/TournamentCreate.vue';
 import TeamsBrowse from '../views/TeamsBrowse.vue';
+import TournamentDetails from '../views/TournamentDetails.vue';
 
 Vue.use(Router);
 
@@ -85,6 +86,14 @@ const router = new Router({
       path: '/teams',
       name: 'teams',
       component: TeamsBrowse,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: '/tournaments/:tournamentId',
+      name: 'tournamentDetails',
+      component: TournamentDetails,
       meta: {
         requiresAuth: false,
       },
