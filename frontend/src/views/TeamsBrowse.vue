@@ -4,7 +4,9 @@
             <input type="text" v-model="filter.name" placeholder="Filter by Name" />
             <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
             <input type="text" v-model="filter.losses" placeholder="Losses <= Than" />
-            <select class="form-select ms-1" v-model="sortBy">
+            <p class="ms-1 text-center">Sort By:</p>
+            <select class="form-select ms-1" v-model="filter.sortBy">
+                <option>None</option>
                 <option>Wins</option>
                 <option>Losses</option>
                 <option>W / L Ratio</option>
@@ -33,6 +35,7 @@ export default {
               name: "",
               wins: "",
               losses: "",
+              sortBy: "",
           }
       };
   },
@@ -64,8 +67,34 @@ export default {
                   team.losses <= this.filter.losses;
               });
           }
+
+          if (this.filter.sortBy == "Wins") {
+             filteredTeams.sort((a, b) => {
+                if (a.wins > b.wins) {
+                    return 1;
+                } else return -1;
+            });
+        }
+
+        if (this.filter.sortBy == "Losses") {
+             filteredTeams.sort((a, b) => {
+                if (a.losses > b.losses) {
+                    return 1;
+                } else return -1;
+            });
+        }
+
+          if (this.filter.sortBy == "W / L Ratio") {
+             filteredTeams.sort((a, b) => {
+                if ((a.wins / a.losses) > (b.wins / b.losses)) {
+                    return 1;
+                } else return -1;
+            });
+        }
+
           return filteredTeams;
-      }
+
+      },
 
   }
     
@@ -74,9 +103,13 @@ export default {
 
 <style scoped>
 
-.d-flex {
+.justify-content-around {
     height: 100vh;
     flex-wrap: wrap;
+}
+
+.form-select {
+  width: 15%;
 }
 
 </style>
