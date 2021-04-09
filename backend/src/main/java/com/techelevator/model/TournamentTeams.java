@@ -1,19 +1,10 @@
 package com.techelevator.model;
 
-public class TournamentUsers {
-	public int userId;
+public class TournamentTeams {
 	public int tournamentId;
 	public int teamId;
 	
-	public TournamentUsers() {
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public TournamentTeams() {
 	}
 
 	public int getTournamentId() {
