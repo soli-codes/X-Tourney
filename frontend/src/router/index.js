@@ -8,6 +8,7 @@ import Register from '../views/Register.vue';
 import store from '../store/index';
 import TournamentBrowse from '../views/TournamentBrowse.vue';
 import TournamentCreate from '../views/TournamentCreate.vue';
+import TeamsBrowse from '../views/TeamsBrowse.vue';
 
 Vue.use(Router);
 
@@ -78,6 +79,14 @@ const router = new Router({
       component: TournamentCreate,
       meta: {
         requiresAuth: false, // Change to true on prod
+      },
+    },
+    {
+      path: '/teams',
+      name: 'teams',
+      component: TeamsBrowse,
+      meta: {
+        requiresAuth: false,
       },
     },
   ],
