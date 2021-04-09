@@ -78,8 +78,10 @@ CREATE TABLE tournament (
     tournament_id int DEFAULT nextval('seq_tournament_id'::regclass) NOT NULL,
     game_type_id integer NOT NULL,
     host_id integer NOT NULL,
+    tournament_winner_id integer,
     name varchar(100) NOT NULL,
     description varchar(10000),
+    has_started boolean NOT NULL DEFAULT false,
     is_private boolean NOT NULL,
     is_open boolean NOT NULL,
     max_teams integer NOT NULL,
@@ -97,12 +99,10 @@ CREATE TABLE tournament (
 
 );
 
-CREATE TABLE tournament_users (
-    user_id integer NOT NULL,
+CREATE TABLE tournament_teams (
     team_id integer NOT NULL,
     tournament_id integer NOT NULL,
 
-    CONSTRAINT FK_user_id_team_id_tournament_id FOREIGN KEY (user_id) REFERENCES users (user_id),
     CONSTRAINT FK_team_id_user_id_tournament_id FOREIGN KEY (team_id) REFERENCES team_name (team_id),
     CONSTRAINT FK_tournament_id_user_id_team_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
 );
@@ -158,16 +158,19 @@ max_teams, elimination_type, start_date, end_date, signup_open, signup_close, st
 (14, 7, 'Viscious Valorant', 'Victory to the Valorant Victor who Visciously Vanquishes their foes', true, false, 8, 'Single', 
 '2021-05-01', '2021-05-05', '2021-04-01', '2021-04-28', '13:00');
 
-INSERT INTO tournament_users (tournament_id, team_id, user_id) VALUES (1, 1, 3), (1, 2, 4), (1, 3, 5), 
-(2, 4, 5), (2, 5, 7), 
-(3, 1, 3), (3, 2, 4), (3, 3, 5), (3, 4, 6), 
-(4, 5, 7), (4, 1, 8), (4, 2, 3), (4, 3, 5), 
-(5, 1, 7), (5, 2, 8), (5, 4,5 ), (5, 5, 6);
+INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 1), (1, 2), (1, 3), 
+(2, 4), (2, 5), 
+(3, 1), (3, 2), (3, 3), (3, 4), 
+(4, 5), (4, 1), (4, 2), (4, 3), 
+(5, 1), (5, 2), (5, 4), (5, 5);
 
 INSERT INTO matches (tournament_id, team_1_id, team_2_id, match_date, match_time, winning_team_id, 
 losing_team_id, winning_team_score, losing_team_score) VALUES 
 (3, 1, 2, '2021-03-01', '12:00', 1, 2, 5, 3), 
 (3, 3, 4, '2021-03-02', '12:00', 3, 4, 7, 5), 
 (3, 1, 3, '2021-03-04', '14:00', 1, 3, 6, 4);
+
+UPDATE tournament SET has_started = true, tournament_winner_id = 1 
+WHERE tournament_id = 3;
 
 COMMIT TRANSACTION;
