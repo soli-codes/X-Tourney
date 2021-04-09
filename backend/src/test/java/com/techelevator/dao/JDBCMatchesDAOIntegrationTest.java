@@ -1,10 +1,14 @@
 package com.techelevator.dao;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.techelevator.model.Matches;
+
+import org.junit.Assert;
 
 public class JDBCMatchesDAOIntegrationTest extends DAOIntegrationTest {
 	
@@ -65,25 +69,34 @@ public class JDBCMatchesDAOIntegrationTest extends DAOIntegrationTest {
 	@Test
 	public void getAllMatches_returns_all_matches() {
 		//Arrange
-		
+		List<Matches> matchesBefore = matchesDao.getAllMatches();
+		Matches one = matchesDao.createMatch(matchesOne);
+		Matches two = matchesDao.createMatch(matchesTwo);
+		Matches three = matchesDao.createMatch(matchesThree);
 		
 		//Act
-		
+		List<Matches> matchesAfter = matchesDao.getAllMatches();
 		
 		//Assert
-		
+		Assert.assertEquals(matchesBefore.size() + 3, matchesAfter.size());
 	}
 	
 	@Test
 	public void getMatchById_returns_the_correct_match() {
 		//Arrange
-		
+		Matches one = matchesDao.createMatch(matchesOne);
+		Matches two = matchesDao.createMatch(matchesTwo);
+		Matches three = matchesDao.createMatch(matchesThree);
 		
 		//Act
-		
+		Matches resultOne = matchesDao.getMatchById(matchesOne.getMatchId());
+		Matches resultTwo = matchesDao.getMatchById(matchesTwo.getMatchId());
+		Matches resultThree = matchesDao.getMatchById(matchesThree.getMatchId());
 		
 		//Assert
-		
+		Assert.assertEquals(one.getTournamentId(), resultOne.getTournamentId());
+		Assert.assertEquals(two.getTeamOneId(), resultTwo.getTeamOneId());
+		Assert.assertEquals(three.getTeamTwoId(), resultThree.getTeamTwoId());
 	}
 	
 	@Test
@@ -92,33 +105,58 @@ public class JDBCMatchesDAOIntegrationTest extends DAOIntegrationTest {
 		
 		
 		//Act
-		
+		Matches one = matchesDao.createMatch(matchesOne);
+		Matches two = matchesDao.createMatch(matchesTwo);
+		Matches three = matchesDao.createMatch(matchesThree);
 		
 		//Assert
-		
+		Assert.assertEquals(matchesOne.getTournamentId(), one.getTournamentId());
+		Assert.assertEquals(matchesTwo.getTeamTwoId(), two.getTeamTwoId());
+		Assert.assertEquals(matchesThree.getTeamOneId(), three.getTeamOneId());
 	}
 	
 	@Test
 	public void updateMatch_successfully_updates_a_match() {
 		//Arrange
-		
+		int newOneWinningScore = 10;
+		int newTwoWinningScore = 15;
+		int newThreeWinningScore = 20;
+		matchesOne.setWinningTeamScore(newOneWinningScore);
+		matchesTwo.setWinningTeamScore(newTwoWinningScore);
+		matchesThree.setWinningTeamScore(newThreeWinningScore);
+		Matches one = matchesDao.createMatch(matchesOne);
+		Matches two = matchesDao.createMatch(matchesTwo);
+		Matches three = matchesDao.createMatch(matchesThree);
 		
 		//Act
-		
+		matchesDao.updateMatch(matchesOne);
+		matchesDao.updateMatch(matchesTwo);
+		matchesDao.updateMatch(matchesThree);
+		Matches resultOne = matchesDao.getMatchById(one.getMatchId());
+		Matches resultTwo = matchesDao.getMatchById(two.getMatchId());
+		Matches resultThree = matchesDao.getMatchById(three.getMatchId());
 		
 		//Assert
-		
+		Assert.assertEquals(newOneWinningScore, resultOne.getWinningTeamScore());
+		Assert.assertEquals(newTwoWinningScore, resultTwo.getWinningTeamScore());
+		Assert.assertEquals(newThreeWinningScore, resultThree.getWinningTeamScore());
 	}
 	
 	@Test
 	public void deleteMatch_deletes_a_match() {
 		//Arrange
-		
+		List<Matches> matchesBefore = matchesDao.getAllMatches();
+		Matches one = matchesDao.createMatch(matchesOne);
+		Matches two = matchesDao.createMatch(matchesTwo);
+		Matches three = matchesDao.createMatch(matchesThree);
 		
 		//Act
-		
+		matchesDao.deleteMatch(one.getMatchId());
+		matchesDao.deleteMatch(two.getMatchId());
+		List<Matches> matchesAfter = matchesDao.getAllMatches();
 		
 		//Assert
+		Assert.assertEquals(matchesBefore.size() + 1, matchesAfter.size());
 		
 	}
 }
