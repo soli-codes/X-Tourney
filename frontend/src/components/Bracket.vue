@@ -29,7 +29,7 @@ import TeamsService from '../services/TeamsService.js';
 export default {
   data() {
     return {
-      teams: [1, 2, 3, 4, 5, 6, 7, 8],
+      teams: [1, 2, 3, 4],
       matches: [],
       initialMatches: 0,
       rounds: 3,

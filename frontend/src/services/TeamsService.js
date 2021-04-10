@@ -4,7 +4,7 @@ export default {
 
     // return all teams
     getTeams() {
-        return axios.get('/teams');
+        return axios.get('/teamnames');
     },
 
    
