@@ -9,10 +9,12 @@
         <div>
             <p>{{ tournament.description }}</p>
         </div>
+        <!-- bracket should display here -->
+        
         <!-- displays registered teams in a list -->
         <div v-for="team in teams" :key="team.teamId" :team="team" class="d-flex">
             <img :src="team.teamImage" />
-            <h4>{{ team.name }}</h4>   
+            <h4>{{ team.name }}</h4>
         </div>
     </div>
 </template>
