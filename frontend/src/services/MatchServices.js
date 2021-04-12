@@ -1,15 +1,22 @@
 import axios from 'axios';
 
 export default {
-  getMatches(id) {
-    return axios.get(`/tournaments/${id}/matches`);
+
+  getMatches() {
+    return axios.get(`/matches`);
+  },
+
+  getMatchById(id) {
+    return axios.get(`/matches/${id}`);
   },
 
   postMatch(match) {
-    return axios.post(`/tournaments/${id}/matches/post`, match);
+    return axios.post(`/matches/create`, match);
   },
 
   updateMatch(match) {
-    return axios.put(`tournaments/${id}/matches/put`, match);
+    return axios.put(`/matches/update`, match);
   },
+
+  // DELETE MATCH END POINT EXISTS BUT NOT IMPLEMENTED BECAUSE IT'S NOT NEEDED
 };
