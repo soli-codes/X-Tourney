@@ -2,13 +2,13 @@
   <nav
     class="navbar navbar-expand-lg navbar-primary navbar-dark top-nav-color fixed-top"
   >
-    <a href="../views/Home.vue">
+    <router-link :to="{ name: 'help' }">
       <img
         src="../assets/vectorBlueLogoXTourney.png"
         alt=""
         class="image-size p-0 m-0 spinny"
       />
-    </a>
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -51,12 +51,21 @@
           </ul>
         </li>
         <li class="nav-item sizing collapse-size">
-          <router-link :to="{ name: 'profileTeams' }" class="nav-link active text-primary" aria-current="page" href="#"
+          <router-link
+            :to="{ name: 'profileTeams' }"
+            class="nav-link active text-primary"
+            aria-current="page"
+            href="#"
             >My Teams</router-link
           >
         </li>
         <li class="nav-item sizing collapse-size">
-          <router-link :to="{ name: 'profileTournaments'}" class="nav-link text-primary" href="#">My Tournaments</router-link>
+          <router-link
+            :to="{ name: 'profileTournaments' }"
+            class="nav-link text-primary"
+            href="#"
+            >My Tournaments</router-link
+          >
         </li>
       </ul>
       <a
@@ -72,17 +81,31 @@
         target="_blank"
         >Careers</a
       >
-      <router-link :to="{ name: 'login'} "
+      <router-link
+        :to="{ name: 'login' }"
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
         href="#"
+        v-if="this.$store.state.token == ''"
         >Login</router-link
+      >
+      <router-link
+        :to="{ name: 'settings' }"
+        class="nav-link active text-primary d-flex collapse-size"
+        aria-current="page"
+        href="#"
+        v-else
+        >Settings</router-link
       >
     </div>
   </nav>
 </template>
 
 <style scoped>
+.right-align {
+  position: relative;
+}
+
 .sizing {
   width: 150px;
   text-align: center;
