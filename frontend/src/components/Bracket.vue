@@ -8,19 +8,17 @@
     >
       <div
         class="flex-column p-0 m-1 d-flex"
-        id="match divs"
+        id="match-divs"
         v-for="match in matchCounter()"
         :key="match"
         style="border-color: #FFFFFF; background-color: #000000; width: 200px;"
       >
-      <div id="matches">
-        <div
-          class="team1 p-0 m-0"
-          style="background-color: #333333">
-          TEST TEAM ONE
+        <div id="matches">
+          <div class="team1 p-0 m-0" style="background-color: #333333">
+            TEST TEAM ONE
+          </div>
+          <div class="team2 p-0 m-0">TEST TEAM TWO</div>
         </div>
-        <div class="team2 p-0 m-0">TEST TEAM TWO</div>
-      </div>
       </div>
     </div>
   </div>
@@ -32,7 +30,7 @@ import TournamentsService from '../services/TournamentsService.js';
 export default {
   data() {
     return {
-      teams: [],
+      teams: [1, 2, 3, 4],
       matches: [],
       initialMatches: 0,
       rounds: 3,
@@ -41,9 +39,11 @@ export default {
     };
   },
   created() {
-    TournamentsService.getTournamentTeams().then((response) => {
-      this.teams = response.data;
-    });
+    TournamentsService.getTournamentTeams(this.$route.params.tournamentId).then(
+      (response) => {
+        this.teams = response.data;
+      }
+    );
 
     if (this.teams.length <= 64) {
       this.rounds = 7;
@@ -65,19 +65,21 @@ export default {
 
   methods: {
     matchCounter() {
-      this.tempCounter--;
-      return Math.pow(2, this.tempCounter);
+      while (this.tempCounter > 1) {
+        this.tempCounter--;
+        return Math.pow(2, this.tempCounter);
+      }
+      return 1;
     },
 
     generateSeedArray() {
       this.seedArray = this.teams;
       this.seedArray.sort((a, b) => {
-        if ((a.wins / a.losses) > (b.wins / b.losses)) {
+        if (a.wins / a.losses > b.wins / b.losses) {
           return 1;
         } else return -1;
       });
     },
-
   },
 };
 </script>

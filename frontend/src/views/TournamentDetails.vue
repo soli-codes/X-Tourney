@@ -12,7 +12,7 @@
         <button
           v-if="this.matches == null"
           id="generateBracket"
-          v-on:click="generateBracket()"
+          v-on:click="generateBracket"
         >
           Generate Bracket
         </button>
@@ -21,7 +21,7 @@
         <p>{{ tournament.description }}</p>
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-      <bracket v-if="this.matches == null" />
+      <bracket v-if="this.matches.length == 0" />
       <generated-bracket v-else :matches="this.matches" :teams="this.teams" />
       <!-- displays registered teams in a list -->
       <div
@@ -33,6 +33,8 @@
         <img :src="team.teamImage" />
         <h4>{{ team.teamName }}</h4>
       </div>
+      <button @click="checkTeams">check</button>
+      <button @click="checkMatches">checkM</button>
     </div>
   </div>
 </template>
@@ -76,6 +78,12 @@ export default {
   },
 
   methods: {
+    checkTeams() {
+      console.log(this.teams);
+    },
+    checkMatches() {
+      console.log(this.matches);
+    },
     generateBracket() {
       if (this.teams != null && this.teams.length > 0) {
         let seedArray = this.generateSeedArray();
@@ -104,9 +112,6 @@ export default {
       });
       return seedArray;
     },
-  },
-  mounted() {
-    console.log(this.matches);
   },
 };
 </script>
