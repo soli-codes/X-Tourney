@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.techelevator.dao.TournamentDAO;
+import com.techelevator.model.Matches;
 import com.techelevator.model.TeamName;
 import com.techelevator.model.Tournament;
 
@@ -50,6 +51,21 @@ public class TournamentController {
 	@RequestMapping( path = "/tournaments/{id}/teams", method = RequestMethod.GET)
 	public List<TeamName> listTeamsByTournament(@PathVariable int id){
 		return dao.getTeamsByTournamentId(id);
+	}
+	
+	@RequestMapping( path = "/tournaments/{id}/matches", method = RequestMethod.GET)
+	public List<Matches> listMatchesByTournament(@PathVariable int id){
+		return dao.getMatchesBytournamentId(id);
+	}
+	
+	@RequestMapping( path = "/tournaments/host/{id}", method = RequestMethod.GET)
+	public List<Tournament> listTournamentsByHostId(@PathVariable int id){
+		return dao.getTournamentsByHostId(id);
+	}
+	
+	@RequestMapping( path = "/tournaments/user/{id}", method = RequestMethod.GET)
+	public List<Tournament> listTournamentsByUserId(@PathVariable int id){
+		return dao.getTournamentsByUserId(id);
 	}
 	
 }
