@@ -199,7 +199,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		String tournamentImage = rowset.getString("tournament_image");
 		theTournament.setTournamentImage(tournamentImage);
 		
-		int tournamentWinnderId = rowset.getInt("tournamentWinnerId");
+		int tournamentWinnderId = rowset.getInt("tournament_winner_id");
 		theTournament.setTournamentWinnerId(tournamentWinnderId);
 		
 		boolean hasStarted = rowset.getBoolean("has_started");
