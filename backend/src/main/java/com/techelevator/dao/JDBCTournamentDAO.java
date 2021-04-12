@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.model.Matches;
 import com.techelevator.model.TeamName;
 import com.techelevator.model.Tournament;
 import com.techelevator.dao.TournamentDAO;
@@ -82,14 +83,11 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public List<TeamName> getTeamsByTournamentId(int tournamentId){
 		
-		String sqlGetTeamsByTournamentId = "SELECT * FROM team_name"
-										+ "JOIN tournament_teams ON team_name.team_id = tournament_teams.team_id"
-										+ "JOIN tournament ON tournament_teams.tournament_id = tournament.tournament_id"
-										+ "WHERE tournament.tournament_id = ?;";
+		String sqlGetTeamsByTournamentId = "SELECT * FROM team_name JOIN tournament_teams ON team_name.team_id = tournament_teams.team_id JOIN tournament ON tournament_teams.tournament_id = tournament.tournament_id WHERE tournament.tournament_id = ?;";
 
 		List<TeamName> teams = new ArrayList<>();
 
-		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetTeamsByTournamentId);
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetTeamsByTournamentId, tournamentId);
 
 		while(rowSet.next()) {
 			TeamName theTeamName = mapTeamNameFromRowSet(rowSet);
@@ -98,6 +96,60 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		
 		return teams;
 	}
+	
+	@Override
+	public List<Matches>getMatchesBytournamentId(int tournamentId){
+		
+		String sqlGetMatchesByTournamentId = "SELECT * FROM matches WHERE tournament_id = ?;";
+		
+		List<Matches> matches = new ArrayList<>();
+		
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetMatchesByTournamentId, tournamentId);
+		
+		while(rowSet.next()) {
+			Matches theMatch = mapMatchFromRowSet(rowSet);
+			matches.add(theMatch);
+		}
+	
+		return matches;
+	}
+	
+	@Override
+	public List<Tournament> getTournamentsByHostId(int hostId) {
+		
+			String sqlListAllTournaments = "SELECT * FROM tournament WHERE host_id = ?;";
+			
+			List<Tournament> tournaments = new ArrayList<>();
+			
+			SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlListAllTournaments, hostId);
+			
+			while(rowSet.next()) {
+			Tournament theTournament = mapTournamentFromRowSet(rowSet);
+			tournaments.add(theTournament);
+			}
+
+			return tournaments;
+	}
+	
+	@Override
+	public List<Tournament> getTournamentsByUserId(int userId) {
+		
+		String sqlListAllTournamentsByUserId = "SELECT * FROM tournament JOIN users ON tournament.host_id = users.user_id WHERE user_id = ?;";
+		
+		List<Tournament> tournaments = new ArrayList<>();
+		
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlListAllTournamentsByUserId, userId);
+		
+		while(rowSet.next()) {
+		Tournament theTournament = mapTournamentFromRowSet(rowSet);
+		tournaments.add(theTournament);
+		}
+
+		return tournaments;
+
+	}
+
+
 	
 	private Tournament mapTournamentFromRowSet(SqlRowSet rowset) {
 		Tournament theTournament = new Tournament();
@@ -147,11 +199,17 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		String tournamentImage = rowset.getString("tournament_image");
 		theTournament.setTournamentImage(tournamentImage);
 		
+		int tournamentWinnderId = rowset.getInt("tournamentWinnerId");
+		theTournament.setTournamentWinnerId(tournamentWinnderId);
+		
+		boolean hasStarted = rowset.getBoolean("has_started");
+		theTournament.setHasStarted(hasStarted);
+		
 		return theTournament;
 		
 	}
 	
-private TeamName mapTeamNameFromRowSet(SqlRowSet rowset) {
+	private TeamName mapTeamNameFromRowSet(SqlRowSet rowset) {
 		
 		TeamName theTeamName = new TeamName();
 		
@@ -179,6 +237,25 @@ private TeamName mapTeamNameFromRowSet(SqlRowSet rowset) {
 		return theTeamName;
 	}
 
+	private Matches mapMatchFromRowSet(SqlRowSet rs) {
+		Matches match = new Matches();
+	
+		match.setMatchId(rs.getInt("match_id"));
+		match.setTournamentId(rs.getInt("tournament_id"));
+		match.setTeamOneId(rs.getInt("team_1_id"));
+		match.setTeamTwoId(rs.getInt("team_2_id"));
+		match.setWinningTeamId(rs.getInt("winning_team_id"));
+		match.setLosingTeamId(rs.getInt("losing_team_id"));
+		match.setWinningTeamScore(rs.getInt("winning_team_score"));
+		match.setLosingTeamScore(rs.getInt("losing_team_score"));
+		match.setMatchDate(rs.getString("match_date"));
+		match.setMatchTime(rs.getString("match_time"));
+		
+	return match;
+	}
+
+	
+	
 	
 
 }

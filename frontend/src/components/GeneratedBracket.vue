@@ -29,13 +29,11 @@
 </template>
 
 <script>
-import TeamsService from '../services/TeamsService.js';
-// import TournamentsService from '../services/TournamentsService.js';
-// import MatchServices from '../services/MatchServices.js';
+
 export default {
   data() {
     return {
-      props: [ 'matches', 'teams', ],
+      props: [ 'matches', 'teams' ],
       rounds: "",
       tempCounter: 0,
       tempMatchCounter: -1,
@@ -43,9 +41,6 @@ export default {
     };
   },
   created() {
-    TeamsService.getTeams().then((response) => {
-      this.teams = response.data;
-    });
 
     if (this.teams.length <= 64) {
       this.rounds = 7;

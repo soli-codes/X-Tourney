@@ -27,13 +27,12 @@
 </template>
 
 <script>
-import TeamsService from '../services/TeamsService.js';
-// import TournamentsService from '../services/TournamentsService.js'
+import TournamentsService from '../services/TournamentsService.js';
 // import MatchServices from `../services/MatchService.js`
 export default {
   data() {
     return {
-      teams: [1, 2, 3, 4],
+      teams: [],
       matches: [],
       initialMatches: 0,
       rounds: 3,
@@ -42,7 +41,7 @@ export default {
     };
   },
   created() {
-    TeamsService.getTeams().then((response) => {
+    TournamentsService.getTournamentTeams().then((response) => {
       this.teams = response.data;
     });
 
