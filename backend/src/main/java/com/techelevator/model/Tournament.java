@@ -16,7 +16,8 @@ public class Tournament {
 	private int hostId;
 	private String startTime;
 	private String tournamentImage;
-	
+	private int tournamentWinnerId;
+	private boolean hasStarted;
 	
 
 	public Tournament() {
@@ -140,6 +141,22 @@ public class Tournament {
 	
 	public void setTournamentImage(String tournamentImage) {
 		this.tournamentImage = tournamentImage;
+	}
+	
+	public int getTournamentWinnerId() {
+		return tournamentWinnerId;
+	}
+	
+	public void setTournamentWinnerId(int tournamentWinnerId) {
+		this.tournamentWinnerId = tournamentWinnerId;
+	}
+	
+	public boolean getHasStarted() {
+		return hasStarted;
+	}
+	
+	public void setHasStarted(boolean hasStarted) {
+		this.hasStarted = hasStarted;
 	}
 	
 }

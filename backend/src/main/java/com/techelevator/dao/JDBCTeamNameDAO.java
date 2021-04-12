@@ -31,6 +31,23 @@ private JdbcTemplate jdbcTemplate;
 			teamNames.add(theTeamName);
 		} return teamNames;
 	} 
+	
+	@Override
+	public List<TeamName> getTeamsByUserId(int userId) {
+		String sqlGetTeamsByUserId = "SELECT * FROM team_name JOIN team_name_users "
+				+ "ON team_name.team_id = team_name_users.team_id JOIN users "
+				+ "ON team_name_users.user_id = users.user_id WHERE users.user_id = ?;";
+		
+		List<TeamName> teamNames = new ArrayList<>();
+		
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetTeamsByUserId, userId);
+		
+		while(rowSet.next()) {
+			TeamName theTeamName = mapTeamNameFromRowSet(rowSet);
+			teamNames.add(theTeamName);
+		}
+		return teamNames;
+	}
 
 	@Override
 	public TeamName getTeamNameById(int id) {
