@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.techelevator.dao.TournamentDAO;
+import com.techelevator.model.TeamName;
 import com.techelevator.model.Tournament;
 
 @RestController
@@ -44,6 +45,11 @@ public class TournamentController {
 	@RequestMapping(path = "/tournaments/{id}", method = RequestMethod.DELETE)
 	public void deleteAccount(@PathVariable int id) {
 		dao.deleteTournament(id);
+	}
+	
+	@RequestMapping( path = "/tournaments/{id}/teams", method = RequestMethod.GET)
+	public List<TeamName> listTeamsByTournament(@PathVariable int id){
+		return dao.getTeamsByTournamentId(id);
 	}
 	
 }
