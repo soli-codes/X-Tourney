@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.model.TeamName;
 import com.techelevator.model.Tournament;
 import com.techelevator.dao.TournamentDAO;
 
@@ -78,6 +79,26 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		
 	}
 	
+	@Override
+	public List<TeamName> getTeamsByTournamentId(int tournamentId){
+		
+		String sqlGetTeamsByTournamentId = "SELECT * FROM team_name"
+										+ "JOIN tournament_teams ON team_name.team_id = tournament_teams.team_id"
+										+ "JOIN tournament ON tournament_teams.tournament_id = tournament.tournament_id"
+										+ "WHERE tournament.tournament_id = ?;";
+
+		List<TeamName> teams = new ArrayList<>();
+
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetTeamsByTournamentId);
+
+		while(rowSet.next()) {
+			TeamName theTeamName = mapTeamNameFromRowSet(rowSet);
+			teams.add(theTeamName);
+		}
+		
+		return teams;
+	}
+	
 	private Tournament mapTournamentFromRowSet(SqlRowSet rowset) {
 		Tournament theTournament = new Tournament();
 		
@@ -129,5 +150,35 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		return theTournament;
 		
 	}
+	
+private TeamName mapTeamNameFromRowSet(SqlRowSet rowset) {
+		
+		TeamName theTeamName = new TeamName();
+		
+		int teamNameId = rowset.getInt("team_id");
+		theTeamName.setTeamId(teamNameId);
+		
+		String teamName = rowset.getString("team_name");
+		theTeamName.setTeamName(teamName);
+		
+		int wins = rowset.getInt("wins");
+		theTeamName.setWins(wins);
+		
+		int losses = rowset.getInt("losses");
+		theTeamName.setLosses(losses);
+		
+		int tournamentWins = rowset.getInt("tournament_wins");
+		theTeamName.setTournamentWins(tournamentWins);
+		
+		int tournamentsEntered = rowset.getInt("tournaments_entered");
+		theTeamName.setTournamentsEntered(tournamentsEntered);
+		
+		String getTeamImage = rowset.getString("team_image");
+		theTeamName.setTeamImage(getTeamImage);
+		
+		return theTeamName;
+	}
+
+	
 
 }
