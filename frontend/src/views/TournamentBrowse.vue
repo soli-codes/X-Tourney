@@ -21,7 +21,7 @@
       </select>
       <p class="ms-1 text-center">Game Type:</p>
       <select class="form-select ms-1" v-model="filter.gameType">
-        <option>Display All</option>
+        <option value="" >Display All</option>
         <option
           v-for="gameType in gameTypes"
           :value="gameType.gameTypeId"

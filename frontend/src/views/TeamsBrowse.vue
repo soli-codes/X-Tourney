@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-primary">
+    <div class="bg-dark">
         <div class="d-flex flex-start bg-dark">
             <input type="text" v-model="filter.teamName" placeholder="Filter by Name" />
             <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
