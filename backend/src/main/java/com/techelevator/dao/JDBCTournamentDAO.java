@@ -82,14 +82,11 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public List<TeamName> getTeamsByTournamentId(int tournamentId){
 		
-		String sqlGetTeamsByTournamentId = "SELECT * FROM team_name"
-										+ "JOIN tournament_teams ON team_name.team_id = tournament_teams.team_id"
-										+ "JOIN tournament ON tournament_teams.tournament_id = tournament.tournament_id"
-										+ "WHERE tournament.tournament_id = ?;";
+		String sqlGetTeamsByTournamentId = "SELECT * FROM team_name JOIN tournament_teams ON team_name.team_id = tournament_teams.team_id JOIN tournament ON tournament_teams.tournament_id = tournament.tournament_id WHERE tournament.tournament_id = ?;";
 
 		List<TeamName> teams = new ArrayList<>();
 
-		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetTeamsByTournamentId);
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetTeamsByTournamentId, tournamentId);
 
 		while(rowSet.next()) {
 			TeamName theTeamName = mapTeamNameFromRowSet(rowSet);

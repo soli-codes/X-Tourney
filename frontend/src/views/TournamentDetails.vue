@@ -23,7 +23,7 @@
         <!-- displays registered teams in a list -->
         <div v-for="team in this.teams" :key="team.teamId" :team="team" class="d-flex">
             <img :src="team.teamImage" />
-            <h4>{{ team.name }}</h4>
+            <h4>{{ team.teamName }}</h4>
         </div>
     </div>
   </div>
@@ -60,7 +60,7 @@ export default {
     );
 
   // will pull down matches sorted by matchId and place them in an arry to be displayed in bracket
-    MatchServices.getMatches(this.$route.params.tournamentId).then(
+    TournamentsService.getTournamentMatches(this.$route.params.tournamentId).then(
       (response) => {
         this.matches = response.data;
       }
@@ -71,22 +71,22 @@ export default {
   methods: {
 
    generateBracket() {
+     if(this.teams != null && this.teams.length > 0) {
+      let seedArray = this.generateSeedArray();
 
-     let seedArray = this.generateSeedArray();
+      let j = this.teams.length - 1;
+      for(let i = 0; i <= j; i++) {
+        let newMatch = {};
 
-     let j = this.teams.length - 1;
-     for(let i = 0; i <= j; i++) {
-       let newMatch = {};
+          newMatch.tournament_id = this.tournament.tournamentId;
+          newMatch.team_1_id = seedArray[i.teamId];
+          newMatch.team_2_id = seedArray[j.teamId];
+          j--;
 
-        newMatch.tournament_id = this.tournament.tournamentId;
-        newMatch.team_1_id = seedArray[i.teamId];
-        newMatch.team_2_id = seedArray[j.teamId];
-        j--;
+        MatchServices.postMatch(newMatch);
 
-      MatchServices.postMatch(newMatch);
-
+      }
      }
-
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
