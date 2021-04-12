@@ -8,7 +8,7 @@
             <router-link v-else to="login">Login to Sign Up</router-link>
             <!-- add condition for if currentUser Id is equal to tournament host Id -->
             <button
-              v-if="this.matches == null"
+              v-if="this.matches.length == 0"
               id="generateBracket"
               v-on:click="generateBracket()">
                 Generate Bracket
@@ -18,10 +18,9 @@
             <p>{{ tournament.description }}</p>
         </div>
         <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-        <bracket v-if="this.matches == null"/>
-        <generated-bracket v-else :matches="this.matches" :teams="this.teams" />
+        <generated-bracket v-if="$store.state.teams.length != 0 && $store.state.matches.length != 0" />
         <!-- displays registered teams in a list -->
-        <div v-for="team in this.teams" :key="team.teamId" :team="team" class="d-flex">
+        <div v-for="team in teams" :key="team.teamId" :team="team" class="d-flex">
             <img :src="team.teamImage" />
             <h4>{{ team.teamName }}</h4>
         </div>
@@ -30,18 +29,15 @@
 </template>
 
 <script>
-import Bracket from '../components/Bracket.vue';
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
 
 export default {
-  components: { Bracket, GeneratedBracket },
+  components: { GeneratedBracket, },
   data() {
     return {
       tournament: {},
-      teams: [],
-      matches: [],
     };
   },
 
@@ -55,14 +51,14 @@ export default {
     // should work once getTournamentTeams end point is up and running
     TournamentsService.getTournamentTeams(this.$route.params.tournamentId).then(
       (response) => {
-        this.teams = response.data;
+        this.$store.commit('SET_TEAMS', response.data);
       }
     );
 
   // will pull down matches sorted by matchId and place them in an arry to be displayed in bracket
     TournamentsService.getTournamentMatches(this.$route.params.tournamentId).then(
       (response) => {
-        this.matches = response.data;
+        this.$store.commit('SET_MATCHES', response.data);
       }
     );
 
@@ -102,7 +98,22 @@ export default {
   
   },
 
+  computed: {
+    // imagePath() {
+    //   if(!this.tournament || !this.tournament.tournamentImage) return '';
+    //   return require(`@/${this.tournament.tournamentImage}`);
+    // },
+
+    teams() {
+      return this.$store.state.teams;
+    },
+
+    matches() {
+      return this.$store.state.matches;
+    }
+  },
+
+  
+
 }
 </script>
-
-<style scoped></style>

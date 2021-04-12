@@ -27,24 +27,16 @@
 </template>
 
 <script>
-import TournamentsService from '../services/TournamentsService.js';
-// import MatchServices from `../services/MatchService.js`
+
 export default {
   data() {
     return {
-      teams: [],
-      matches: [],
-      initialMatches: 0,
       rounds: 3,
       tempCounter: 0,
-      seedArray: [],
     };
   },
   created() {
-    TournamentsService.getTournamentTeams().then((response) => {
-      this.teams = response.data;
-    });
-
+    
     if (this.teams.length <= 64) {
       this.rounds = 7;
     }
@@ -65,8 +57,10 @@ export default {
 
   methods: {
     matchCounter() {
+      if (this.tempCounter >= 0) {
       this.tempCounter--;
       return Math.pow(2, this.tempCounter);
+      } return 0;
     },
 
     generateSeedArray() {
@@ -79,5 +73,14 @@ export default {
     },
 
   },
+
+  computed: {
+
+    teams() {
+      return this.$store.state.teams;
+    },
+  }
+
+  
 };
 </script>

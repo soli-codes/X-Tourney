@@ -33,7 +33,6 @@
 export default {
   data() {
     return {
-      props: [ 'matches', 'teams' ],
       rounds: "",
       tempCounter: 0,
       tempMatchCounter: -1,
@@ -62,8 +61,10 @@ export default {
 
   methods: {
     matchCounter() {
+      if (this.tempCounter > 0) {
       this.tempCounter--;
       return Math.pow(2, this.tempCounter);
+      } return 0;
     },
 
     countMatches() {
@@ -76,13 +77,27 @@ export default {
         return this.matches[this.tempMatchWinner]
     },
 
-    getTeamName(teamId) {
+    getTeamName(id) {
         let targetTeam = this.teams.find(team => {
-            return team.teamId = teamId;
-        })
+            return team.teamId == id;
+        });
         return targetTeam.teamName;
     },
 
   },
+
+  computed: {
+
+    teams() {
+      return this.$store.state.teams;
+    },
+
+    matches() {
+      return this.$store.state.matches;
+    }
+  },
+
+  
+
 };
 </script>
