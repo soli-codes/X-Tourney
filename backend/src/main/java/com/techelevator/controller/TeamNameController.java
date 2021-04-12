@@ -31,6 +31,11 @@ public class TeamNameController {
 		return dao.listAllTeamNames();
 	}
 	
+	@RequestMapping(path = "/teamnames/user/{id}", method = RequestMethod.GET)
+	public List<TeamName> getTeamsByUserId(@PathVariable int id) {
+		return dao.getTeamsByUserId(id);
+	}
+	
 	@RequestMapping(path = "/teamnames/{id}", method = RequestMethod.GET)
 	public TeamName getTeamName(@PathVariable int id){
 		return dao.getTeamNameById(id);
