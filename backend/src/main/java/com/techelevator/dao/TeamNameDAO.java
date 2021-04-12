@@ -8,6 +8,8 @@ public interface TeamNameDAO {
 	
 	List<TeamName> listAllTeamNames();
 	
+	List<TeamName> getTeamsByUserId(int userId);
+	
 	TeamName getTeamNameById(int id);
 	
 	TeamName createNewTeam(TeamName teamName);
