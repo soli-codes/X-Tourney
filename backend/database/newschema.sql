@@ -42,7 +42,7 @@ CREATE TABLE users (
 	losses integer NOT NULL DEFAULT 0,
 	tournament_wins integer NOT NULL DEFAULT 0,
 	tournaments_entered integer NOT NULL DEFAULT 0,
-    user_image varchar(1000) NOT NULL DEFAULT '/assets/vectorBlueLogoXTourney.png',
+    user_image varchar(1000) NOT NULL DEFAULT 'http://localhost:8081/img/vectorBlueLogoXTourney.bbc29c6e.png',
 
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
@@ -54,7 +54,7 @@ CREATE TABLE team_name (
 	losses integer NOT NULL DEFAULT 0,
 	tournament_wins integer NOT NULL DEFAULT 0,
 	tournaments_entered integer NOT NULL DEFAULT 0,
-    team_image varchar(1000) NOT NULL DEFAULT '/assets/vectorBlueLogoXTourney.png',
+    team_image varchar(1000) NOT NULL DEFAULT 'http://localhost:8081/img/vectorBlueLogoXTourney.bbc29c6e.png',
 
     CONSTRAINT PK_team_id PRIMARY KEY (team_id)
 );
@@ -91,7 +91,7 @@ CREATE TABLE tournament (
     end_date varchar(50) NOT NULL,
     signup_open varchar(50) NOT NULL,
     signup_close varchar(50) NOT NULL,
-    tournament_image varchar(1000) NOT NULL DEFAULT '/assets/vectorBlueLogoXTourney.png',
+    tournament_image varchar(1000) NOT NULL DEFAULT 'http://localhost:8081/img/vectorBlueLogoXTourney.bbc29c6e.png',
 
     CONSTRAINT PK_tournament_id PRIMARY KEY (tournament_id),
     CONSTRAINT FK_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_type (game_type_id),
