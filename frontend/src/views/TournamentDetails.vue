@@ -2,7 +2,7 @@
   <div>
     <div>
         <div class="d-flex justify-content-between mx-2 mt-4 border-bottom border-danger pb-2">
-            <img :src="tournament.tournamentImage" />
+            <img :src="imagePath" />
             <h1>{{ tournament.name }}</h1>
             <button v-if="$store.state.token != ''">Sign Up</button>
             <router-link v-else to="login">Login to Sign Up</router-link>
@@ -100,6 +100,13 @@ export default {
       return seedArray;
     }
   
+  },
+
+  computed: {
+    imagePath() {
+      if(!this.tournament || !this.tournament.tournamentImage) return '';
+      return require(`@/${this.tournament.tournamentImage}`);
+    }
   },
 
 }

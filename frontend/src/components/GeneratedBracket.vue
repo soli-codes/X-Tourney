@@ -31,9 +31,9 @@
 <script>
 
 export default {
+    props: [ 'matches', 'teams' ],
   data() {
     return {
-      props: [ 'matches', 'teams' ],
       rounds: "",
       tempCounter: 0,
       tempMatchCounter: -1,
@@ -84,5 +84,13 @@ export default {
     },
 
   },
+
+  computed: {
+    imagePath() {
+      if(!this.tournament || !this.tournament.tournamentImage) return '';
+      return require(`@/${this.tournament.tournamentImage}`);
+    }
+  },
+
 };
 </script>
