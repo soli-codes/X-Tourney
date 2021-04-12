@@ -10,6 +10,9 @@ import TournamentBrowse from '../views/TournamentBrowse.vue';
 import TournamentCreate from '../views/TournamentCreate.vue';
 import TeamsBrowse from '../views/TeamsBrowse.vue';
 import TournamentDetails from '../views/TournamentDetails.vue';
+import Profile from '../views/Profile.vue';
+import ProfileTeams from '../views/ProfileTeams.vue';
+import ProfileTournaments from '../views/ProfileTournaments.vue';
 
 Vue.use(Router);
 
@@ -26,6 +29,7 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    // HOMEPAGE
     {
       path: '/',
       name: 'home',
@@ -34,6 +38,7 @@ const router = new Router({
         requiresAuth: true,
       },
     },
+    // LOGIN
     {
       path: '/login',
       name: 'login',
@@ -42,6 +47,7 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // LOGOUT
     {
       path: '/logout',
       name: 'logout',
@@ -50,6 +56,7 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // REGISTER
     {
       path: '/register',
       name: 'register',
@@ -58,6 +65,7 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // HELP/FAQ
     {
       path: '/help',
       name: 'help',
@@ -66,6 +74,7 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // BROWSE ALL TOURNAMENTS
     {
       path: '/tournaments',
       name: 'tournaments',
@@ -74,6 +83,7 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // CREATE A TOURNAMENT
     {
       path: '/create',
       name: 'create',
@@ -82,6 +92,7 @@ const router = new Router({
         requiresAuth: false, // Change to true on prod
       },
     },
+    // BROWSE ALL TEAMS
     {
       path: '/teams',
       name: 'teams',
@@ -90,14 +101,43 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // VIEW A SPECIFIC TOURNAMENT
     {
       path: '/tournaments/:tournamentId',
       name: 'tournamentDetails',
       component: TournamentDetails,
       meta: {
         requiresAuth: false,
+      }
+    },
+    // VIEW YOUR PROFILE
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+      meta: {
+        requiresAuth: false,
       },
     },
+    // VIEW TEAMS YOU MANAGE AND TEAMS YOU'RE ON
+    {
+        path: '/profile/teams',
+        name: 'profileTeams',
+        component: ProfileTeams,
+        meta: {
+          requiresAuth: false,
+      }
+    },
+    // VIEW TOURNAMENTS YOU MANAGE AND TOURNAMENTS YOU'RE PART OF
+    {
+      path: '/profile/tournaments',
+      name: 'profileTournaments',
+      component: ProfileTournaments,
+      meta: {
+        requiresAuth: false,
+    }
+  },
+    
   ],
 });
 

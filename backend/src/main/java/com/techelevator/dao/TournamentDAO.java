@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import java.util.List;
 
+import com.techelevator.model.TeamName;
 import com.techelevator.model.Tournament;
 
 public interface TournamentDAO {
@@ -13,5 +14,7 @@ public interface TournamentDAO {
 	Tournament createTournament(Tournament tournament);
 	
 	void deleteTournament(int tournamentId);
+	
+	List<TeamName> getTeamsByTournamentId(int tournamentId);
 
 }

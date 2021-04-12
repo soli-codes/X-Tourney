@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 public class TeamName {
+	private  int teamId;
 	private String teamName;
 	private int wins;
 	private int losses;
@@ -10,6 +11,15 @@ public class TeamName {
 	
 	public TeamName() {
 	}
+	
+	public int getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
+
 
 	public String getTeamName() {
 		return teamName;

@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-primary">
+    <div class="bg-dark">
         <div class="d-flex flex-start bg-dark">
-            <input type="text" v-model="filter.name" placeholder="Filter by Name" />
+            <input type="text" v-model="filter.teamName" placeholder="Filter by Name" />
             <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
             <input type="text" v-model="filter.losses" placeholder="Losses <= Than" />
             <p class="ms-1 text-center">Sort By:</p>
@@ -13,7 +13,7 @@
             </select>
         </div>
         <div class="d-flex justify-content-around">
-            <div v-for="team in filteredTeams" :key="team.teamId">
+            <div v-for="team in filteredList" :key="team.teamId">
                 <team-card :team="team" />
             </div>
         </div>
@@ -32,7 +32,7 @@ export default {
           teams: [],
 
           filter: {
-              name: "",
+              teamName: "",
               wins: "",
               losses: "",
               sortBy: "",
@@ -49,22 +49,23 @@ export default {
 
       filteredList() {
           let filteredTeams = this.teams;
-          if (this.filter.name != "") {
+
+          if (this.filter.teamName != "") {
               filteredTeams = filteredTeams.filter( (team) => {
-                  team.name.toLowerCase()
-                  .includes(this.filter.name.toLowerCase());
+                  return team.teamName.toLowerCase()
+                  .includes(this.filter.teamName.toLowerCase());
               });
           }
 
           if (this.filter.wins != "") {
               filteredTeams = filteredTeams.filter( (team) => {
-                  team.wins >= this.filter.wins;
+                  return team.wins >= this.filter.wins;
               });
           }
 
           if (this.filter.losses != "") {
               filteredTeams = filteredTeams.filter( (team) => {
-                  team.losses <= this.filter.losses;
+                  return team.losses <= this.filter.losses;
               });
           }
 

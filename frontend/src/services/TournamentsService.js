@@ -8,12 +8,25 @@ export default {
 
   // return tournament by id
   getTournamentById(tournamentId) {
-    return axios.get(`/tournaments/${tournamentId}`)
+    return axios.get(`/tournaments/${tournamentId}`);
+  },
+
+  getTournamentsByUser(userId) {
+    return axios.get(`/tournaments/user/${userId}`)
+  },
+
+  getTournamentByHost(hostId) {
+    return axios.get(`/tournaments/host/${hostId}`)
   },
 
    // return teams by tournamentId
    getTournamentTeams(tournamentId) {
-    return axios.get(`/teams/${tournamentId}`) // ask Korry for proper end point
+    return axios.get(`/tournaments/${tournamentId}/teams`);
+  },
+
+  // RETURN MATCHES BY TOURNAMENT ID
+  getTournamentMatches(tournamentId) {
+    return axios.get(`/tournaments/${tournamentId}/matches`);
   },
 
   // create tournament

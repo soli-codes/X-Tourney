@@ -2,7 +2,7 @@
   <nav
     class="navbar navbar-expand-lg navbar-primary navbar-dark top-nav-color fixed-top"
   >
-    <a href="#">
+    <a href="../views/Home.vue">
       <img
         src="../assets/vectorBlueLogoXTourney.png"
         alt=""
@@ -35,7 +35,11 @@
           </a>
           <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item text-primary" href="#">Teams</a>
+              <router-link
+                :to="{ name: 'teams' }"
+                class="dropdown-item text-primary"
+                >Teams</router-link
+              >
             </li>
             <li>
               <router-link
@@ -47,12 +51,12 @@
           </ul>
         </li>
         <li class="nav-item sizing collapse-size">
-          <a class="nav-link active text-primary" aria-current="page" href="#"
-            >My Teams</a
+          <router-link :to="{ name: 'profileTeams' }" class="nav-link active text-primary" aria-current="page" href="#"
+            >My Teams</router-link
           >
         </li>
         <li class="nav-item sizing collapse-size">
-          <a class="nav-link text-primary" href="#">My Tournaments</a>
+          <router-link :to="{ name: 'profileTournaments'}" class="nav-link text-primary" href="#">My Tournaments</router-link>
         </li>
       </ul>
       <a
@@ -64,14 +68,15 @@
       <a
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
-        href="#"
+        href="https://www.techelevator.com/?gclid=CjwKCAjwvMqDBhB8EiwA2iSmPGzzFasx6lXvj4qZY-ZzfVY_4nL0ogGcSvLNPRWZh6H_WYuw0coe5RoC1QEQAvD_BwE"
+        target="_blank"
         >Careers</a
       >
-      <a
+      <router-link :to="{ name: 'login'} "
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
         href="#"
-        >Login</a
+        >Login</router-link
       >
     </div>
   </nav>
