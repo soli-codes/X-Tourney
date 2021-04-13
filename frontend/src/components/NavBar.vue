@@ -59,11 +59,11 @@
           <router-link :to="{ name: 'profileTournaments'}" class="nav-link text-primary" href="#">My Tournaments</router-link>
         </li>
       </ul>
-      <a
+      <router-link
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
-        href="#"
-        >Meet the team</a
+        :to="{name: 'meetTheTeam'}"
+        >Meet the team</router-link
       >
       <a
         class="nav-link active text-primary d-flex collapse-size"

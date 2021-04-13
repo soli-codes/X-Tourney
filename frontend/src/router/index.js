@@ -13,6 +13,7 @@ import TournamentDetails from '../views/TournamentDetails.vue';
 import Profile from '../views/Profile.vue';
 import ProfileTeams from '../views/ProfileTeams.vue';
 import ProfileTournaments from '../views/ProfileTournaments.vue';
+import MeetTheTeam from '../views/MeetTheTeam.vue';
 
 Vue.use(Router);
 
@@ -137,6 +138,15 @@ const router = new Router({
         requiresAuth: false,
     }
   },
+
+  {
+    path: '/meettheteam',
+    name: 'meetTheTeam',
+    component: MeetTheTeam,
+    meta: {
+      requiresAuth: false,
+    }
+  }
     
   ],
 });
