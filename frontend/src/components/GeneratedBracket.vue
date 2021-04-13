@@ -58,7 +58,7 @@
 
 <script>
 import TournamentsService from '../services/TournamentsService';
-import MatchServices from '../services/MatchServices';
+// import MatchServices from '../services/MatchServices';
 
 export default {
   data() {
@@ -94,16 +94,17 @@ export default {
     },
 
     onClick (round, match) {
-        this.modalMatch.matchId = match.matchId;
-        this.modalMatch.tournamentId = match.tournamentId;
-        this.modalMatch.teamOneId = match.teamOneId;
-        this.modalMatch.teamTwoId = match.teamTwoId;
-        this.modalMatch.winningTeamId = match.winningTeamId;
-        this.modalMatch.losingTeamId = match.losingTeamId;
-        this.modalMatch.winningTeamScore = match.winningTeamScore;
-        this.modalMatch.losingTeamScore = match.losingTeamScore;
-        this.modalMatch.matchDate = match.matchDate;
-        this.modalMatch.matchTime = match.matchTime;
+        // this.modalMatch.matchId = match.matchId;
+        // this.modalMatch.tournamentId = match.tournamentId;
+        // this.modalMatch.teamOneId = match.teamOneId;
+        // this.modalMatch.teamTwoId = match.teamTwoId;
+        // this.modalMatch.winningTeamId = match.winningTeamId;
+        // this.modalMatch.losingTeamId = match.losingTeamId;
+        // this.modalMatch.winningTeamScore = match.winningTeamScore;
+        // this.modalMatch.losingTeamScore = match.losingTeamScore;
+        // this.modalMatch.matchDate = match.matchDate;
+        // this.modalMatch.matchTime = match.matchTime;
+        this.modalMatch = match;
         this.modalMatch.teamOneName = this.getTeamName(match.teamOneId);
         this.modalMatch.teamTwoName = this.getTeamName(match.teamTwoId);
 
@@ -114,8 +115,9 @@ export default {
         }
     },
 
-    putMatch(newMatch) {
-            MatchServices.updateMatch(newMatch);
+    putMatch(updatedMatch) {
+      console.log(updatedMatch);
+            // MatchServices.updateMatch(updatedMatch);
     },
 
   },
