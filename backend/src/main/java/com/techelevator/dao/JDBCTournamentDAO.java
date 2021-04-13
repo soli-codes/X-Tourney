@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -110,7 +111,8 @@ public class JDBCTournamentDAO implements TournamentDAO {
 			Matches theMatch = mapMatchFromRowSet(rowSet);
 			matches.add(theMatch);
 		}
-		
+		// NEED TO SORT MATCHES BY MATCH ID HERE
+		matches.sort(Comparator.comparing(Matches::getMatchId));
 		List<List<Matches>> fullList = new ArrayList<>();
 		
 		String sqlGetTournamentSize = "SELECT max_teams FROM tournament WHERE tournament_id = ?;";

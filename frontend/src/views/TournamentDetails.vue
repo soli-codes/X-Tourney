@@ -6,7 +6,9 @@
       >
         <img :src="tournament.tournamentImage" class="image" />
         <h1>{{ tournament.name }}</h1>
-        <button class="bg-primary" v-if="$store.state.token != ''">Sign Up</button>
+        <button class="bg-primary" v-if="$store.state.token != ''">
+          Sign Up
+        </button>
         <router-link v-else to="login">Login to Sign Up</router-link>
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
@@ -49,7 +51,6 @@ export default {
   data() {
     return {
       tournament: {},
-      
     };
   },
 
@@ -76,13 +77,11 @@ export default {
   methods: {
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
-      console.log(tournamentSize);
       const axiosObject = {
         tournamentSize: tournamentSize,
         tournamentId: parseInt(this.$route.params.tournamentId),
         teams: this.generateSeedArray(),
       };
-      console.log(axiosObject.teams);
       if (
         this.$store.state.teams != null &&
         this.$store.state.teams.length > 0
@@ -115,18 +114,16 @@ export default {
       }
       return seededArray;
     },
-
   },
 
-  computed: {
-    teams() {
-      return this.$store.state.teams;
-    },
-    matches() {
-      console.log('test');
-      return this.$store.state.matches;
-    },
-  },
+  // computed: {
+  //   teams() {
+  //     return this.$store.state.teams;
+  //   },
+  //   matches() {
+  //     return this.$store.state.matches;
+  //   },
+  // },
 
   // imagePath() {
   //   if(!this.tournament || !this.tournament.tournamentImage) return '';
