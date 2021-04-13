@@ -126,7 +126,7 @@ CREATE TABLE matches (
 CREATE TABLE invitation (
     tournament_id int NOT NULL,
     team_id int NOT NULL,
-    has_accepted boolean DEFAULT NULL,
+    has_accepted varchar(10) DEFAULT 'pending',
 
     CONSTRAINT FK_invitation_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id),
     CONSTRAINT FK_invitation_team_id FOREIGN KEY (team_id) REFERENCES team_name (team_id)
@@ -184,7 +184,6 @@ losing_team_id, winning_team_score, losing_team_score) VALUES
 (3, 3, 2, 4, '2021-03-04', '14:00', 2, 4, 6, 4);
 
 INSERT INTO invitation (tournament_id, team_id) VALUES (4, 5);
-
 
 UPDATE tournament SET has_started = true, tournament_winner_id = 1 
 WHERE tournament_id = 3;

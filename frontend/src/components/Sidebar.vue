@@ -15,8 +15,13 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'create' }" class="nav-link text-primary">
+        <router-link :to="{ name: 'createTournament' }" class="nav-link text-primary">
           Create Tournament
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ name: 'createTeam' }" class="nav-link text-primary">
+          Create Team
         </router-link>
       </li>
       <li>
