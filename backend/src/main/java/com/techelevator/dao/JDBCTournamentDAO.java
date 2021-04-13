@@ -98,7 +98,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	}
 	
 	@Override
-	public List<Matches>getMatchesBytournamentId(int tournamentId){
+	public List<List<Matches>> getMatchesBytournamentId(int tournamentId){
 		
 		String sqlGetMatchesByTournamentId = "SELECT * FROM matches WHERE tournament_id = ?;";
 		
@@ -110,8 +110,25 @@ public class JDBCTournamentDAO implements TournamentDAO {
 			Matches theMatch = mapMatchFromRowSet(rowSet);
 			matches.add(theMatch);
 		}
+		
+		List<List<Matches>> fullList = new ArrayList<>();
+		List<Matches> tempList = new ArrayList<>();
+		
+		String sqlGetTournamentSize = "SELECT max_teams FROM tournament WHERE tournament_id = ?;";
+		
+		int maxTeams = jdbcTemplate.queryForObject(sqlGetTournamentSize, Integer.class, tournamentId);
+		int j = 0;
+		while(maxTeams/2 >= 2) {
+			for(int i = 0; i < maxTeams/2; i++) {
+				tempList.add(matches.get(i));
+				j++;
+			}
+			fullList.add(tempList);
+			maxTeams = maxTeams/2;
+		}
+		
 	
-		return matches;
+		return fullList;
 	}
 	
 	@Override

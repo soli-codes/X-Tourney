@@ -54,7 +54,7 @@ public class TournamentController {
 	}
 	
 	@RequestMapping( path = "/tournaments/{id}/matches", method = RequestMethod.GET)
-	public List<Matches> listMatchesByTournament(@PathVariable int id){
+	public List<List<Matches>> listMatchesByTournament(@PathVariable int id){
 		return dao.getMatchesBytournamentId(id);
 	}
 	
