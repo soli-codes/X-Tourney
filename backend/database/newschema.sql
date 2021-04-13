@@ -126,7 +126,10 @@ CREATE TABLE matches (
 CREATE TABLE invitation (
     tournament_id int NOT NULL,
     team_id int NOT NULL,
-    has_accepted boolean DEFAULT NULL
+    has_accepted boolean DEFAULT NULL,
+
+    CONSTRAINT FK_invitation_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id),
+    CONSTRAINT FK_invitation_team_id FOREIGN KEY (team_id) REFERENCES team_name (team_id)
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
