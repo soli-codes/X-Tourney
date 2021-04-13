@@ -77,21 +77,13 @@ export default {
     checkMatches() {
       console.log(this.matches);
     },
-    generateBracket() {
-      if (this.teams != null && this.teams.length > 0) {
-        let seedArray = this.generateSeedArray();
+    
+   generateBracket() {
+     if(this.teams != null && this.teams.length > 0) {
+      let seedArray = this.generateSeedArray();
+      
+      MatchServices.postMatch(this.teams.length, this.$route.params.tournamentId, seedArray);
 
-        let j = this.teams.length - 1;
-        for (let i = 0; i <= j; i++) {
-          let newMatch = {};
-
-          newMatch.tournament_id = this.tournament.tournamentId;
-          newMatch.team_1_id = seedArray[i.teamId];
-          newMatch.team_2_id = seedArray[j.teamId];
-          j--;
-
-          MatchServices.postMatch(newMatch);
-        }
       }
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
@@ -104,8 +96,9 @@ export default {
         } else return -1;
       });
       return seedArray;
-    },
   },
+  
+
 
   computed: {
     // imagePath() {
@@ -121,5 +114,6 @@ export default {
       return this.$store.state.matches;
     },
   },
-};
+  }
+}
 </script>

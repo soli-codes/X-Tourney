@@ -137,14 +137,14 @@ INSERT INTO game_type (game_type_id, game_type) VALUES (1, 'Golf'), (2, 'Basebal
 (10, 'Apex Legends'), (11, 'Leage of Legends'), (12, 'Counter-Strike'), (13, 'Hearthstone'), 
 (14, 'Valorant'), (15, 'Rainbow Six Siege');
 
-INSERT INTO team_name (team_name) VALUES ('Team One With All'), ('Two True for You'), 
+INSERT INTO team_name (team_name) VALUES ('TO BE DETERMINED'),('Team One With All'), ('Two True for You'), 
 ('Team Three for Me'), ('Team Four on the Floor'), ('Team Five Guys and Fries');
 
-INSERT INTO team_name_users (user_id, team_id) VALUES (3, 1), (8, 1), (7, 1), 
-(4, 2), (3, 2), (8, 2), 
-(5, 3), (4, 3), 
-(5, 4), (6, 4), 
-(7, 5), (6, 5);
+INSERT INTO team_name_users (user_id, team_id) VALUES (3, 2), (8, 2), (7, 2), 
+(4, 3), (3, 3), (8, 3), 
+(5, 4), (4, 4), 
+(5, 5), (6, 5), 
+(7, 6), (6, 6);
 
 INSERT INTO tournament (game_type_id, host_id, name, description, is_open, is_private, 
 max_teams, elimination_type, start_date, end_date, signup_open, signup_close, start_time) VALUES 
@@ -159,17 +159,19 @@ max_teams, elimination_type, start_date, end_date, signup_open, signup_close, st
 (14, 7, 'Viscious Valorant', 'Victory to the Valorant Victor who Visciously Vanquishes their foes', true, false, 8, 'Single', 
 '2021-05-01', '2021-05-05', '2021-04-01', '2021-04-28', '13:00');
 
-INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 1), (1, 2), (1, 3), 
-(2, 4), (2, 5), 
-(3, 1), (3, 2), (3, 3), (3, 4), 
-(4, 5), (4, 1), (4, 2), (4, 3), 
-(5, 1), (5, 2), (5, 4), (5, 5);
+INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1, 4), 
+(2, 5), (2, 6), 
+(3, 2), (3, 3), (3, 4), (3, 5), 
+(4, 6), (4, 2), (4, 3), (4, 4), 
+(5, 2), (5, 3), (5, 5), (5, 6);
 
 INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id, match_date, match_time, winning_team_id,
 losing_team_id, winning_team_score, losing_team_score) VALUES 
+
 (1, 3, 1, 2, '2021-03-01', '12:00', 1, 2, 5, 3),
 (2, 3, 3, 4, '2021-03-02', '12:00', 3, 4, 7, 5),
 (3, 3, 1, 3, '2021-03-04', '14:00', 1, 3, 6, 4);
+
 
 UPDATE tournament SET has_started = true, tournament_winner_id = 1 
 WHERE tournament_id = 3;
