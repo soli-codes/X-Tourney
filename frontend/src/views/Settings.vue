@@ -12,10 +12,16 @@
 </template>
 
 <script>
+import UserService from '../services/UserService.js';
+
 export default {
   data() {
     return {
       imageURL: '',
+      user: {
+        id: '',
+        userImage: '',
+      }
     };
   },
   methods: {
@@ -23,7 +29,16 @@ export default {
       this.$store.commit('LOGOUT');
       this.$router.push('/help');
     },
-    saveNewImage() {},
+    saveNewImage() {
+      this.user.id = this.$store.state.user.id;
+      this.user.userImage = this.imageURL;
+
+      UserService.updateUser(this.user).then(response => {
+        if (response.status == 200) {
+          this.$router.push({name: 'home'});
+        }
+      });
+    },
   },
 };
 </script>

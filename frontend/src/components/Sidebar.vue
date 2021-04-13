@@ -20,16 +20,6 @@
         </router-link>
       </li>
       <li>
-        <a href="#" class="nav-link text-primary">
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-primary">
-          Customers
-        </a>
-      </li>
-      <li>
         <a href="#" class="text-primary nav-link">
           Toggle Display
         </a>
