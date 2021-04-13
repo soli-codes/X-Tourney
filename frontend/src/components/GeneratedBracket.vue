@@ -1,103 +1,39 @@
 <template>
-  <div class="d-flex flex-row" id="mainBracket">
+  <div class="d-flex flex-row">
     <div
-      class="flex-column p-1 m-2 d-flex justify-content-around"
-      id="rounds"
-      v-for="round in rounds"
+      v-for="round in array"
       :key="round"
+      class="flex-column p-1 m-2 d-flex justify-content-around"
     >
-      <div v-if="matches.legth =! 0 && teams.legnth != 0">
       <div
-        class="flex-column p-0 m-1 d-flex"
-        id="match divs"
-        v-for="match in matchCounter"
+        v-for="match in round"
         :key="match"
-        style="border-color: #FFFFFF; background-color: #000000; width: 200px;"
+        class="flex-column p-0 m-1 d-flex"
       >
-      <!-- DISPLAYS KNOWN MATCH TEAMS IF IN THE FIRST COLUMN -->
-      <div v-if="round == 1">
-        <div class="team1 p-0 m-0" style="background-color: #333333">{{ countMatches().teamOneId }}</div>
-        <div class="team2 p-0 m-0">{{ countMatches().teamTwoId }}</div>
-      
-      </div>
-      <!-- BINDS TEAMS BASED ON WINNERS OF PREVIOUS MATCHES -->
-      <div v-else>
-          <div class="team1 p-0 m-0" style="background-color: #333333">{{ getTeamName(countMatchWinner().winningTeamId) }}</div>
-          <div class="team2 p-0 m-0">{{ getTeamName(countMatchWinner().winningTeamId) }}</div>
-      </div>
-      </div>
+        <div style="width: 200px; background-color: #333333">
+          {{ match.teamOneId }}
+        </div>
+        <div style="width: 200px; background-color: #333333">
+          {{ match.teamTwoId }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import TournamentsService from '../services/TournamentsService';
 export default {
   data() {
     return {
-      rounds: '',
-      tempCounter: 0,
-      tempMatchCounter: -1,
-      tempMatchWinner: -1,
+      array: [],
+      teams: [],
     };
   },
   created() {
-    if (this.teams.length <= 64) {
-      this.rounds = 6;
-    }
-    if (this.teams.length <= 32) {
-      this.rounds = 5;
-    }
-    if (this.teams.length <= 16) {
-      this.rounds = 4;
-    }
-    if (this.teams.length <= 8) {
-      this.rounds = 3;
-    }
-    if (this.teams.length <= 4) {
-      this.rounds = 2;
-    }
-    this.tempCounter = this.rounds;
-
-  },
-  methods: {
-    matchCounter() {
-      if (this.tempCounter > 0) {
-        this.tempCounter--;
-        return Math.pow(2, this.tempCounter);
-      }
-      return 0;
-    },
-
-    countMatches() {
-      this.tempMatchCounter++;
-      return this.matches[this.tempMatchCounter];
-    },
-
-    countMatchWinner() {
-      this.tempMatchWinner++;
-      return this.matches[this.tempMatchWinner];
-    },
-
-    getTeamName(id) {
-      let targetTeam = this.teams.find((team) => {
-        return team.teamId == id;
-      });
-      return targetTeam.teamName;
-    },
-  },
-  mounted() {
-    console.log(this.teams);
-  },
-
-  computed: {
-    teams() {
-      return this.$store.state.teams;
-    },
-
-    matches() {
-      return this.$store.state.matches;
-    },
+    TournamentsService.getTournamentMatches(
+      this.$route.params.tournamentId
+    ).then((response) => (this.array = response.data));
   },
 };
 </script>

@@ -112,15 +112,16 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		}
 		
 		List<List<Matches>> fullList = new ArrayList<>();
-		List<Matches> tempList = new ArrayList<>();
+
 		
 		String sqlGetTournamentSize = "SELECT max_teams FROM tournament WHERE tournament_id = ?;";
 		
 		int maxTeams = jdbcTemplate.queryForObject(sqlGetTournamentSize, Integer.class, tournamentId);
 		int j = 0;
-		while(maxTeams/2 >= 2) {
+		while(maxTeams/2 >= 1) {
+			List<Matches> tempList = new ArrayList<>();
 			for(int i = 0; i < maxTeams/2; i++) {
-				tempList.add(matches.get(i));
+				tempList.add(matches.get(j));
 				j++;
 			}
 			fullList.add(tempList);
