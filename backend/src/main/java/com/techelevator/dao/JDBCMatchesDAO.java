@@ -3,7 +3,7 @@ package com.techelevator.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.techelevator.model.TeamName;
+import com.techelevator.model.BracketInformation;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -49,20 +49,22 @@ public class JDBCMatchesDAO implements MatchesDAO {
 	}
 
 	@Override
-	public void createMatch(int tournamentSize, int tournamentId, TeamName[] teams) {
+	public BracketInformation createMatch(BracketInformation bracketInformation) {
 		String sqlCreateMatch = "INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id) "
-				+ "VALUES (?, ?, ?, ?) RETURNING match_id;";
-		int lowSeed = teams.length;
+				+ "VALUES (?, ?, ?, ?) ";
+		int tournamentSize = bracketInformation.getTournamentSize();
+		int lowSeed = bracketInformation.getTournamentSize()-1;
 		int highSeed = 0;
 		for (int i = 1; i <= tournamentSize; i++) {
 			if (i <= tournamentSize/2) {
-				jdbcTemplate.update(sqlCreateMatch, i, tournamentId, highSeed, lowSeed);
+				jdbcTemplate.update(sqlCreateMatch, i, bracketInformation.getTournamentId(), bracketInformation.getTeams().get(highSeed), bracketInformation.getTeams().get(lowSeed));
 				highSeed++;
 				lowSeed--;
 			}
-			else jdbcTemplate.update(sqlCreateMatch, i, tournamentId, 0, 0);
+			else jdbcTemplate.update(sqlCreateMatch, i, bracketInformation.getTournamentId(), 0, 0);
 		}
 
+		return bracketInformation;
 	}
 
 	@Override
@@ -103,6 +105,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 		match.setLosingTeamScore(rs.getInt("losing_team_score"));
 		match.setMatchDate(rs.getString("match_date"));
 		match.setMatchTime(rs.getString("match_time"));
+		match.setNextMatch(rs.getInt("next_match"));
 		
 		return match;
 	}

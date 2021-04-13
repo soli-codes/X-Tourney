@@ -82,19 +82,30 @@ export default {
   },
 
   methods: {
-    
-   generateBracket() {
-     if(this.teams != null && this.teams.length > 0) {
-      let seedArray = this.generateSeedArray();
-      
-      MatchServices.postMatch(this.teams.length, this.$route.params.tournamentId, seedArray);
 
+    generateBracket() {
+      let tournamentSize = this.tournament.maxTeamCount;
+      const axiosObject = {
+        tournamentSize: tournamentSize,
+        tournamentId: parseInt(this.$route.params.tournamentId),
+        teams: this.generateSeedArray(),
+      };
+      
+      if (this.teams != null && this.teams.length > 0) {
+        MatchServices.postMatch(axiosObject).then((response) => {
+          if (response.status == 201) {
+            console.log(response);
+            window.location.reload();
+          } else {
+            console.log(response.error);
+          }
+        });
       }
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
       let seedArray = this.teams;
-
+      let seedLength = seedArray.length;
       seedArray.sort((a, b) => {
         if (a.wins / a.losses > b.wins / b.losses) {
           return 1;

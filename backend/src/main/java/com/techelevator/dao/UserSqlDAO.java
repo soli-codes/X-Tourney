@@ -88,11 +88,9 @@ public class UserSqlDAO implements UserDAO {
     
 	@Override
 	public void updateUser(User user) {
-		String sqlUpdateUser = "UPDATE users SET wins = ?, losses = ?, tournament_wins = ?, "
-				+ "tournaments_entered = ?, user_image = ? WHERE user_id = ?;";
+		String sqlUpdateUser = "UPDATE users SET user_image = ? WHERE user_id = ?;";
 		
-		jdbcTemplate.update(sqlUpdateUser, user.getWins(), user.getLosses(), user.getTournamentWins(), 
-				user.getTournamentsEntered(), user.getUserImage(), user.getId());
+		jdbcTemplate.update(sqlUpdateUser, user.getUserImage(), user.getId());
 		
 	}
 

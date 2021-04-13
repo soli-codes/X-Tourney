@@ -118,8 +118,15 @@ CREATE TABLE matches (
     losing_team_score integer,
     match_date varchar(50),
     match_time varchar(50),
+    next_match int DEFAULT NULL,
 
     CONSTRAINT FK_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
+);
+
+CREATE TABLE invitation (
+    tournament_id int NOT NULL,
+    team_id int NOT NULL,
+    has_accepted boolean DEFAULT NULL
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
@@ -136,8 +143,10 @@ INSERT INTO game_type (game_type_id, game_type) VALUES (1, 'Golf'), (2, 'Basebal
 (10, 'Apex Legends'), (11, 'Leage of Legends'), (12, 'Counter-Strike'), (13, 'Hearthstone'), 
 (14, 'Valorant'), (15, 'Rainbow Six Siege');
 
-INSERT INTO team_name (team_name) VALUES ('TO BE DETERMINED'),('Team One With All'), ('Two True for You'), 
-('Team Three for Me'), ('Team Four on the Floor'), ('Team Five Guys and Fries');
+INSERT INTO team_name (team_name, wins, losses, tournament_wins, tournaments_entered) VALUES 
+('TO BE DETERMINED', 0, 0, 0, 0),('Team One With All', 5, 6, 1, 3), 
+('Two True for You', 8, 5, 2, 4), ('Team Three for Me', 3, 5, 0, 3), 
+('Team Four on the Floor', 9, 8, 1, 5), ('Team Five Guys and Fries', 1, 8, 0, 5);
 
 INSERT INTO team_name_users (user_id, team_id) VALUES (3, 2), (8, 2), (7, 2), 
 (4, 3), (3, 3), (8, 3), 
@@ -147,22 +156,22 @@ INSERT INTO team_name_users (user_id, team_id) VALUES (3, 2), (8, 2), (7, 2),
 
 INSERT INTO tournament (game_type_id, host_id, name, description, is_open, is_private, 
 max_teams, elimination_type, start_date, end_date, signup_open, signup_close, start_time) VALUES 
-(1, 3, 'Golf Extravaganza', 'Come play in this super cool golf tournament!', true, false, 8, 'Single', 
+(1, 3, 'Golf Extravaganza', 'Come play in this super cool golf tournament!', true, false, 4, 'Single',
 '2021-05-01', '2021-05-05', '2021-04-20', '2021-04-28', '12:00'), 
 (3, 4, 'Hockey Hooplah', 'Hittin up the hockey gods for a fun tournament - INVITE ONLY - ', true, true, 4, 'Single', 
 '2021-06-01', '2021-06-05', '2021-05-20', '2021-05-28', '11:00'),
 (5, 5, 'Table Tennis Tourney', 'Get it on with some ping pong!', false, false, 4, 'Single', 
 '2021-03-01', '2021-03-05', '2021-02-20', '2021-02-28', '17:00'),
-(8, 6, 'PUBG Chicken Dinner Winner', 'Wanna win this dinner? You better be the winner!', true, false, 6, 'Single', 
+(8, 6, 'PUBG Chicken Dinner Winner', 'Wanna win this dinner? You better be the winner!', true, false, 4, 'Single',
 '2021-04-15', '2021-05-01', '2021-04-01', '2021-04-14', '09:00'),
-(14, 7, 'Viscious Valorant', 'Victory to the Valorant Victor who Visciously Vanquishes their foes', true, false, 8, 'Single', 
+(14, 7, 'Viscious Valorant', 'Victory to the Valorant Victor who Visciously Vanquishes their foes', true, false, 4, 'Single',
 '2021-05-01', '2021-05-05', '2021-04-01', '2021-04-28', '13:00');
 
-INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1, 4), 
-(2, 5), (2, 6), 
+INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1, 4), (1,5),
+(2, 5), (2, 6), (2, 2), (2, 3),
 (3, 2), (3, 3), (3, 4), (3, 5), 
 (4, 6), (4, 2), (4, 3), (4, 4), 
-(5, 2), (5, 3), (5, 5), (5, 6);
+(5, 2), (5, 3), (5, 4), (5, 5);
 
 INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id, match_date, match_time, winning_team_id,
 losing_team_id, winning_team_score, losing_team_score) VALUES 
@@ -170,6 +179,8 @@ losing_team_id, winning_team_score, losing_team_score) VALUES
 (1, 3, 1, 2, '2021-03-01', '12:00', 1, 2, 5, 3),
 (2, 3, 3, 4, '2021-03-02', '12:00', 3, 4, 7, 5),
 (3, 3, 1, 3, '2021-03-04', '14:00', 1, 3, 6, 4);
+
+INSERT INTO invitation (tournament_id, team_id) VALUES (4, 5);
 
 
 UPDATE tournament SET has_started = true, tournament_winner_id = 1 

@@ -9,9 +9,10 @@
         v-for="match in round"
         :key="match"
         class="flex-column p-0 m-1 d-flex"
+        style="width: 200px; background-color: #333333"
         @click="checkLength(round, match)"
       >
-        {{ match.id }},{{ match.team1 }},{{ match.team2 }}
+        {{ match.teamOneId }},{{ match.teamTwoId }}
       </div>
     </div>
   </div>
@@ -19,23 +20,21 @@
 
 <script>
 import MatchServices from '../services/MatchServices';
+import TournamentsService from '../services/TournamentsService';
 export default {
   data() {
     return {
-      array: [
-        [
-          { id: 1, team1: 'cat', team2: 'dog' },
-          { id: 2, team1: 'ferret', team2: 'garfield' },
-          { id: 3, team1: 'cat', team2: 'dog' },
-          { id: 4, team1: 'ferret', team2: 'garfield' },
-        ],
-        [
-          { id: 5, team1: 'cat', team2: 'dog' },
-          { id: 6, team1: 'ferret', team2: 'garfield' },
-        ],
-        [{ id: 7, team1: 'cat', team2: 'ferret' }],
-      ],
+      array: [],
+      teams: [],
     };
+  },
+  created() {
+    TournamentsService.getTournamentMatches(3).then((response) => {
+      this.array = response.data;
+    });
+    TournamentsService.getTournamentTeams(3).then((response) => {
+      this.teams = response.data;
+    });
   },
   methods: {
     checkLength(round, match) {

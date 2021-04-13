@@ -47,6 +47,10 @@ export default new Vuex.Store({
 
     SET_MATCHES(state, matches) {
       state.matches = matches;
+    },
+
+    SET_USER_IMAGE(state, imageURL) {
+      state.user.userImage = imageURL;
     }
   }
 })
