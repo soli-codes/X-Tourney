@@ -101,6 +101,13 @@
   </nav>
 </template>
 
+<script>
+export default {
+   methods: {
+
+   }
+}
+</script>
 <style scoped>
 .right-align {
   position: relative;

@@ -71,7 +71,7 @@
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Manage a Team</h2>
         <p class="text-primary">
-          Ready to manage your very own squad? Ourcreation tool makes it easy to
+          Ready to manage your very own squad? Our creation tool makes it easy to
           build, manage, and enroll your team in competitions.
         </p>
       </div>
