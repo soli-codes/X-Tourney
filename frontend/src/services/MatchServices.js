@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export default {
-
   getMatches() {
     return axios.get('/matches');
   },
@@ -10,8 +9,8 @@ export default {
     return axios.get(`/matches/${id}`);
   },
 
-  postMatch(match) {
-    return axios.post('/matches/create', match);
+  postMatch(axiosObject) {
+    return axios.post('/matches/create', axiosObject);
   },
 
   updateMatch(match) {
