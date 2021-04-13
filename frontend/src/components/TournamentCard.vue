@@ -5,7 +5,9 @@
       src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200410200859/LogoVersion_Beta_Key_Art_VALORANT.jpg"
     />
     <div class="card-body">
-      <h5 class="card-title text-center">{{ tournament.name }}</h5>
+      <h5 class="card-title text-center">
+        {{ tournament.name }}
+      </h5>
       <p class="card-text text-center text-primary">
         {{ tournament.startDate }}
       </p>
