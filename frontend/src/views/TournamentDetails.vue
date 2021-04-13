@@ -6,7 +6,7 @@
       >
         <img :src="tournament.tournamentImage" class="image" />
         <h1>{{ tournament.name }}</h1>
-        <button v-if="$store.state.token != ''">Sign Up</button>
+        <button class="bg-primary" v-if="$store.state.token != ''">Sign Up</button>
         <router-link v-else to="login">Login to Sign Up</router-link>
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
@@ -35,21 +35,6 @@
         <img :src="team.teamImage" class="image" />
         <h4>{{ team.teamName }}</h4>
       </div>
-      <!-- MODAL -->
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <match-details
-          v-if="
-            $store.state.matches.length > 0 && $store.state.teams.length > 0
-          "
-          :match="modalMatch"
-        />
-      </div>
     </div>
   </div>
 </template>
@@ -58,26 +43,13 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
-import MatchDetails from '../components/MatchDetails.vue';
 
 export default {
-  components: { GeneratedBracket, MatchDetails },
+  components: { GeneratedBracket },
   data() {
     return {
       tournament: {},
-      modalMatch: {
-        matchId: '',
-        tournamentId: '',
-        teamOneId: '',
-        teamTwoId: '',
-        winningTeamId: '',
-        losingTeamId: '',
-        winningTeamScore: '',
-        losingTeamScore: '',
-        matchDate: '',
-        matchTime: '',
-        nextMatch: '',
-      },
+      
     };
   },
 
@@ -144,19 +116,6 @@ export default {
       return seededArray;
     },
 
-    onClickChild(modalMatch) {
-      this.modalMatch.matchId = modalMatch.matchId;
-      this.modalMatch.tournamentId = modalMatch.tournamentId;
-      this.modalMatch.teamOneId = modalMatch.teamOneId;
-      this.modalMatch.teamTwoId = modalMatch.teamTwoId;
-      this.modalMatch.winningTeamId = modalMatch.winningTeamId;
-      this.modalMatch.losingTeamId = modalMatch.losingTeamId;
-      this.modalMatch.winningTeamScore = modalMatch.winningTeamScore;
-      this.modalMatch.losingTeamScore = modalMatch.losingTeamScore;
-      this.modalMatch.matchDate = modalMatch.matchDate;
-      this.modalMatch.matchTime = modalMatch.matchTime;
-      this.modalMatch.nextMatch = modalMatch.nextMatch;
-    },
   },
 
   computed: {
