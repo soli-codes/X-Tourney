@@ -71,7 +71,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 	public void updateMatch(Matches match) {
 		String sqlUpdateMatch = "UPDATE matches SET winning_team_id = ?, losing_team_id = ?, "
 				+ "winning_team_score = ?, losing_team_score = ?, match_date = ?, match_time = ?"
-				+ "WHERE match_id = ?;";
+				+ "WHERE match_id = ? AND tournament_id = ?;";
 		String teamToUpdate = "";
 		if (match.getMatchId() % 2 != 0) {
 			teamToUpdate = "team_1_id";
@@ -79,7 +79,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 		String sqlNextMatch = "UPDATE matches SET ? = ? WHERE match_id = ? AND tournament_id = ?;";
 		jdbcTemplate.update(sqlUpdateMatch, match.getWinningTeamId(), match.getLosingTeamId(), 
 				match.getWinningTeamScore(), match.getLosingTeamScore(), match.getMatchDate(), 
-				match.getMatchTime(), match.getMatchId());
+				match.getMatchTime(), match.getMatchId(), match.getTournamentId());
 		jdbcTemplate.update(sqlNextMatch, teamToUpdate, match.getWinningTeamId(), match.getNextMatch(), match.getTournamentId());
 	}
 
