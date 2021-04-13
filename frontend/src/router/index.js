@@ -10,10 +10,11 @@ import TournamentBrowse from '../views/TournamentBrowse.vue';
 import TournamentCreate from '../views/TournamentCreate.vue';
 import TeamsBrowse from '../views/TeamsBrowse.vue';
 import TournamentDetails from '../views/TournamentDetails.vue';
+import Profile from '../views/Profile.vue';
 import MeetTheTeam from '../views/MeetTheTeam.vue';
 import UpdateMatch from '../views/UpdateMatch.vue';
-import Settings from '../views/Settings.vue';
 import Test from '../views/Test.vue';
+import TeamsCreate from '../views/TeamsCreate.vue';
 
 Vue.use(Router);
 
@@ -94,13 +95,22 @@ const router = new Router({
     },
     // CREATE A TOURNAMENT
     {
-      path: '/create',
-      name: 'create',
+      path: '/create/tournament',
+      name: 'createTournament',
       component: TournamentCreate,
       meta: {
         requiresAuth: false, // Change to true on prod
       },
     },
+      // CREATE A TEAM
+      {
+        path: '/create/team',
+        name: 'createTeam',
+        component: TeamsCreate,
+        meta: {
+          requiresAuth: false, // Change to true on prod
+        },
+      },
     // BROWSE ALL TEAMS
     {
       path: '/teams',
@@ -119,6 +129,16 @@ const router = new Router({
         requiresAuth: false,
       },
     },
+    // VIEW YOUR PROFILE
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+
   {
     path: '/meettheteam',
     name: 'meetTheTeam',
@@ -136,16 +156,6 @@ const router = new Router({
       requiresAuth: false,
   }
 },
-
-    // USER SETTINGS
-    {
-      path: '/profile/settings',
-      name: 'settings',
-      component: Settings,
-      meta: {
-        requiresAuth: true,
-      },
-    },
   ],
 });
 

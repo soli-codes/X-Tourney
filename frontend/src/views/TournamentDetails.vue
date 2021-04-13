@@ -10,8 +10,8 @@
         <router-link v-else to="login">Login to Sign Up</router-link>
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
-          id="generateBracket"
           v-if="$store.state.matches.length == 0"
+          id="generateBracket"
           v-on:click="generateBracket()"
         >
           Generate Bracket
@@ -156,10 +156,10 @@ export default {
 
     computed: {
       teams() {
-        console.log('test');
         return this.$store.state.teams;
       },
       matches() {
+        console.log('test');
         return this.$store.state.matches;
       },
     },

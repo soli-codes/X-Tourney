@@ -58,23 +58,6 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item sizing collapse-size">
-          <router-link
-            :to="{ name: 'profileTeams' }"
-            class="nav-link active text-primary"
-            aria-current="page"
-            href="#"
-            >My Teams</router-link
-          >
-        </li>
-        <li class="nav-item sizing collapse-size">
-          <router-link
-            :to="{ name: 'profileTournaments' }"
-            class="nav-link text-primary"
-            href="#"
-            >My Tournaments</router-link
-          >
-        </li>
       </ul>
       <router-link
         class="nav-link active text-primary d-flex collapse-size"
@@ -98,7 +81,7 @@
         >Login</router-link
       >
       <router-link
-        :to="{ name: 'settings' }"
+        :to="{ name: 'profile' }"
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
         href="#"

@@ -1,5 +1,8 @@
 <template>
   <div>
+      <profile-teams />
+      <profile-tournaments />
+      <invitation />
     <div>
       <label for="imageURL"
         >Profile Image URL:

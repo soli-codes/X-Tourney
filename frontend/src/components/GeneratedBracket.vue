@@ -32,14 +32,12 @@ export default {
   },
   methods: {
     getTeamName(teamId) {
-      console.log(teamId);
       if (teamId == 1) {
         return 'TO BE DECIDED';
       }
       let team = this.$store.state.teams.find((team) => {
         return team.teamId == teamId;
       });
-      console.log(team);
       return team.teamName;
     },
 
