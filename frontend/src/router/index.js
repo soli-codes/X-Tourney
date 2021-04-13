@@ -13,6 +13,7 @@ import TournamentDetails from '../views/TournamentDetails.vue';
 import Profile from '../views/Profile.vue';
 import ProfileTeams from '../views/ProfileTeams.vue';
 import ProfileTournaments from '../views/ProfileTournaments.vue';
+import UpdateMatch from '../views/UpdateMatch.vue';
 
 Vue.use(Router);
 
@@ -137,6 +138,14 @@ const router = new Router({
         requiresAuth: false,
     }
   },
+  {
+    path: '/tournaments/:tournamentId/:matchId',
+    name: 'updateMatch',
+    component: UpdateMatch,
+    meta: {
+      requiresAuth: false,
+  }
+},
     
   ],
 });

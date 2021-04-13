@@ -69,17 +69,8 @@ export default {
    generateBracket() {
      if(this.teams != null && this.teams.length > 0) {
       let seedArray = this.generateSeedArray();
-
-      let j = this.teams.length - 1;
-      for(let i = 0; i <= j; i++) {
-        let newMatch = {};
-
-          newMatch.tournament_id = this.tournament.tournamentId;
-          newMatch.team_1_id = seedArray[i.teamId];
-          newMatch.team_2_id = seedArray[j.teamId];
-          j--;
-
-        MatchServices.postMatch(newMatch);
+      
+      MatchServices.postMatch(this.teams.length, this.$route.params.tournamentId, seedArray);
 
       }
      }
@@ -94,9 +85,9 @@ export default {
           } else return -1;
       });
       return seedArray;
-    }
-  
   },
+  
+
 
   computed: {
     // imagePath() {
