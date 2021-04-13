@@ -4,15 +4,15 @@
             <div>
                 <label>Match Winner:</label>
                 <select v-model="newMatch.winningTeamId">
-                    <option value="{{ match.teamOneId }}">{{ getTeamName(match.teamOneId) }}</option>
-                    <option value="{{ match.teamTwoId }}">{{ getTeamName(match.teamTwoId) }}</option>
+                    <option :value=" match.teamOneId ">{{ getTeamName(match.teamOneId) }}</option>
+                    <option :value=" match.teamTwoId ">{{ getTeamName(match.teamTwoId) }}</option>
                 </select>
             </div>
             <div>
                 <label>Match Loser:</label>
                 <select v-model="newMatch.losingTeamId">
-                    <option value="{{ match.teamOneId }}">{{ getTeamName(match.teamOneId) }}</option>
-                    <option value="{{ match.teamTwoId }}">{{ getTeamName(match.teamTwoId) }}</option>
+                    <option :value=" match.teamOneId ">{{ getTeamName(match.teamOneId) }}</option>
+                    <option :value=" match.teamTwoId ">{{ getTeamName(match.teamTwoId) }}</option>
                 </select>
             </div>
             <div>
@@ -56,12 +56,12 @@ export default {
 
     created() {
 
-        this.newMatch.matchDate = match.matchDate;
-        this.newMatch.matchTime = match.matchTime;
-        this.newMatch.matchId = match.matchId;
-        this.newMatch.tournamentId = match.tournamentId;
-        this.newMatch.teamOneId = match.teamOneId;
-        this.newMatch.teamTwoId = match.teamTwoId;
+        this.newMatch.matchDate = this.match.matchDate;
+        this.newMatch.matchTime = this.match.matchTime;
+        this.newMatch.matchId = this.match.matchId;
+        this.newMatch.tournamentId = this.match.tournamentId;
+        this.newMatch.teamOneId = this.match.teamOneId;
+        this.newMatch.teamTwoId = this.match.teamTwoId;
 
     },
 

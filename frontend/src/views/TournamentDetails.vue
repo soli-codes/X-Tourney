@@ -11,6 +11,7 @@
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
           id="generateBracket"
+          v-if="$store.state.matches.length == 0"
           v-on:click="generateBracket()"
         >
           Generate Bracket
@@ -21,17 +22,24 @@
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
       <generated-bracket
-        v-if="this.matches.length > 0 && $store.state.teams.length > 0"
+        v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
       />
-      <!-- displays registered teams in a list -->
+      <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
       <div
-        v-for="team in $store.state.teams"
-        :key="team.teamId"
+        v-for="(team, index) in $store.state.teams"
+        :key="index"
         :team="team"
         class="d-flex"
       >
-        <!-- <img :src="team.teamImage" /> -->
+        <h4>#{{ index + 1}}</h4>
+        <img :src="team.teamImage" class="image" />
         <h4>{{ team.teamName }}</h4>
+      </div>
+      <!-- MODAL -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <match-details
+        v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
+        :match="modalMatch" /> -->
       </div>
     </div>
   </div>
@@ -41,12 +49,28 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
+// import MatchDetails from '../components/MatchDetails.vue';
+
 export default {
-  components: { GeneratedBracket },
+  components: { GeneratedBracket,  },
   data() {
     return {
       tournament: {},
-      matches: [],
+      modalMatch: {
+
+        matchId: '',
+        tournamentId: '',
+        teamOneId: '',
+        teamTwoId: '',
+        winningTeamId: '',
+        losingTeamId: '',
+        winningTeamScore: '',
+        losingTeamScore: '',
+        matchDate: '',
+        matchTime: '',
+        nextMatch: '',
+
+      },
     };
   },
 
@@ -62,6 +86,13 @@ export default {
         this.$store.commit('SET_TEAMS', response.data);
       }
     );
+
+    TournamentsService.getTournamentMatches(this.$route.params.tournamentId).then(
+      (response) => {
+        this.$store.commit('SET_MATCHES', response.data);
+      }
+    )
+
   },
 
   methods: {
@@ -108,6 +139,21 @@ export default {
       return seededArray;
     },
 
+    // onClickChild (modalMatch) {
+    //     this.modalMatch.matchId = modalMatch.matchId;
+    //     this.modalMatch.tournamentId = modalMatch.tournamentId;
+    //     this.modalMatch.teamOneId = modalMatch.teamOneId;
+    //     this.modalMatch.teamTwoId = modalMatch.teamTwoId;
+    //     this.modalMatch.winningTeamId = modalMatch.winningTeamId;
+    //     this.modalMatch.losingTeamId = modalMatch.losingTeamId;
+    //     this.modalMatch.winningTeamScore = modalMatch.winningTeamScore;
+    //     this.modalMatch.losingTeamScore = modalMatch.losingTeamScore;
+    //     this.modalMatch.matchDate = modalMatch.matchDate;
+    //     this.modalMatch.matchTime = modalMatch.matchTime;
+    //     this.modalMatch.nextMatch = modalMatch.nextMatch;
+    // },
+  },
+
     computed: {
       teams() {
         console.log('test');
@@ -117,17 +163,15 @@ export default {
         return this.$store.state.matches;
       },
     },
-  },
 
-  computed: {
     // imagePath() {
     //   if(!this.tournament || !this.tournament.tournamentImage) return '';
     //   return require(`@/${this.tournament.tournamentImage}`);
     // },
-
-  },
-  
 }
+
+  
+
 </script>
 
 <style scoped>
