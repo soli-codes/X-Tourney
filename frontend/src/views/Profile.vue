@@ -120,4 +120,8 @@ div.title {
 h3 {
     text-align: center;
 }
+
+a {
+text-decoration: none
+}
 </style>
