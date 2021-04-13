@@ -22,6 +22,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item sizing collapse-size">
+          <router-link
+            :to="{ name: 'home' }"
+            class="nav-link text-primary"
+            href="#"
+            >Home</router-link
+          >
+        </li>
         <li class="nav-item dropdown sizing collapse-size">
           <a
             class="nav-link dropdown-toggle text-primary"
@@ -132,4 +140,5 @@ export default {
   transform: rotate(360deg);
   transition-duration: 750ms;
 }
+
 </style>

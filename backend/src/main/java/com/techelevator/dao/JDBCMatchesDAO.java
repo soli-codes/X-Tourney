@@ -105,6 +105,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 		match.setLosingTeamScore(rs.getInt("losing_team_score"));
 		match.setMatchDate(rs.getString("match_date"));
 		match.setMatchTime(rs.getString("match_time"));
+		match.setNextMatch(rs.getInt("next_match"));
 		
 		return match;
 	}

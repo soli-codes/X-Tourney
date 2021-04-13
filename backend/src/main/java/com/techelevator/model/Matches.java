@@ -11,6 +11,7 @@ public class Matches {
 	private int losingTeamScore;
 	private String matchDate;
 	private String matchTime;
+	private int nextMatch;
 	
 	
 	public Matches() {
@@ -94,6 +95,14 @@ public class Matches {
 
 	public void setMatchTime(String matchTime) {
 		this.matchTime = matchTime;
+	}
+	
+	public int getNextMatch() {
+		return nextMatch;
+	}
+	
+	public void setNextMatch(int nextMatch) {
+		this.nextMatch = nextMatch;
 	}
 	
 	
