@@ -8,31 +8,29 @@
     >
       <div
         class="flex-column p-0 m-1 d-flex"
-        id="match divs"
+        id="match-divs"
         v-for="match in matchCounter()"
         :key="match"
         style="border-color: #FFFFFF; background-color: #000000; width: 200px;"
       >
-      <div id="matches">
-        <div
-          class="team1 p-0 m-0"
-          style="background-color: #333333">
-          TEST TEAM ONE
+        <div id="matches">
+          <div class="team1 p-0 m-0" style="background-color: #333333">
+            TEST TEAM ONE
+          </div>
+          <div class="team2 p-0 m-0">TEST TEAM TWO</div>
         </div>
-        <div class="team2 p-0 m-0">TEST TEAM TWO</div>
-      </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      rounds: 3,
+      rounds: 0,
       tempCounter: 0,
+      teams: [1, 2, 3, 4, 5, 6, 7, 8],
     };
   },
   created() {
@@ -57,30 +55,15 @@ export default {
 
   methods: {
     matchCounter() {
-      if (this.tempCounter >= 0) {
       this.tempCounter--;
       return Math.pow(2, this.tempCounter);
-      } return 0;
     },
-
-    generateSeedArray() {
-      this.seedArray = this.teams;
-      this.seedArray.sort((a, b) => {
-        if ((a.wins / a.losses) > (b.wins / b.losses)) {
-          return 1;
-        } else return -1;
-      });
-    },
-
   },
 
-  computed: {
-
-    teams() {
-      return this.$store.state.teams;
-    },
-  }
-
-  
+  // computed: {
+  //   teams() {
+  //     return this.$store.state.teams;
+  //   },
+  // },
 };
 </script>

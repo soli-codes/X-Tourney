@@ -14,6 +14,8 @@ import Profile from '../views/Profile.vue';
 import ProfileTeams from '../views/ProfileTeams.vue';
 import ProfileTournaments from '../views/ProfileTournaments.vue';
 import UpdateMatch from '../views/UpdateMatch.vue';
+import Settings from '../views/Settings.vue';
+import Test from '../views/Test.vue';
 
 Vue.use(Router);
 
@@ -35,6 +37,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test,
       meta: {
         requiresAuth: true,
       },
@@ -109,7 +119,7 @@ const router = new Router({
       component: TournamentDetails,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     // VIEW YOUR PROFILE
     {
@@ -122,12 +132,12 @@ const router = new Router({
     },
     // VIEW TEAMS YOU MANAGE AND TEAMS YOU'RE ON
     {
-        path: '/profile/teams',
-        name: 'profileTeams',
-        component: ProfileTeams,
-        meta: {
-          requiresAuth: false,
-      }
+      path: '/profile/teams',
+      name: 'profileTeams',
+      component: ProfileTeams,
+      meta: {
+        requiresAuth: false,
+      },
     },
     // VIEW TOURNAMENTS YOU MANAGE AND TOURNAMENTS YOU'RE PART OF
     {
@@ -146,7 +156,16 @@ const router = new Router({
       requiresAuth: false,
   }
 },
-    
+
+    // USER SETTINGS
+    {
+      path: '/profile/settings',
+      name: 'settings',
+      component: Settings,
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
 });
 

@@ -10,7 +10,7 @@
       <div
         class="flex-column p-0 m-1 d-flex"
         id="match divs"
-        v-for="match in matchCounter()"
+        v-for="match in matchCounter"
         :key="match"
         style="border-color: #FFFFFF; background-color: #000000; width: 200px;"
       >
@@ -32,18 +32,16 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      rounds: "",
+      rounds: '',
       tempCounter: 0,
       tempMatchCounter: -1,
       tempMatchWinner: -1,
     };
   },
   created() {
-
     if (this.teams.length <= 64) {
       this.rounds = 6;
     }
@@ -62,43 +60,44 @@ export default {
     this.tempCounter = this.rounds;
 
   },
-
   methods: {
     matchCounter() {
       if (this.tempCounter > 0) {
-      this.tempCounter--;
-      return Math.pow(2, this.tempCounter);
-      } return 0;
+        this.tempCounter--;
+        return Math.pow(2, this.tempCounter);
+      }
+      return 0;
     },
 
     countMatches() {
-        this.tempMatchCounter++;
-        return this.matches[this.tempMatchCounter];
+      this.tempMatchCounter++;
+      return this.matches[this.tempMatchCounter];
     },
 
     countMatchWinner() {
-        this.tempMatchWinner++;
-        return this.matches[this.tempMatchWinner]
+      this.tempMatchWinner++;
+      return this.matches[this.tempMatchWinner];
     },
 
     getTeamName(id) {
-        let targetTeam = this.teams.find(team => {
-            return team.teamId == id;
-        });
-        return targetTeam.teamName;
+      let targetTeam = this.teams.find((team) => {
+        return team.teamId == id;
+      });
+      return targetTeam.teamName;
     },
-
+  },
+  mounted() {
+    console.log(this.teams);
   },
 
   computed: {
-
     teams() {
       return this.$store.state.teams;
     },
 
     matches() {
       return this.$store.state.matches;
-    }
+    },
   },
 };
 </script>

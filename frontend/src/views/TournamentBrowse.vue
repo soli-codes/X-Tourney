@@ -21,7 +21,7 @@
       </select>
       <p class="ms-1 text-center">Game Type:</p>
       <select class="form-select ms-1" v-model="filter.gameType">
-        <option value="" >Display All</option>
+        <option value="">Display All</option>
         <option
           v-for="gameType in gameTypes"
           :value="gameType.gameTypeId"
@@ -33,7 +33,12 @@
     </div>
     <div class="d-flex justify-content-around">
       <div v-for="tournament in filteredList" :key="tournament.tournamentId">
-        <router-link :to="{ name: 'tournamentDetails', params: { tournamentId: tournament.tournamentId }}">
+        <router-link
+          :to="{
+            name: 'tournamentDetails',
+            params: { tournamentId: tournament.tournamentId },
+          }"
+        >
           <tournament-card :tournament="tournament" />
         </router-link>
       </div>
@@ -167,6 +172,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
+
 .justify-content-around {
   height: 100vh;
   flex-wrap: wrap;

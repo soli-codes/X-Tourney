@@ -1,12 +1,11 @@
 <template>
-  <div class="home text-center">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
-  </div>
+  <bracket />
 </template>
 
 <script>
+import Bracket from '../components/Bracket.vue';
 export default {
+  components: { Bracket },
   name: 'home',
 };
 </script>
