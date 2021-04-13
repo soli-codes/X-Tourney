@@ -31,7 +31,7 @@
         :team="team"
         class="d-flex"
       >
-        <h4>#{{ index + 1}}</h4>
+        <h4>#{{ index + 1 }}</h4>
         <img :src="team.teamImage" class="image" />
         <h4>{{ team.teamName }}</h4>
       </div>
@@ -66,16 +66,14 @@ export default {
       }
     );
 
-    TournamentsService.getTournamentMatches(this.$route.params.tournamentId).then(
-      (response) => {
-        this.$store.commit('SET_MATCHES', response.data);
-      }
-    )
-
+    TournamentsService.getTournamentMatches(
+      this.$route.params.tournamentId
+    ).then((response) => {
+      this.$store.commit('SET_MATCHES', response.data);
+    });
   },
 
   methods: {
-
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
       console.log(tournamentSize);
@@ -120,37 +118,26 @@ export default {
 
   },
 
-    computed: {
-      teams() {
-        return this.$store.state.teams;
-      },
-      matches() {
-        console.log('test');
-        return this.$store.state.matches;
-      },
+  computed: {
+    teams() {
+      return this.$store.state.teams;
     },
+    matches() {
+      console.log('test');
+      return this.$store.state.matches;
+    },
+  },
 
-    // imagePath() {
-    //   if(!this.tournament || !this.tournament.tournamentImage) return '';
-    //   return require(`@/${this.tournament.tournamentImage}`);
-    // },
-}
-
-  
-
+  // imagePath() {
+  //   if(!this.tournament || !this.tournament.tournamentImage) return '';
+  //   return require(`@/${this.tournament.tournamentImage}`);
+  // },
+};
 </script>
 
 <style scoped>
-
-
-
 .image {
   height: 150px;
   width: 150px;
 }
-
-.background-image {
-  background-image: url(../assets/CustomBorder.png) !important;
-}
-
 </style>

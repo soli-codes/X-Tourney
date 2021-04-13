@@ -13,7 +13,7 @@ public interface MatchesDAO {
 	
 	BracketInformation createMatch(BracketInformation bracketInfo);
 	
-	void updateMatch(Matches match, int nextMatchId);
+	void updateMatch(Matches match);
 	
 	void deleteMatch(int matchId);
 }
