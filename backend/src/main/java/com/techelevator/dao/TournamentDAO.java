@@ -18,7 +18,7 @@ public interface TournamentDAO {
 	
 	List<TeamName> getTeamsByTournamentId(int tournamentId);
 	
-	public List<Matches>getMatchesBytournamentId(int tournamentId);
+	public List<List<Matches>> getMatchesBytournamentId(int tournamentId);
 	
 	public List<Tournament>getTournamentsByHostId(int hostId);
 	
