@@ -10,8 +10,8 @@ export default {
     return axios.get(`/matches/${id}`);
   },
 
-  postMatch(match) {
-    return axios.post('/matches/create', match);
+  postMatch(length, tournamentId, seedArray) {
+    return axios.post('/matches/create', length, tournamentId, seedArray);
   },
 
   updateMatch(match) {

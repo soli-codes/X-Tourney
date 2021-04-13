@@ -11,7 +11,7 @@ public interface MatchesDAO {
 	
 	Matches getMatchById(int matchId);
 	
-	void createMatch(Integer tournamentSize, Integer tournamentId, TeamName[] teams);
+	void createMatch(int tournamentSize, int tournamentId, TeamName[] teams);
 	
 	void updateMatch(Matches match, int nextMatchId);
 	

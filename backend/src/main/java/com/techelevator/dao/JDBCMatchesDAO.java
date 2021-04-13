@@ -49,7 +49,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 	}
 
 	@Override
-	public void createMatch(Integer tournamentSize, Integer tournamentId, TeamName[] teams) {
+	public void createMatch(int tournamentSize, int tournamentId, TeamName[] teams) {
 		String sqlCreateMatch = "INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id) "
 				+ "VALUES (?, ?, ?, ?) RETURNING match_id;";
 		int lowSeed = teams.length;

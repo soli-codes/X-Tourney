@@ -10,9 +10,6 @@ import TournamentBrowse from '../views/TournamentBrowse.vue';
 import TournamentCreate from '../views/TournamentCreate.vue';
 import TeamsBrowse from '../views/TeamsBrowse.vue';
 import TournamentDetails from '../views/TournamentDetails.vue';
-import Profile from '../views/Profile.vue';
-import ProfileTeams from '../views/ProfileTeams.vue';
-import ProfileTournaments from '../views/ProfileTournaments.vue';
 import MeetTheTeam from '../views/MeetTheTeam.vue';
 import UpdateMatch from '../views/UpdateMatch.vue';
 import Settings from '../views/Settings.vue';
@@ -122,34 +119,6 @@ const router = new Router({
         requiresAuth: false,
       },
     },
-    // VIEW YOUR PROFILE
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile,
-      meta: {
-        requiresAuth: false,
-      },
-    },
-    // VIEW TEAMS YOU MANAGE AND TEAMS YOU'RE ON
-    {
-      path: '/profile/teams',
-      name: 'profileTeams',
-      component: ProfileTeams,
-      meta: {
-        requiresAuth: false,
-      },
-    },
-    // VIEW TOURNAMENTS YOU MANAGE AND TOURNAMENTS YOU'RE PART OF
-    {
-      path: '/profile/tournaments',
-      name: 'profileTournaments',
-      component: ProfileTournaments,
-      meta: {
-        requiresAuth: false,
-    }
-  },
-
   {
     path: '/meettheteam',
     name: 'meetTheTeam',

@@ -95,7 +95,7 @@
         aria-current="page"
         href="#"
         v-else
-        >Settings</router-link
+        >My Profile</router-link
       >
     </div>
   </nav>
@@ -124,5 +124,9 @@
 .spinny:hover {
   transform: rotate(360deg);
   transition-duration: 750ms;
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>

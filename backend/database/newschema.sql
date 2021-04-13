@@ -120,7 +120,6 @@ CREATE TABLE matches (
     match_time varchar(50),
 
     CONSTRAINT FK_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
-    CONSTRAINT CompKey_MATCHID_TOURNAMENTID PRIMARY KEY (match_id,tournament_id)
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');

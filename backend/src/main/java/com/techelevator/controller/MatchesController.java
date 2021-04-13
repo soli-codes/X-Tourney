@@ -38,7 +38,7 @@ public class MatchesController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping( path = "/matches/create", method = RequestMethod.POST)
-	public void createMatch(@RequestBody Integer tournamentSize, Integer tournamentId, TeamName[] teams) {
+	public void createMatch(@RequestBody int tournamentSize, int tournamentId, TeamName[] teams) {
 		dao.createMatch(tournamentSize, tournamentId, teams);
 	}
 	
