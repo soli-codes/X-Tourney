@@ -179,9 +179,9 @@ INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1,
 INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id, match_date, match_time, winning_team_id,
 losing_team_id, winning_team_score, losing_team_score) VALUES 
 
-(1, 3, 1, 2, '2021-03-01', '12:00', 1, 2, 5, 3),
-(2, 3, 3, 4, '2021-03-02', '12:00', 3, 4, 7, 5),
-(3, 3, 1, 3, '2021-03-04', '14:00', 1, 3, 6, 4);
+(1, 3, 2, 3, '2021-03-01', '12:00', 2, 3, 5, 3),
+(2, 3, 4, 5, '2021-03-02', '12:00', 4, 5, 7, 5),
+(3, 3, 2, 4, '2021-03-04', '14:00', 2, 4, 6, 4);
 
 INSERT INTO invitation (tournament_id, team_id) VALUES (4, 5);
 
