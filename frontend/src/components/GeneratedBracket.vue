@@ -6,6 +6,7 @@
       v-for="round in rounds"
       :key="round"
     >
+      <div v-if="matches.legth =! 0 && teams.legnth != 0">
       <div
         class="flex-column p-0 m-1 d-flex"
         id="match divs"
@@ -13,26 +14,18 @@
         :key="match"
         style="border-color: #FFFFFF; background-color: #000000; width: 200px;"
       >
-        <!-- DISPLAYS KNOWN MATCH TEAMS IF IN THE FIRST COLUMN -->
-        <div v-if="round == 1" :match="countMatches()">
-          <div class="team1 p-0 m-0" style="background-color: #333333">
-            {{ match.teamOneId }}
-          </div>
-          <div class="team2 p-0 m-0">{{ match.teamTwoId }}</div>
-        </div>
-        <!-- BINDS TEAMS BASED ON WINNERS OF PREVIOUS MATCHES -->
-        <div v-else>
-          <div
-            :match="countMatchWinner()"
-            class="team1 p-0 m-0"
-            style="background-color: #333333"
-          >
-            {{ getTeamName(match.winningTeamId) }}
-          </div>
-          <div :match="countMatchWinner()" class="team2 p-0 m-0">
-            {{ getTeamName(match.winningTeamId) }}
-          </div>
-        </div>
+      <!-- DISPLAYS KNOWN MATCH TEAMS IF IN THE FIRST COLUMN -->
+      <div v-if="round == 1">
+        <div class="team1 p-0 m-0" style="background-color: #333333">{{ countMatches().teamOneId }}</div>
+        <div class="team2 p-0 m-0">{{ countMatches().teamTwoId }}</div>
+      
+      </div>
+      <!-- BINDS TEAMS BASED ON WINNERS OF PREVIOUS MATCHES -->
+      <div v-else>
+          <div class="team1 p-0 m-0" style="background-color: #333333">{{ getTeamName(countMatchWinner().winningTeamId) }}</div>
+          <div class="team2 p-0 m-0">{{ getTeamName(countMatchWinner().winningTeamId) }}</div>
+      </div>
+      </div>
       </div>
     </div>
   </div>
@@ -50,21 +43,22 @@ export default {
   },
   created() {
     if (this.teams.length <= 64) {
-      this.rounds = 7;
-    }
-    if (this.teams.length <= 32) {
       this.rounds = 6;
     }
-    if (this.teams.length <= 16) {
+    if (this.teams.length <= 32) {
       this.rounds = 5;
     }
-    if (this.teams.length <= 8) {
+    if (this.teams.length <= 16) {
       this.rounds = 4;
     }
-    if (this.teams.length <= 4) {
+    if (this.teams.length <= 8) {
       this.rounds = 3;
     }
+    if (this.teams.length <= 4) {
+      this.rounds = 2;
+    }
     this.tempCounter = this.rounds;
+
   },
   methods: {
     matchCounter() {
