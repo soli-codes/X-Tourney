@@ -112,7 +112,6 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		}
 		
 		List<List<Matches>> fullList = new ArrayList<>();
-
 		
 		String sqlGetTournamentSize = "SELECT max_teams FROM tournament WHERE tournament_id = ?;";
 		

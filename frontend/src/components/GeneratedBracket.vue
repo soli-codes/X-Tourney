@@ -9,6 +9,7 @@
         v-for="match in round"
         :key="match"
         class="flex-column p-0 m-1 d-flex"
+        
       >
         <div style="width: 200px; background-color: #333333">
           {{ getTeamName(match.teamOneId) }}
@@ -39,6 +40,11 @@ export default {
       });
       return team.teamName;
     },
+
+    // onClick(event, match) {
+    //   this.$emit('clicked', match);
+    // },
+
   },
   created() {
     TournamentsService.getTournamentMatches(
