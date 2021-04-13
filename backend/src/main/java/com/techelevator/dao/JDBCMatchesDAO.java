@@ -61,7 +61,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 				highSeed++;
 				lowSeed--;
 			}
-			else jdbcTemplate.update(sqlCreateMatch, i, bracketInformation.getTournamentId(), 0, 0);
+			else jdbcTemplate.update(sqlCreateMatch, i, bracketInformation.getTournamentId(), 1, 1);
 		}
 
 		return bracketInformation;

@@ -115,10 +115,12 @@
     <select
       class="form-select"
       v-model="tournament.maxTeams"
-      aria-label="Select a max amount of teams"
+      aria-label="Select amount of teams participating"
       id="maxTeams"
     >
-      <option disabled selected value="">Select the max amount of teams</option>
+      <option disabled selected value=""
+        >Select amount of teams participating</option
+      >
       <option>4</option>
       <option>8</option>
       <option>16</option>

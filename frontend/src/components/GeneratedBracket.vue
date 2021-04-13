@@ -11,10 +11,10 @@
         class="flex-column p-0 m-1 d-flex"
       >
         <div style="width: 200px; background-color: #333333">
-          {{ match.teamOneId }}
+          {{ getTeamName(match.teamOneId) }}
         </div>
         <div style="width: 200px; background-color: #333333">
-          {{ match.teamTwoId }}
+          {{ getTeamName(match.teamTwoId) }}
         </div>
       </div>
     </div>
@@ -27,8 +27,20 @@ export default {
   data() {
     return {
       array: [],
-      teams: [],
     };
+  },
+  methods: {
+    getTeamName(teamId) {
+      console.log(teamId);
+      if (teamId == 1) {
+        return 'TO BE DECIDED';
+      }
+      let team = this.$store.state.teams.find((team) => {
+        return team.teamId == teamId;
+      });
+      console.log(team);
+      return team.teamName;
+    },
   },
   created() {
     TournamentsService.getTournamentMatches(

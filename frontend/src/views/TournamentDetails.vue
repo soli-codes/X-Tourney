@@ -21,9 +21,16 @@
         <p>{{ tournament.description }}</p>
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-      <generated-bracket v-if="this.matches.length > 0" />
+      <generated-bracket
+        v-if="this.matches.length > 0 && $store.state.teams.length > 0"
+      />
       <!-- displays registered teams in a list -->
-      <div v-for="team in teams" :key="team.teamId" :team="team" class="d-flex">
+      <div
+        v-for="team in $store.state.teams"
+        :key="team.teamId"
+        :team="team"
+        class="d-flex"
+      >
         <!-- <img :src="team.teamImage" /> -->
         <h4>{{ team.teamName }}</h4>
       </div>
@@ -35,13 +42,11 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
-
 export default {
   components: { GeneratedBracket },
   data() {
     return {
       tournament: {},
-      teams: [],
       matches: [],
     };
   },
@@ -56,7 +61,7 @@ export default {
     // should work once getTournamentTeams end point is up and running
     TournamentsService.getTournamentTeams(this.$route.params.tournamentId).then(
       (response) => {
-        this.teams = response.data;
+        this.$store.commit('SET_TEAMS', response.data);
       }
     );
 
@@ -78,38 +83,30 @@ export default {
 
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
+      console.log(tournamentSize);
       const axiosObject = {
         tournamentSize: tournamentSize,
         tournamentId: parseInt(this.$route.params.tournamentId),
         teams: this.generateSeedArray(),
       };
       console.log(axiosObject.teams);
-      // fetch('http://localhost:8080/matches/create', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: axiosObject,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => console.log('Success:', data))
-      //   .catch((error) => {
-      //     console.log('error:', error);
-      //   });
-      if (this.teams != null && this.teams.length > 0) {
+      if (
+        this.$store.state.teams != null &&
+        this.$store.state.teams.length > 0
+      ) {
         MatchServices.postMatch(axiosObject).then((response) => {
           if (response.status == 201) {
             console.log(response);
             window.location.reload();
           } else {
-            console.log(response.error);
+            console.log('error');
           }
         });
       }
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
-      let seedArray = this.teams;
+      let seedArray = this.$store.state.teams;
       let seedLength = seedArray.length;
       seedArray.sort((a, b) => {
         if (a.wins / a.losses > b.wins / b.losses) {
@@ -120,15 +117,15 @@ export default {
       for (let i = 0; i < seedLength; i++) {
         seededArray.push(seedArray[i].teamId);
       }
+      for (let i = seededArray.length; i < this.tournament.maxTeamCount; i++) {
+        seededArray.push(1);
+      }
       return seededArray;
     },
 
     computed: {
-      // imagePath() {
-      //   if(!this.tournament || !this.tournament.tournamentImage) return '';
-      //   return require(`@/${this.tournament.tournamentImage}`);
-      // },
       teams() {
+        console.log('test');
         return this.$store.state.teams;
       },
       matches() {
