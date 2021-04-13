@@ -34,10 +34,12 @@
         />
       </div>
       <div class="column">
-        
         <div><button type="submit">Sign In</button></div>
-        <div><router-link :to="{ name: 'register' }" class="link-info"
-          >Need an account?</router-link></div>
+        <div>
+          <router-link :to="{ name: 'register' }" class="link-info"
+            >Need an account?</router-link
+          >
+        </div>
       </div>
     </form>
   </div>
@@ -66,7 +68,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit('SET_AUTH_TOKEN', response.data.token);
             this.$store.commit('SET_USER', response.data.user);
-            this.$router.push('/');
+            this.$router.push('/tournaments');
           }
         })
         .catch((error) => {
