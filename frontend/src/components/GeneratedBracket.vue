@@ -9,6 +9,9 @@
         v-for="match in round"
         :key="match"
         class="flex-column p-0 m-1 d-flex"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        v-on:click="onClick(round, match)"
         
       >
         <div style="width: 200px; background-color: #333333">
@@ -19,15 +22,64 @@
         </div>
       </div>
     </div>
+    <!-- MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-primary text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Match #{{ modalMatch.matchId }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label>Select Match Winner:</label>
+          <select v-model="modalMatch.winningTeamdId">
+            <option :value="modalMatch.teamOneId">{{ modalMatch.teamOneName }}</option>
+            <option :value="modalMatch.teamTwoId">{{ modalMatch.teamTwoName }}</option>
+          </select>
+        </div>
+        <div>
+          <label>Select Match Loser:</label>
+          <select v-model="modalMatch.losingTeamdId">
+            <option :value="modalMatch.teamOneId">{{ modalMatch.teamOneName }}</option>
+            <option :value="modalMatch.teamTwoId">{{ modalMatch.teamTwoName }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        <button v-on:click="putMatch(modalMatch)" type="button" class="btn btn-danger">Save Updates</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
 <script>
 import TournamentsService from '../services/TournamentsService';
+import MatchServices from '../services/MatchServices';
+
 export default {
   data() {
     return {
       array: [],
+      modalMatch: {
+
+        matchId: '',
+        tournamentId: '',
+        teamOneId: '',
+        teamTwoId: '',
+        teamOneName: '',
+        teamTwoName: '',
+        winningTeamId: '',
+        losingTeamId: '',
+        winningTeamScore: '',
+        losingTeamScore: '',
+        matchDate: '',
+        matchTime: '',
+        nextMatch: '',
+      },
     };
   },
   methods: {
@@ -41,9 +93,30 @@ export default {
       return team.teamName;
     },
 
-    // onClick(event, match) {
-    //   this.$emit('clicked', match);
-    // },
+    onClick (round, match) {
+        this.modalMatch.matchId = match.matchId;
+        this.modalMatch.tournamentId = match.tournamentId;
+        this.modalMatch.teamOneId = match.teamOneId;
+        this.modalMatch.teamTwoId = match.teamTwoId;
+        this.modalMatch.winningTeamId = match.winningTeamId;
+        this.modalMatch.losingTeamId = match.losingTeamId;
+        this.modalMatch.winningTeamScore = match.winningTeamScore;
+        this.modalMatch.losingTeamScore = match.losingTeamScore;
+        this.modalMatch.matchDate = match.matchDate;
+        this.modalMatch.matchTime = match.matchTime;
+        this.modalMatch.teamOneName = this.getTeamName(match.teamOneId);
+        this.modalMatch.teamTwoName = this.getTeamName(match.teamTwoId);
+
+        if (match.matchId != this.array[this.array.length - 1][0].matchId) {
+          this.modalMatch.nextMatch = null;
+        } else {
+          this.modalMatch.nextMatch = Math.ceil(round.length + (match.matchId / 2));
+        }
+    },
+
+    putMatch(newMatch) {
+            MatchServices.updateMatch(newMatch);
+    },
 
   },
   created() {
