@@ -34,8 +34,7 @@ export default {
     };
   },
   created() {
-    
-     if (this.teams.length <= 64) {
+    if (this.teams.length <= 64) {
       this.rounds = 6;
     }
     if (this.teams.length <= 32) {

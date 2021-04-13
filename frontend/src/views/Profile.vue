@@ -1,8 +1,8 @@
 <template>
   <div>
-      <profile-teams />
-      <profile-tournaments />
-      <invitation />
+    <profile-teams />
+    <profile-tournaments />
+    <invitation />
     <div>
       <label for="imageURL"
         >Profile Image URL:
@@ -24,7 +24,7 @@ export default {
       user: {
         id: '',
         userImage: '',
-      }
+      },
     };
   },
   methods: {
@@ -36,9 +36,9 @@ export default {
       this.user.id = this.$store.state.user.id;
       this.user.userImage = this.imageURL;
 
-      UserService.updateUser(this.user).then(response => {
+      UserService.updateUser(this.user).then((response) => {
         if (response.status == 200) {
-          this.$router.push({name: 'home'});
+          this.$router.push({ name: 'home' });
         }
       });
     },
