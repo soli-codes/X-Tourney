@@ -126,7 +126,10 @@ CREATE TABLE matches (
 CREATE TABLE invitation (
     tournament_id int NOT NULL,
     team_id int NOT NULL,
-    has_accepted boolean DEFAULT NULL
+    has_accepted boolean DEFAULT NULL,
+
+    CONSTRAINT FK_invitation_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id),
+    CONSTRAINT FK_invitation_team_id FOREIGN KEY (team_id) REFERENCES team_name (team_id)
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
@@ -167,7 +170,7 @@ max_teams, elimination_type, start_date, end_date, signup_open, signup_close, st
 (14, 7, 'Viscious Valorant', 'Victory to the Valorant Victor who Visciously Vanquishes their foes', true, false, 4, 'Single',
 '2021-05-01', '2021-05-05', '2021-04-01', '2021-04-28', '13:00');
 
-INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1, 4), (1,5),
+INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1, 4),
 (2, 5), (2, 6), (2, 2), (2, 3),
 (3, 2), (3, 3), (3, 4), (3, 5), 
 (4, 6), (4, 2), (4, 3), (4, 4), 

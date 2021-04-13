@@ -20,11 +20,17 @@
         <p>{{ tournament.description }}</p>
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-      <generated-bracket />
+      <generated-bracket
+        v-if="this.matches.length > 0 && $store.state.teams.length > 0"
+      />
       <!-- displays registered teams in a list -->
-      <div v-for="(team, index) in teams" :key="index" :team="team" class="d-flex align-center">
-        <h4> {{ index + 1 }}</h4>
-        <img :src="team.teamImage" class="image" />
+      <div
+        v-for="team in $store.state.teams"
+        :key="team.teamId"
+        :team="team"
+        class="d-flex"
+      >
+        <!-- <img :src="team.teamImage" /> -->
         <h4>{{ team.teamName }}</h4>
       </div>
     </div>
@@ -35,30 +41,12 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
-
 export default {
   components: { GeneratedBracket },
   data() {
     return {
       tournament: {},
-      teams: [],
-      seedCounter: 0,
-
-      modalMatch: {
-
-        matchId: '',
-        tournamentId: '',
-        teamOneId: '',
-        teamTwoId: '',
-        winningTeamId: '',
-        losingTeamId: '',
-        winningTeamScore: '',
-        losingTeamScore: '',
-        matchDate: '',
-        matchTime: '',
-        nextMatch: '',
-
-      },
+      matches: [],
     };
   },
 
@@ -71,12 +59,7 @@ export default {
 
     TournamentsService.getTournamentTeams(this.$route.params.tournamentId).then(
       (response) => {
-        this.teams = response.data;
-        this.teams.sort((a, b) => {
-        if (a.wins / a.losses > b.wins / b.losses) {
-          return 1;
-        } else return -1;
-      });
+        this.$store.commit('SET_TEAMS', response.data);
       }
     );
   },
@@ -85,47 +68,54 @@ export default {
 
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
+      console.log(tournamentSize);
       const axiosObject = {
         tournamentSize: tournamentSize,
         tournamentId: parseInt(this.$route.params.tournamentId),
         teams: this.generateSeedArray(),
       };
-      
-      if (this.teams != null && this.teams.length > 0) {
+      console.log(axiosObject.teams);
+      if (
+        this.$store.state.teams != null &&
+        this.$store.state.teams.length > 0
+      ) {
         MatchServices.postMatch(axiosObject).then((response) => {
           if (response.status == 201) {
             console.log(response);
             window.location.reload();
           } else {
-            console.log(response.error);
+            console.log('error');
           }
         });
       }
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
-      let seedArray = this.teams;
+      let seedArray = this.$store.state.teams;
       let seedLength = seedArray.length;
       seedArray.sort((a, b) => {
         if (a.wins / a.losses > b.wins / b.losses) {
           return 1;
         } else return -1;
       });
-      return seedArray;
+      let seededArray = [];
+      for (let i = 0; i < seedLength; i++) {
+        seededArray.push(seedArray[i].teamId);
+      }
+      for (let i = seededArray.length; i < this.tournament.maxTeamCount; i++) {
+        seededArray.push(1);
+      }
+      return seededArray;
     },
 
-    getSeed() {
-      this.seedCounter++;
-      return this.seedCounter;
-    },
-
-    updateModalMatch(match) {
-      this.modalMatch.matchId = match.id;
-      this.modalMatch.tournamentId = match.tournamentId;
-      this.modalMatch.teamOneId = match.teamOneId;
-      this.modalMatch.teamTwoId = match.teamTwoId;
-      this.modalMatch.winningTeamId = match.winningTeamId;
-      this.modalMatch.losingTeamId = match.losingTeamId;
+    computed: {
+      teams() {
+        console.log('test');
+        return this.$store.state.teams;
+      },
+      matches() {
+        return this.$store.state.matches;
+      },
     },
   },
 
