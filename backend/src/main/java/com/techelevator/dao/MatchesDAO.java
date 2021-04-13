@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.util.List;
 
 import com.techelevator.model.Matches;
+import com.techelevator.model.TeamName;
 
 public interface MatchesDAO {
 
@@ -10,9 +11,9 @@ public interface MatchesDAO {
 	
 	Matches getMatchById(int matchId);
 	
-	Matches createMatch(Matches match);
+	void createMatch(Integer tournamentSize, Integer tournamentId, TeamName[] teams);
 	
-	void updateMatch(Matches match);
+	void updateMatch(Matches match, int nextMatchId);
 	
 	void deleteMatch(int matchId);
 }
