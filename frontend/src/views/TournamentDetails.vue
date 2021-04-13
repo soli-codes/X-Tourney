@@ -31,15 +31,24 @@
         :team="team"
         class="d-flex"
       >
-        <h4>#{{ index + 1}}</h4>
+        <h4>#{{ index + 1 }}</h4>
         <img :src="team.teamImage" class="image" />
         <h4>{{ team.teamName }}</h4>
       </div>
       <!-- MODAL -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <!-- <match-details
-        v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
-        :match="modalMatch" /> -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <match-details
+          v-if="
+            $store.state.matches.length > 0 && $store.state.teams.length > 0
+          "
+          :match="modalMatch"
+        />
       </div>
     </div>
   </div>
@@ -49,15 +58,14 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
-// import MatchDetails from '../components/MatchDetails.vue';
+import MatchDetails from '../components/MatchDetails.vue';
 
 export default {
-  components: { GeneratedBracket,  },
+  components: { GeneratedBracket, MatchDetails },
   data() {
     return {
       tournament: {},
       modalMatch: {
-
         matchId: '',
         tournamentId: '',
         teamOneId: '',
@@ -69,7 +77,6 @@ export default {
         matchDate: '',
         matchTime: '',
         nextMatch: '',
-
       },
     };
   },
@@ -87,16 +94,14 @@ export default {
       }
     );
 
-    TournamentsService.getTournamentMatches(this.$route.params.tournamentId).then(
-      (response) => {
-        this.$store.commit('SET_MATCHES', response.data);
-      }
-    )
-
+    TournamentsService.getTournamentMatches(
+      this.$route.params.tournamentId
+    ).then((response) => {
+      this.$store.commit('SET_MATCHES', response.data);
+    });
   },
 
   methods: {
-
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
       console.log(tournamentSize);
@@ -139,48 +144,41 @@ export default {
       return seededArray;
     },
 
-    // onClickChild (modalMatch) {
-    //     this.modalMatch.matchId = modalMatch.matchId;
-    //     this.modalMatch.tournamentId = modalMatch.tournamentId;
-    //     this.modalMatch.teamOneId = modalMatch.teamOneId;
-    //     this.modalMatch.teamTwoId = modalMatch.teamTwoId;
-    //     this.modalMatch.winningTeamId = modalMatch.winningTeamId;
-    //     this.modalMatch.losingTeamId = modalMatch.losingTeamId;
-    //     this.modalMatch.winningTeamScore = modalMatch.winningTeamScore;
-    //     this.modalMatch.losingTeamScore = modalMatch.losingTeamScore;
-    //     this.modalMatch.matchDate = modalMatch.matchDate;
-    //     this.modalMatch.matchTime = modalMatch.matchTime;
-    //     this.modalMatch.nextMatch = modalMatch.nextMatch;
-    // },
+    onClickChild(modalMatch) {
+      this.modalMatch.matchId = modalMatch.matchId;
+      this.modalMatch.tournamentId = modalMatch.tournamentId;
+      this.modalMatch.teamOneId = modalMatch.teamOneId;
+      this.modalMatch.teamTwoId = modalMatch.teamTwoId;
+      this.modalMatch.winningTeamId = modalMatch.winningTeamId;
+      this.modalMatch.losingTeamId = modalMatch.losingTeamId;
+      this.modalMatch.winningTeamScore = modalMatch.winningTeamScore;
+      this.modalMatch.losingTeamScore = modalMatch.losingTeamScore;
+      this.modalMatch.matchDate = modalMatch.matchDate;
+      this.modalMatch.matchTime = modalMatch.matchTime;
+      this.modalMatch.nextMatch = modalMatch.nextMatch;
+    },
   },
 
-    computed: {
-      teams() {
-        return this.$store.state.teams;
-      },
-      matches() {
-        console.log('test');
-        return this.$store.state.matches;
-      },
+  computed: {
+    teams() {
+      return this.$store.state.teams;
     },
+    matches() {
+      console.log('test');
+      return this.$store.state.matches;
+    },
+  },
 
-    // imagePath() {
-    //   if(!this.tournament || !this.tournament.tournamentImage) return '';
-    //   return require(`@/${this.tournament.tournamentImage}`);
-    // },
-}
-
-  
-
+  // imagePath() {
+  //   if(!this.tournament || !this.tournament.tournamentImage) return '';
+  //   return require(`@/${this.tournament.tournamentImage}`);
+  // },
+};
 </script>
 
 <style scoped>
-
-
-
 .image {
   height: 150px;
   width: 150px;
 }
-
 </style>

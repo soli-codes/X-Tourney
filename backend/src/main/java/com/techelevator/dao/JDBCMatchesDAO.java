@@ -68,7 +68,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 	}
 
 	@Override
-	public void updateMatch(Matches match, int nextMatchId) {
+	public void updateMatch(Matches match) {
 		String sqlUpdateMatch = "UPDATE matches SET winning_team_id = ?, losing_team_id = ?, "
 				+ "winning_team_score = ?, losing_team_score = ?, match_date = ?, match_time = ?"
 				+ "WHERE match_id = ?;";
@@ -80,7 +80,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 		jdbcTemplate.update(sqlUpdateMatch, match.getWinningTeamId(), match.getLosingTeamId(), 
 				match.getWinningTeamScore(), match.getLosingTeamScore(), match.getMatchDate(), 
 				match.getMatchTime(), match.getMatchId());
-		jdbcTemplate.update(sqlNextMatch, teamToUpdate, match.getWinningTeamId(), nextMatchId, match.getTournamentId());
+		jdbcTemplate.update(sqlNextMatch, teamToUpdate, match.getWinningTeamId(), match.getNextMatch(), match.getTournamentId());
 	}
 
 	@Override

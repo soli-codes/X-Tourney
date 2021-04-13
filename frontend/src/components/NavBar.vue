@@ -62,7 +62,7 @@
       <router-link
         class="nav-link active text-primary d-flex collapse-size"
         aria-current="page"
-        :to="{name: 'meetTheTeam'}"
+        :to="{ name: 'meetTheTeam' }"
         >Meet the team</router-link
       >
       <a
@@ -94,10 +94,8 @@
 
 <script>
 export default {
-   methods: {
-
-   }
-}
+  methods: {},
+};
 </script>
 <style scoped>
 .right-align {
@@ -123,5 +121,4 @@ export default {
   transform: rotate(360deg);
   transition-duration: 750ms;
 }
-
 </style>
