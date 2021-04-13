@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.TeamName;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -48,27 +49,36 @@ public class JDBCMatchesDAO implements MatchesDAO {
 	}
 
 	@Override
-	public Matches createMatch(Matches match) {
-		String sqlCreateMatch = "INSERT INTO matches (tournament_id, team_1_id, team_2_id) "
-				+ "VALUES (?, ?, ?) RETURNING match_id;";
-		
-		int matchId = jdbcTemplate.queryForObject(sqlCreateMatch, Integer.class, 
-				match.getTournamentId(), match.getTeamOneId(), match.getTeamTwoId());
-		
-		match.setMatchId(matchId);
-		
-		return match;
+	public void createMatch(Integer tournamentSize, Integer tournamentId, TeamName[] teams) {
+		String sqlCreateMatch = "INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id) "
+				+ "VALUES (?, ?, ?, ?) RETURNING match_id;";
+		int lowSeed = teams.length;
+		int highSeed = 0;
+		for (int i = 1; i <= tournamentSize; i++) {
+			if (i <= tournamentSize/2) {
+				jdbcTemplate.update(sqlCreateMatch, i, tournamentId, highSeed, lowSeed);
+				highSeed++;
+				lowSeed--;
+			}
+			else jdbcTemplate.update(sqlCreateMatch, i, tournamentId, 0, 0);
+		}
+
 	}
 
 	@Override
-	public void updateMatch(Matches match) {
+	public void updateMatch(Matches match, int nextMatchId) {
 		String sqlUpdateMatch = "UPDATE matches SET winning_team_id = ?, losing_team_id = ?, "
 				+ "winning_team_score = ?, losing_team_score = ?, match_date = ?, match_time = ?"
 				+ "WHERE match_id = ?;";
-		
+		String teamToUpdate = "";
+		if (match.getMatchId() % 2 != 0) {
+			teamToUpdate = "team_1_id";
+		} else teamToUpdate = "team_2_id";
+		String sqlNextMatch = "UPDATE matches SET ? = ? WHERE match_id = ? AND tournament_id = ?;";
 		jdbcTemplate.update(sqlUpdateMatch, match.getWinningTeamId(), match.getLosingTeamId(), 
 				match.getWinningTeamScore(), match.getLosingTeamScore(), match.getMatchDate(), 
 				match.getMatchTime(), match.getMatchId());
+		jdbcTemplate.update(sqlNextMatch, teamToUpdate, match.getWinningTeamId(), nextMatchId, match.getTournamentId());
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import com.techelevator.model.TeamName;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,13 +38,13 @@ public class MatchesController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping( path = "/matches/create", method = RequestMethod.POST)
-	public Matches createMatch(@RequestBody Matches match) {
-		return dao.createMatch(match);
+	public void createMatch(@RequestBody Integer tournamentSize, Integer tournamentId, TeamName[] teams) {
+		dao.createMatch(tournamentSize, tournamentId, teams);
 	}
 	
 	@RequestMapping( path = "/matches/update", method = RequestMethod.PUT)
-	public void updateMatch(@RequestBody Matches match) {
-		dao.updateMatch(match);
+	public void updateMatch(@RequestBody Matches match, int nextMatchId) {
+		dao.updateMatch(match, nextMatchId);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)

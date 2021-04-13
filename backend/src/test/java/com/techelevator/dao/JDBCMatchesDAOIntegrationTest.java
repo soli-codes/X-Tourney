@@ -129,9 +129,9 @@ public class JDBCMatchesDAOIntegrationTest extends DAOIntegrationTest {
 		Matches three = matchesDao.createMatch(matchesThree);
 		
 		//Act
-		matchesDao.updateMatch(matchesOne);
-		matchesDao.updateMatch(matchesTwo);
-		matchesDao.updateMatch(matchesThree);
+		matchesDao.updateMatch(matchesOne, 1000);
+		matchesDao.updateMatch(matchesTwo, 2000);
+		matchesDao.updateMatch(matchesThree, 3000);
 		Matches resultOne = matchesDao.getMatchById(one.getMatchId());
 		Matches resultTwo = matchesDao.getMatchById(two.getMatchId());
 		Matches resultThree = matchesDao.getMatchById(three.getMatchId());

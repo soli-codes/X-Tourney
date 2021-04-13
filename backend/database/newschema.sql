@@ -108,7 +108,7 @@ CREATE TABLE tournament_teams (
 );
 
 CREATE TABLE matches (
-    match_id int DEFAULT nextval('seq_match_id'::regclass) NOT NULL,
+    match_id int NOT NULL,
     tournament_id integer NOT NULL,
     team_1_id integer NOT NULL,
     team_2_id integer NOT NULL,
@@ -120,6 +120,7 @@ CREATE TABLE matches (
     match_time varchar(50),
 
     CONSTRAINT FK_tournament_id FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
+    CONSTRAINT CompKey_MATCHID_TOURNAMENTID PRIMARY KEY (match_id,tournament_id)
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
@@ -164,11 +165,13 @@ INSERT INTO tournament_teams (tournament_id, team_id) VALUES (1, 2), (1, 3), (1,
 (4, 6), (4, 2), (4, 3), (4, 4), 
 (5, 2), (5, 3), (5, 5), (5, 6);
 
-INSERT INTO matches (tournament_id, team_1_id, team_2_id, match_date, match_time, winning_team_id, 
+INSERT INTO matches (match_id, tournament_id, team_1_id, team_2_id, match_date, match_time, winning_team_id,
 losing_team_id, winning_team_score, losing_team_score) VALUES 
-(3, 2, 3, '2021-03-01', '12:00', 2, 3, 5, 3), 
-(3, 4, 5, '2021-03-02', '12:00', 4, 5, 7, 5), 
-(3, 2, 4, '2021-03-04', '14:00', 2, 4, 6, 4);
+
+(1, 3, 1, 2, '2021-03-01', '12:00', 1, 2, 5, 3),
+(2, 3, 3, 4, '2021-03-02', '12:00', 3, 4, 7, 5),
+(3, 3, 1, 3, '2021-03-04', '14:00', 1, 3, 6, 4);
+
 
 UPDATE tournament SET has_started = true, tournament_winner_id = 1 
 WHERE tournament_id = 3;
