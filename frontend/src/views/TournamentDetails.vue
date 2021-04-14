@@ -6,7 +6,12 @@
       >
         <img :src="tournament.tournamentImage" class="tournament-image" />
         <h1>{{ tournament.name }}</h1>
-        <div v-if="$store.state.token != '' &&  $store.state.teams.length < tournament.maxTeamCount">
+        <div
+          v-if="
+            $store.state.token != '' &&
+              $store.state.teams.length < tournament.maxTeamCount
+          "
+        >
           <button v-on:click="signUpTeam()" class="bg-primary">
             Sign Up Your Team:
           </button>
@@ -22,7 +27,9 @@
         <div v-else-if="$store.state.token != ''">
           <h4 class="text-danger">This Tournament is Full!</h4>
         </div>
-        <router-link v-else :to="{ name: 'login' }">Login to Sign Up</router-link>
+        <router-link v-else :to="{ name: 'login' }"
+          >Login to Sign Up</router-link
+        >
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
           v-if="$store.state.matches.length == 0"
@@ -36,7 +43,7 @@
         <p>{{ tournament.description }}</p>
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-      <div class="d-flex justify-content-center">
+      <div class="d-flex">
         <generated-bracket
           v-if="
             $store.state.matches.length > 0 && $store.state.teams.length > 0
@@ -45,18 +52,21 @@
       </div>
       <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
       <div class="d-flex flex-column align-items-center">
-      <router-link
-        v-for="(team, index) in $store.state.teams"
-        :key="index"
-        :team="team"
-        :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
-        class="d-flex justify-content-around align-items-center team-border m-3 w-75">
+        <router-link
+          v-for="(team, index) in $store.state.teams"
+          :key="index"
+          :team="team"
+          :to="{ name: 'teamDetails', params: { teamId: team.teamId } }"
+          class="d-flex justify-content-around align-items-center team-border m-3 w-75"
+        >
           <div class="d-flex flex-row align-items-center">
             <h4 class="text-danger">#{{ index + 1 }}</h4>
             <img class="team-image" :src="team.teamImage" />
           </div>
-          <h5>{{ team.teamName }}     W/L:    {{ (team.wins / team.losses).toFixed(2) }}</h5>
-      </router-link>
+          <h5>
+            {{ team.teamName }} W/L: {{ (team.wins / team.losses).toFixed(2) }}
+          </h5>
+        </router-link>
       </div>
     </div>
   </div>
@@ -129,7 +139,10 @@ export default {
     signUpTeam() {
       console.log(this.tournament.tournamentId);
       console.log(this.teamToSignUp);
-      TournamentTeamService.postTournamentTeam(this.tournament.tournamentId, this.teamToSignUp).then((response) => {
+      TournamentTeamService.postTournamentTeam(
+        this.tournament.tournamentId,
+        this.teamToSignUp
+      ).then((response) => {
         if (response.status == 201) {
           window.location.reload();
         } else {
