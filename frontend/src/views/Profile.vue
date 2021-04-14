@@ -5,11 +5,11 @@
     </div>
 
     <div class="d-flex justify-content-around">
-      <div v-for="team in myTeams" :key="team.teamId">
+      <div v-for="team in this.$stroe.state.myTeams" :key="team.teamId">
         <router-link
           :to="{
             name: 'teamDetails',
-            params: { teamtId: team.teamId },
+            params: { teamId: team.teamId },
           }"
         >
           <team-card :team="team" />
@@ -22,7 +22,7 @@
     </div>
 
     <div class="d-flex justify-content-around">
-      <div v-for="tournament in myTournaments" :key="tournament.tournamentId">
+      <div v-for="tournament in this.$store.state.myTournaments" :key="tournament.tournamentId">
         <router-link
           :to="{
             name: 'tournamentDetails',
@@ -60,9 +60,7 @@
 <script>
 import TeamCard from '../components/TeamCard.vue';
 import TournamentCard from '../components/TournamentCard.vue';
-import TeamsService from '../services/TeamsService.js';
 import UserService from '../services/UserService.js';
-import TournamentService from '../services/TournamentsService.js';
 
 export default {
   components: {
@@ -76,24 +74,12 @@ export default {
         id: '',
         userImage: '',
       },
-      myTournaments: [],
-      myTeams: [],
       myInvitations: [],
     };
   },
 
   created() {
-    TournamentService.getTournamentsByUser(this.$store.state.user.id).then(
-      (response) => {
-        this.myTournaments = response.data;
-      }
-    );
-
-    TeamsService.getTeamsByUserId(this.$store.state.user.id).then(
-      (response) => {
-        this.myTeams = response.data;
-      }
-    );
+        // add in call to invitation service/controller to get all invitations
   },
   methods: {
     logout() {
