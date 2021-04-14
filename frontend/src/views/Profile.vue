@@ -126,6 +126,7 @@ import InvitationService from '../services/InvitationService.js';
 import InvitationCard from '../components/InvitationCard.vue';
 import TeamsService from '../services/TeamsService';
 import TournamentsService from '../services/TournamentsService';
+import TournamentTeamService from '../services/TournamentTeamService.js';
 
 export default {
   components: {
@@ -147,10 +148,12 @@ export default {
         teamId: '',
         inviteStatus: '',
       },
+      inviteTeam: {},
     };
   },
 
   created() {
+    
     InvitationService.getPendingInvitations(this.$store.state.user.id).then(
       (response) => {
         this.myInvitations = response.data;
@@ -163,9 +166,11 @@ export default {
     );
     TournamentsService.getTournamentsByUser(this.$store.state.user.id).then(
       (response) => {
+        console.log(response.data);
         this.$store.commit('SET_MY_TOURNAMENTS', response.data);
       }
     );
+    console.log(this.$store.state.myTournaments);
   },
   methods: {
     logout() {
@@ -185,6 +190,10 @@ export default {
 
     onClick(invite) {
       this.pendingInvite = invite;
+      TeamsService.getTeamById(this.pendingInvite.teamId).then(response => {
+        this.inviteTeam = response.data;
+      });
+      
     },
 
     updateInvite() {
@@ -192,7 +201,17 @@ export default {
       InvitationService.updateInvitation(this.pendingInvite).then(response => {
          if (response.status == 200) {
            //add in call to add team to tournament
-          window.location.reload();
+          TournamentTeamService.postTournamentTeam(this.pendingInvite.tournamentId, this.inviteTeam)
+          .then(response => {
+            if (response.status == 201) {
+              TournamentsService.getTournamentsByUser(this.$store.state.user.id).then( (response) => {
+              this.$store.commit('SET_MY_TOURNAMENTS', response.data);
+              window.location.reload();
+            });
+              
+            }
+          });
+          
          }
       });
     },
