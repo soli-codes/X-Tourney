@@ -13,7 +13,6 @@ import TournamentDetails from '../views/TournamentDetails.vue';
 import Profile from '../views/Profile.vue';
 import MeetTheTeam from '../views/MeetTheTeam.vue';
 import UpdateMatch from '../views/UpdateMatch.vue';
-import Test from '../views/Test.vue';
 import TeamsCreate from '../views/TeamsCreate.vue';
 import TeamDetails from '../views/TeamDetails.vue';
 
@@ -37,14 +36,6 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: Test,
       meta: {
         requiresAuth: true,
       },

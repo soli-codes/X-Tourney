@@ -2,7 +2,7 @@
   <div class="bg-secondary">
     <!-- make each div into a row flexbox // each will be a StepX button-->
     <router-link
-      to="#"
+      :to = "{name: 'login'}"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
@@ -30,7 +30,7 @@
       </div>
     </router-link>
     <router-link
-      to="#"
+      :to = "{name: 'teams'}"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
@@ -55,7 +55,7 @@
       </div>
     </router-link>
     <router-link
-      to="#"
+      :to = "{name: 'createTeam'}"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                 m-4 bg-dark
@@ -83,7 +83,7 @@
       </div>
     </router-link>
     <router-link
-      to="#"
+      :to = "{name: 'createTournament'}"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                 m-4 bg-dark

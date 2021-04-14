@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,12 +38,14 @@ public class GameTypeController {
 		return dao.getGameTypeById(id);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/gametypes/create", method = RequestMethod.POST)
 	public void create(@Valid @RequestBody GameType gameType) {
 		dao.createGameType(gameType);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(path = "/gametypes/{id}", method = RequestMethod.DELETE)
 	public void deleteGameType(@Valid @PathVariable int id) {
