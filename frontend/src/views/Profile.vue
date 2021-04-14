@@ -55,7 +55,10 @@
       v-if="this.myInvitations.length != 0"
       class="d-flex justify-content-around"
     >
-      <div v-for="(invite, index) in this.myInvitations" :key="index">
+      <div v-for="(invite, index) in this.myInvitations" :key="index"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      v-on:click="onClick(invite)">
           <invitation-card :invite="invite" />
       </div>
     </div>
@@ -79,7 +82,7 @@
         <div class="modal-content bg-primary text-dark">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
-              Match #{{ modalMatch.matchId }}
+              Invitation
             </h5>
             <button
               type="button"
@@ -90,25 +93,10 @@
           </div>
           <div class="modal-body">
             <div>
-              <label>Select Match Winner:</label>
-              <select v-model="modalMatch.winningTeamId">
-                <option :value="modalMatch.teamOneId">{{
-                  modalMatch.teamOneName
-                }}</option>
-                <option :value="modalMatch.teamTwoId">{{
-                  modalMatch.teamTwoName
-                }}</option>
-              </select>
-            </div>
-            <div>
-              <label>Select Match Loser:</label>
-              <select v-model="modalMatch.losingTeamId">
-                <option :value="modalMatch.teamOneId">{{
-                  modalMatch.teamOneName
-                }}</option>
-                <option :value="modalMatch.teamTwoId">{{
-                  modalMatch.teamTwoName
-                }}</option>
+              <label>Accept or Decline</label>
+              <select v-model="inviteResponse">
+                <option value="accept">Accept</option>
+                <option value="decline">Decline</option>
               </select>
             </div>
           </div>
@@ -117,11 +105,11 @@
               Close
             </button>
             <button
-              v-on:click="putMatch(modalMatch)"
+              v-on:click="updateInvite"
               type="button"
               class="btn btn-danger"
             >
-              Save Updates
+              Save Response
             </button>
           </div>
         </div>
@@ -153,12 +141,16 @@ export default {
         userImage: '',
       },
       myInvitations: [],
+      inviteResponse: '',
+      pendingInvite: {
+        tournamentId: '',
+        teamId: '',
+        inviteStatus: '',
+      },
     };
   },
 
   created() {
-    console.log(this.$store.state.myTeams);
-    // add in call to invitation service/controller to get all invitations
     InvitationService.getPendingInvitations(this.$store.state.user.id).then(
       (response) => {
         this.myInvitations = response.data;
@@ -188,6 +180,20 @@ export default {
         if (response.status == 200) {
           this.$router.push({ name: 'home' });
         }
+      });
+    },
+
+    onClick(invite) {
+      this.pendingInvite = invite;
+    },
+
+    updateInvite() {
+      this.pendingInvite.inviteStatus = this.inviteResponse;
+      InvitationService.updateInvitation(this.pendingInvite).then(response => {
+         if (response.status == 200) {
+           //add in call to add team to tournament
+          window.location.reload();
+         }
       });
     },
   },
