@@ -7,13 +7,16 @@
         <img :src="tournament.tournamentImage" class="tournament-image" />
         <h1>{{ tournament.name }}</h1>
         <div v-if="$store.state.token != ''">
-          <button v-on:click="signUpTeam()" class="bg-primary">Sign Up Your Team:</button>
+          <button v-on:click="signUpTeam()" class="bg-primary">
+            Sign Up Your Team:
+          </button>
           <select style="display: block" v-model="teamToSignUp">
             <option
-            v-for="team in $store.state.myTeams"
-            :value="team"
-            :key="team"
-            >{{ team.teamName }}</option>
+              v-for="team in $store.state.myTeams"
+              :value="team"
+              :key="team"
+              >{{ team.teamName }}</option
+            >
           </select>
         </div>
         <router-link v-else to="login">Login to Sign Up</router-link>
@@ -32,7 +35,9 @@
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
       <div class="d-flex justify-content-center">
         <generated-bracket
-          v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
+          v-if="
+            $store.state.matches.length > 0 && $store.state.teams.length > 0
+          "
         />
       </div>
       <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
@@ -40,12 +45,13 @@
         v-for="(team, index) in $store.state.teams"
         :key="index"
         :team="team"
-        :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
-        class="d-flex align-items-center team-border m-3">
-          <h1 class="text-danger">#{{ index + 1 }}</h1>
-          <img class="team-image" :src="team.teamImage" />
-          <h1>{{ team.teamName }}</h1>
-          <h1 class="flex-grow">{{ (team.wins / team.losses).toFixed(2) }}</h1>
+        :to="{ name: 'teamDetails', params: { teamId: team.teamId } }"
+        class="d-flex align-items-center team-border m-3"
+      >
+        <h1 class="text-danger">#{{ index + 1 }}</h1>
+        <img class="team-image" :src="team.teamImage" />
+        <h1>{{ team.teamName }}</h1>
+        <h1 class="flex-grow">{{ (team.wins / team.losses).toFixed(2) }}</h1>
       </router-link>
     </div>
   </div>
@@ -56,6 +62,7 @@ import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
 import TournamentTeamService from '../services/TournamentTeamService';
+import TeamsService from '../services/TeamsService';
 
 export default {
   components: { GeneratedBracket },
@@ -84,6 +91,11 @@ export default {
     ).then((response) => {
       this.$store.commit('SET_MATCHES', response.data);
     });
+    TeamsService.getTeamsByUserId(this.$store.state.user.id).then(
+      (response) => {
+        this.$store.commit('SET_MY_TEAMS', response.data);
+      }
+    );
   },
 
   methods: {
@@ -153,6 +165,4 @@ export default {
 a {
   text-decoration: none;
 }
-
-
 </style>
