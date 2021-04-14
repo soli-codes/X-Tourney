@@ -25,7 +25,7 @@
         <router-link v-else :to="{ name: 'login' }">Login to Sign Up</router-link>
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
-          v-if="$store.state.matches.length == 0"
+          v-if="$store.state.matches.length == 0 && tournament.hostId == $store.state.user.id"
           id="generateBracket"
           v-on:click="generateBracket()"
         >
@@ -46,7 +46,7 @@
       <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
       <div class="d-flex flex-column align-items-center">
       <router-link
-        v-for="(team, index) in $store.state.teams"
+        v-for="(team, index) in sortWinLoss()"
         :key="index"
         :team="team"
         :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
@@ -154,6 +154,16 @@ export default {
         seededArray.push(1);
       }
       return seededArray;
+    },
+
+    sortWinLoss() {
+      let sortedArray = this.$store.state.teams;
+      sortedArray.sort((a, b) => {
+        if (a.wins / a.losses < b.wins / b.losses) {
+          return 1;
+        } else return -1;
+      });
+      return sortedArray;
     },
   },
 };
