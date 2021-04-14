@@ -24,6 +24,7 @@
       </div>
     </div>
 
+  <div v-if="this.$store.state.myTournaments.length != 0">
     <div class="title">
       <h3>MY TOURNAMENTS</h3>
     </div>
@@ -43,7 +44,9 @@
         </router-link>
       </div>
     </div>
+  </div>
 
+  <div v-if="this.myInvitations.length != 0">
     <div class="title">
       <h3>PENDING INVITATIONS</h3>
     </div>
@@ -53,12 +56,10 @@
       class="d-flex justify-content-around"
     >
       <div v-for="(invite, index) in this.myInvitations" :key="index">
-        <router-link :to="{ name: 'invitation' }">
           <invitation-card :invite="invite" />
-        </router-link>
       </div>
     </div>
-
+  </div>
     <div>
       <label for="imageURL"
         >Update Your Profile Image URL:
