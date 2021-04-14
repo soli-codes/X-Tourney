@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,17 +44,20 @@ public class TeamNameController {
 		return dao.getTeamNameById(id);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/teamnames/create", method = RequestMethod.POST)
 	public void create(@Valid @RequestBody TeamName teamName) {
 		dao.createNewTeam(teamName);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/teamnames/{id}/update", method = RequestMethod.PUT)
     public void executeRequest(@Valid @RequestBody TeamName teamName,@PathVariable int id ) {
     	dao.updateTeam(teamName, id);
     }
     
+	@PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(path = "/teamnames/{id}", method = RequestMethod.DELETE)
 	public void deleteTeamName(@Valid @PathVariable int id) {

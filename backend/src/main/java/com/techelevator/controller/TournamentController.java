@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,12 +39,14 @@ public class TournamentController {
 		return dao.getTournamentById(id);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/tournaments/create", method = RequestMethod.POST)
 	public void create(@Valid @RequestBody Tournament tournament) {
 		dao.createTournament(tournament);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(path = "/tournaments/{id}", method = RequestMethod.DELETE)
 	public void deleteAccount(@PathVariable int id) {
