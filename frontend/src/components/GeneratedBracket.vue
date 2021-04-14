@@ -16,7 +16,7 @@
         <div class="d-flex flex-row">
           <div v-if="index != 0">
             <div class="empty-spacer border-bottom border-4" />
-            <div class="empty-spacer" />
+            <div class="empty-spacer empty-spacer-bottom" />
           </div>
           <div>
             <div style="width: 200px; background-color: #333333">
@@ -28,7 +28,7 @@
           </div>
           <div>
             <div :class="{ 'border-end' : match.matchId % 2 == 0, 'override-border' : index == $store.state.matches.length - 1, }" class="empty-spacer border-bottom border-4" />
-            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer border-4" />
+            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer empty-spacer-bottom border-4" />
           </div>
         </div>
       </div>
@@ -172,10 +172,21 @@ export default {
 .empty-spacer {
   width: 50px;
   height: 27px;
+  border-color: lime !important;
+}
+
+.empty-spacer-bottom {
+  box-shadow: 0px -9px 10px -7px lime;
+}
+
+.border-bottom {
+  border-color: lime !important;
+  box-shadow: 0px 6px 10px -7px lime;
 }
 
 .override-border {
   border: none !important;
+  box-shadow: none;
 }
 
 </style>

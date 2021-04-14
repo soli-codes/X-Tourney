@@ -42,10 +42,9 @@
         :team="team"
         :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
         class="d-flex align-items-center team-border m-3">
-          <h1 class="text-danger">#{{ index + 1 }}</h1>
+          <h5 class="text-danger">#{{ index + 1 }}</h5>
           <img class="team-image" :src="team.teamImage" />
-          <h1>{{ team.teamName }}</h1>
-          <h1 class="flex-grow">{{ (team.wins / team.losses).toFixed(2) }}</h1>
+          <h5>{{ team.teamName }} W/L: {{ (team.wins / team.losses).toFixed(2) }}</h5>
       </router-link>
     </div>
   </div>
@@ -110,7 +109,7 @@ export default {
     },
 
     signUpTeam() {
-      TournamentTeamService.postTournamentTeam(this.teamToSignUp);
+      TournamentTeamService.postTournamentTeam(this.tournament.tournamentId, this.teamToSignUp);
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
@@ -141,8 +140,8 @@ export default {
 }
 
 .team-image {
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
 }
 
 .team-border {
