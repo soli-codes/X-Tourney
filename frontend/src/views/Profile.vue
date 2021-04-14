@@ -52,7 +52,7 @@
 
     <div>
       <label for="imageURL"
-        >Profile Image URL:
+        >Update Your Profile Image URL:
         <input type="text" v-model="imageURL" />
         <button @click="saveNewImage">Save</button>
       </label>
