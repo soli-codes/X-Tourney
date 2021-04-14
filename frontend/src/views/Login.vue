@@ -47,6 +47,8 @@
 
 <script>
 import authService from '../services/AuthService';
+import TeamsService from '../services/TeamsService';
+import TournamentsService from '../services/TournamentsService';
 
 export default {
   name: 'login',
@@ -68,6 +70,12 @@ export default {
           if (response.status == 200) {
             this.$store.commit('SET_AUTH_TOKEN', response.data.token);
             this.$store.commit('SET_USER', response.data.user);
+            TeamsService.getTeamsByUserId(this.$store.state.user.id).then( (response) => {
+              this.$store.commit('SET_MY_TEAMS', response.data);
+            });
+            TournamentsService.getTournamentsByUser(this.$store.state.user.id).then( (response) => {
+              this.$store.commit('SET_MY_TOURNAMENTS', response.data);
+            });
             this.$router.push('/tournaments');
           }
         })
