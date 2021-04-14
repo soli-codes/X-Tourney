@@ -55,6 +55,14 @@ export default new Vuex.Store({
       state.user.userImage = imageURL;
     },
 
+    SET_TEAM_IMAGE(state, team) {
+      state.myTeams.forEach(myTeam => {
+        if (myTeam.teamId == team.teamId) {
+          myTeam.teamImage = team.teamImage;
+        }
+      });
+    },
+
     SET_MY_TEAMS(state, teams) {
       state.myTeams = teams;
     },

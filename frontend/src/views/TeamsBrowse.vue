@@ -21,8 +21,9 @@
         <router-link
           :to="{
             name: 'teamDetails',
-            params: { teamtId: team.teamId },
+            params: { teamId: team.teamId },
           }"
+          :team="team"
         >
         <team-card :team="team" />
         </router-link>

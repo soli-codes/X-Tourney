@@ -30,15 +30,19 @@ private JdbcTemplate jdbcTemplate;
 	}
 
 	@Override
-	public List<Invitation> getPendingInvitations(int teamId) {
+	public List<Invitation> getPendingInvitations(int userId) {
 		String sqlGetPendingTransactionsByTeamId = "SELECT tournament_id, invitation.team_id, has_accepted "
 												+ "FROM invitation "
 												+ "JOIN team_name ON team_name.team_id = invitation.team_id "
-												+ "WHERE invitation.team_id = ?;";
+												+ "WHERE invitation.team_id IN "
+												+ "(SELECT team_name.team_id FROM team_name JOIN team_name_users "
+												+ "ON team_name.team_id = team_name_users.team_id "
+												+ "JOIN users ON team_name_users.user_id = users.user_id "
+												+ "WHERE users.user_id = ? AND has_accepted = 'pending');";
 		
 		List<Invitation> pendingInvitations = new ArrayList<>();
 		
-		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetPendingTransactionsByTeamId, teamId);
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetPendingTransactionsByTeamId, userId);
 		
 		while(rowSet.next()) {
 			Invitation theInvitation = mapInvitationFromRowSet(rowSet);

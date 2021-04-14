@@ -80,14 +80,16 @@ private JdbcTemplate jdbcTemplate;
 								+ "wins = ?, "
 								+ "losses = ?, "
 								+ "tournament_wins = ?, "
-								+ "tournaments_entered = ? "
+								+ "tournaments_entered = ?, "
+								+ "team_image = ? "
 								+ "WHERE team_id = ?;";
 		jdbcTemplate.update(sqlUpdateTeam, 
 								teamName.getTeamName(), 
 								teamName.getWins(), 
 								teamName.getLosses(), 
 								teamName.getTournamentWins(), 
-								teamName.getTournamentsEntered(), 
+								teamName.getTournamentsEntered(),
+								teamName.getTeamImage(),
 								teamId);
 		
 	}
