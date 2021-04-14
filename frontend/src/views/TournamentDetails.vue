@@ -2,18 +2,17 @@
   <div>
     <div>
       <div
-        class="d-flex justify-content-between mx-2 mt-4 border-bottom border-danger pb-2"
+        class="d-flex justify-content-between align-items-center mx-2 mt-4 border-bottom border-danger pb-2"
       >
-        <img :src="tournament.tournamentImage" class="image" />
+        <img :src="tournament.tournamentImage" class="tournament-image" />
         <h1>{{ tournament.name }}</h1>
         <div v-if="$store.state.token != ''">
-          <button class="bg-primary">Sign Up Your Team</button>
-          <select v-model="teamToSignUp">
+          <button v-on:click="signUpTeam()" class="bg-primary">Sign Up Your Team:</button>
+          <select style="display: block" v-model="teamToSignUp">
             <option
             v-for="team in $store.state.myTeams"
             :value="team"
             :key="team"
-            v-on:click="signUpTeam()"
             >{{ team.teamName }}</option>
           </select>
         </div>
@@ -31,20 +30,23 @@
         <p>{{ tournament.description }}</p>
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-      <generated-bracket
-        v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
-      />
+      <div class="d-flex justify-content-center">
+        <generated-bracket
+          v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
+        />
+      </div>
       <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
-      <div
+      <router-link
         v-for="(team, index) in $store.state.teams"
         :key="index"
         :team="team"
-        class="d-flex"
-      >
-        <h4>#{{ index + 1 }}</h4>
-        <img :src="team.teamImage" class="image" />
-        <h4>{{ team.teamName }}</h4>
-      </div>
+        :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
+        class="d-flex align-items-center team-border m-3">
+          <h1 class="text-danger">#{{ index + 1 }}</h1>
+          <img class="team-image" :src="team.teamImage" />
+          <h1>{{ team.teamName }}</h1>
+          <h1 class="flex-grow">{{ (team.wins / team.losses).toFixed(2) }}</h1>
+      </router-link>
     </div>
   </div>
 </template>
@@ -129,14 +131,28 @@ export default {
       return seededArray;
     },
   },
-
-
 };
 </script>
 
 <style scoped>
-.image {
+.tournament-image {
   height: 150px;
   width: 150px;
 }
+
+.team-image {
+  height: 100px;
+  width: 100px;
+}
+
+.team-border {
+  border-radius: 25px !important;
+  box-shadow: 0px 0px 5px 5px #ff455d;
+}
+
+a {
+  text-decoration: none;
+}
+
+
 </style>
