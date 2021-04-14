@@ -4,7 +4,7 @@
                     m-4 bg-dark
                     border border-5 border-danger rounded-3">
             <img class ="image" 
-            src="" 
+            src="../assets/JacobBurton.jpg" 
             alt="Picture of Jacob Burton">
             <div class="p-2">
                 <h3 class="text-center">Jacob Burton</h3>
