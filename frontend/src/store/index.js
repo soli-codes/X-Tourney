@@ -61,6 +61,10 @@ export default new Vuex.Store({
 
     SET_MY_TOURNAMENTS(state, tournaments) {
       state.myTournaments = tournaments;
-    }
+    },
+    CLEAR_STORE(state) {
+      state.teams = [];
+      state.matches = [];
+    },
   },
 });

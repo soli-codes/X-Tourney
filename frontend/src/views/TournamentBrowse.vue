@@ -32,7 +32,11 @@
       </select>
     </div>
     <div class="d-flex justify-content-around">
-      <div v-for="tournament in filteredList" :key="tournament.tournamentId">
+      <div
+        v-for="tournament in filteredList"
+        :key="tournament.tournamentId"
+        @click="clearStore"
+      >
         <router-link
           :to="{
             name: 'tournamentDetails',
@@ -66,6 +70,12 @@ export default {
       },
       sortBy: '',
     };
+  },
+
+  methods: {
+    clearStore(state) {
+      this.$store.commit('CLEAR_STORE', state);
+    },
   },
 
   created() {
