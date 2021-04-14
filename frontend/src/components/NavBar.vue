@@ -59,35 +59,44 @@
           </ul>
         </li>
       </ul>
-      <router-link
-        class="nav-link active text-primary d-flex collapse-size"
-        aria-current="page"
-        :to="{ name: 'meetTheTeam' }"
-        >Meet the team</router-link
-      >
-      <a
-        class="nav-link active text-primary d-flex collapse-size"
-        aria-current="page"
-        href="https://www.techelevator.com/?gclid=CjwKCAjwvMqDBhB8EiwA2iSmPGzzFasx6lXvj4qZY-ZzfVY_4nL0ogGcSvLNPRWZh6H_WYuw0coe5RoC1QEQAvD_BwE"
-        target="_blank"
-        >Careers</a
-      >
-      <router-link
-        :to="{ name: 'login' }"
-        class="nav-link active text-primary d-flex collapse-size"
-        aria-current="page"
-        href="#"
-        v-if="this.$store.state.token == ''"
-        >Login</router-link
-      >
-      <router-link
-        :to="{ name: 'profile' }"
-        class="nav-link active text-primary d-flex collapse-size"
-        aria-current="page"
-        href="#"
-        v-else
-        >My Profile</router-link
-      >
+      <li>
+        <router-link
+          class="nav-link active text-primary d-flex collapse-size"
+          aria-current="page"
+          :to="{ name: 'meetTheTeam' }"
+          >Meet the team</router-link
+        >
+      </li>
+      <li>
+        <a
+          class="nav-link active text-primary d-flex collapse-size"
+          aria-current="page"
+          href="https://www.techelevator.com/?gclid=CjwKCAjwvMqDBhB8EiwA2iSmPGzzFasx6lXvj4qZY-ZzfVY_4nL0ogGcSvLNPRWZh6H_WYuw0coe5RoC1QEQAvD_BwE"
+          target="_blank"
+          >Careers</a
+        >
+      </li>
+      <div class="right">
+        <li>
+          <router-link
+            :to="{ name: 'login' }"
+            class="nav-link active text-primary d-flex collapse-size"
+            aria-current="page"
+            href="#"
+            v-if="this.$store.state.token == ''"
+            >Login</router-link
+          >
+
+          <router-link
+            :to="{ name: 'profile' }"
+            class="nav-link active text-primary d-flex collapse-size "
+            aria-current="page"
+            href="#"
+            v-else
+            >My Profile</router-link
+          >
+        </li>
+      </div>
     </div>
   </nav>
 </template>
@@ -97,7 +106,29 @@ export default {
   methods: {},
 };
 </script>
+
 <style scoped>
+li {
+  -webkit-box-shadow: 0px 5px 19px 4px rgba(183, 29, 222, 0.75);
+  box-shadow: 0px 5px 19px 4px rgba(183, 29, 222, 0.75);
+  border: 4px double #b71dde;
+  margin: 1px;
+  margin-left: 10px;
+  text-align: center;
+  list-style-type: none !important;
+}
+
+li:hover {
+  border: 4px double rgb(255, 251, 0);
+  -webkit-box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
+  box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
+  margin-left: 10px;
+  background: black;
+}
+
+.right {
+  margin-right: 10px;
+}
 .right-align {
   position: relative;
 }
