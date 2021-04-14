@@ -2,7 +2,7 @@
   <div class="card m-3 border border-5 border-danger bg-dark">
     <img
       class="card-img-top"
-      src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200410200859/LogoVersion_Beta_Key_Art_VALORANT.jpg"
+      :src="team.teamImage"
     />
     <div class="card-body">
       <p class="card-title text-center">{{ team.teamName }}</p>

@@ -18,7 +18,15 @@
     </div>
     <div class="d-flex justify-content-around">
       <div v-for="team in filteredList" :key="team.teamId">
+        <router-link
+          :to="{
+            name: 'teamDetails',
+            params: { teamId: team.teamId },
+          }"
+          :team="team"
+        >
         <team-card :team="team" />
+        </router-link>
       </div>
     </div>
   </div>

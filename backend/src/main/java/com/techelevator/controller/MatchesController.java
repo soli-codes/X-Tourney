@@ -38,8 +38,8 @@ public class MatchesController {
 	}
 	
 	@RequestMapping( path = "/matches/update", method = RequestMethod.PUT)
-	public void updateMatch(@RequestBody Matches match, int nextMatchId) {
-		dao.updateMatch(match, nextMatchId);
+	public void updateMatch(@RequestBody Matches match) {
+		dao.updateMatch(match);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)

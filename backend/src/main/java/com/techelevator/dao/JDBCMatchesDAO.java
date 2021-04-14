@@ -55,7 +55,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 		int tournamentSize = bracketInformation.getTournamentSize();
 		int lowSeed = bracketInformation.getTournamentSize()-1;
 		int highSeed = 0;
-		for (int i = 1; i <= tournamentSize; i++) {
+		for (int i = 1; i < tournamentSize; i++) {
 			if (i <= tournamentSize/2) {
 				jdbcTemplate.update(sqlCreateMatch, i, bracketInformation.getTournamentId(), bracketInformation.getTeams().get(highSeed), bracketInformation.getTeams().get(lowSeed));
 				highSeed++;
@@ -68,19 +68,19 @@ public class JDBCMatchesDAO implements MatchesDAO {
 	}
 
 	@Override
-	public void updateMatch(Matches match, int nextMatchId) {
+	public void updateMatch(Matches match) {
 		String sqlUpdateMatch = "UPDATE matches SET winning_team_id = ?, losing_team_id = ?, "
 				+ "winning_team_score = ?, losing_team_score = ?, match_date = ?, match_time = ?"
-				+ "WHERE match_id = ?;";
-		String teamToUpdate = "";
+				+ "WHERE match_id = ? AND tournament_id = ?;";
+		String sqlNextMatch;
 		if (match.getMatchId() % 2 != 0) {
-			teamToUpdate = "team_1_id";
-		} else teamToUpdate = "team_2_id";
-		String sqlNextMatch = "UPDATE matches SET ? = ? WHERE match_id = ? AND tournament_id = ?;";
+			sqlNextMatch = "UPDATE matches SET team_1_id = ? WHERE match_id = ? AND tournament_id = ?;";
+		} else sqlNextMatch = "UPDATE matches SET team_2_id = ? WHERE match_id = ? AND tournament_id = ?;";;
+
 		jdbcTemplate.update(sqlUpdateMatch, match.getWinningTeamId(), match.getLosingTeamId(), 
 				match.getWinningTeamScore(), match.getLosingTeamScore(), match.getMatchDate(), 
-				match.getMatchTime(), match.getMatchId());
-		jdbcTemplate.update(sqlNextMatch, teamToUpdate, match.getWinningTeamId(), nextMatchId, match.getTournamentId());
+				match.getMatchTime(), match.getMatchId(), match.getTournamentId());
+		jdbcTemplate.update(sqlNextMatch, match.getWinningTeamId(), match.getNextMatch(), match.getTournamentId());
 	}
 
 	@Override

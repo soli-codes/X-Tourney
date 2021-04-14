@@ -25,7 +25,7 @@ private InvitationDAO dao;
 		this.dao = dao;
 	}
 	
-	@RequestMapping(path = "/teamnames/{id}/invitations", method = RequestMethod.GET)
+	@RequestMapping(path = "/users/{id}/invitations", method = RequestMethod.GET)
 	public List<Invitation> listPendingInvitations(@PathVariable int id){
 		return dao.getPendingInvitations(id);
 	}

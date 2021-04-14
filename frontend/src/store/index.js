@@ -22,6 +22,8 @@ export default new Vuex.Store({
     user: currentUser || {},
     teams: [],
     matches: [],
+    myTeams: [],
+    myTournaments: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -51,6 +53,26 @@ export default new Vuex.Store({
 
     SET_USER_IMAGE(state, imageURL) {
       state.user.userImage = imageURL;
+    },
+
+    SET_TEAM_IMAGE(state, team) {
+      state.myTeams.forEach(myTeam => {
+        if (myTeam.teamId == team.teamId) {
+          myTeam.teamImage = team.teamImage;
+        }
+      });
+    },
+
+    SET_MY_TEAMS(state, teams) {
+      state.myTeams = teams;
+    },
+
+    SET_MY_TOURNAMENTS(state, tournaments) {
+      state.myTournaments = tournaments;
+    },
+    CLEAR_STORE(state) {
+      state.teams = [];
+      state.matches = [];
     },
   },
 });

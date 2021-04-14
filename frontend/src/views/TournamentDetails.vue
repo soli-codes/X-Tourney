@@ -2,11 +2,20 @@
   <div>
     <div>
       <div
-        class="d-flex justify-content-between mx-2 mt-4 border-bottom border-danger pb-2"
+        class="d-flex justify-content-between align-items-center mx-2 mt-4 border-bottom border-danger pb-2"
       >
-        <img :src="tournament.tournamentImage" class="image" />
+        <img :src="tournament.tournamentImage" class="tournament-image" />
         <h1>{{ tournament.name }}</h1>
-        <button v-if="$store.state.token != ''">Sign Up</button>
+        <div v-if="$store.state.token != ''">
+          <button v-on:click="signUpTeam()" class="bg-primary">Sign Up Your Team:</button>
+          <select style="display: block" v-model="teamToSignUp">
+            <option
+            v-for="team in $store.state.myTeams"
+            :value="team"
+            :key="team"
+            >{{ team.teamName }}</option>
+          </select>
+        </div>
         <router-link v-else to="login">Login to Sign Up</router-link>
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
@@ -21,19 +30,23 @@
         <p>{{ tournament.description }}</p>
       </div>
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
-      <generated-bracket
-        v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
-      />
-      <!-- displays registered teams in a list -->
-      <div
-        v-for="team in $store.state.teams"
-        :key="team.teamId"
-        :team="team"
-        class="d-flex"
-      >
-        <!-- <img :src="team.teamImage" /> -->
-        <h4>{{ team.teamName }}</h4>
+      <div class="d-flex justify-content-center">
+        <generated-bracket
+          v-if="$store.state.matches.length > 0 && $store.state.teams.length > 0"
+        />
       </div>
+      <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
+      <router-link
+        v-for="(team, index) in $store.state.teams"
+        :key="index"
+        :team="team"
+        :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
+        class="d-flex align-items-center team-border m-3">
+          <h1 class="text-danger">#{{ index + 1 }}</h1>
+          <img class="team-image" :src="team.teamImage" />
+          <h1>{{ team.teamName }}</h1>
+          <h1 class="flex-grow">{{ (team.wins / team.losses).toFixed(2) }}</h1>
+      </router-link>
     </div>
   </div>
 </template>
@@ -42,11 +55,14 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
+import TournamentTeamService from '../services/TournamentTeamService';
+
 export default {
   components: { GeneratedBracket },
   data() {
     return {
       tournament: {},
+      teamToSignUp: {},
     };
   },
 
@@ -57,14 +73,12 @@ export default {
       }
     );
 
-    // should work once getTournamentTeams end point is up and running
     TournamentsService.getTournamentTeams(this.$route.params.tournamentId).then(
       (response) => {
         this.$store.commit('SET_TEAMS', response.data);
       }
     );
 
-    // will pull down matches sorted by matchId and place them in an arry to be displayed in bracket
     TournamentsService.getTournamentMatches(
       this.$route.params.tournamentId
     ).then((response) => {
@@ -73,22 +87,13 @@ export default {
   },
 
   methods: {
-    checkTeams() {
-      console.log(this.teams);
-    },
-    checkMatches() {
-      console.log(this.matches);
-    },
-
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
-      console.log(tournamentSize);
       const axiosObject = {
         tournamentSize: tournamentSize,
         tournamentId: parseInt(this.$route.params.tournamentId),
         teams: this.generateSeedArray(),
       };
-      console.log(axiosObject.teams);
       if (
         this.$store.state.teams != null &&
         this.$store.state.teams.length > 0
@@ -102,6 +107,10 @@ export default {
           }
         });
       }
+    },
+
+    signUpTeam() {
+      TournamentTeamService.postTournamentTeam(this.teamToSignUp);
     },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
@@ -121,23 +130,29 @@ export default {
       }
       return seededArray;
     },
-
-    computed: {
-      teams() {
-        return this.$store.state.teams;
-      },
-      matches() {
-        console.log('test');
-        return this.$store.state.matches;
-      },
-    },
   },
 };
 </script>
 
 <style scoped>
-.image {
-  width: 150px;
+.tournament-image {
   height: 150px;
+  width: 150px;
 }
+
+.team-image {
+  height: 100px;
+  width: 100px;
+}
+
+.team-border {
+  border-radius: 25px !important;
+  box-shadow: 0px 0px 5px 5px #ff455d;
+}
+
+a {
+  text-decoration: none;
+}
+
+
 </style>

@@ -17,7 +17,7 @@
         </option>
       </select>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <select
         class="form-select"
         v-model="tournament.eliminationType"
@@ -28,7 +28,7 @@
         <option value="2">Single Elimination</option>
         <option value="3">Double Elimination</option>
       </select>
-    </div>
+    </div> -->
     <div class="form-group">
       <label for="Name">Name</label>
       <input type="text" name="name" id="name" v-model="tournament.name" />
@@ -148,7 +148,7 @@ export default {
         signupOpen: '',
         signupClose: '',
         gameTypeId: '',
-        eliminationType: '',
+        eliminationType: 'Single Elimination',
         private: '',
         tournamentID: null,
       },
