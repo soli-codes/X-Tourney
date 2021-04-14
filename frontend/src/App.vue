@@ -39,24 +39,22 @@ html {
 }
 
 .top-nav-color {
-  background: rgb(0, 11, 24);
+  background: black;
   background: linear-gradient(
     180deg,
     rgba(0, 11, 24, 1) 0%,
     rgba(0, 23, 45, 1) 25%,
-    rgba(0, 38, 77, 1) 50%,
-    rgba(2, 56, 110, 1) 100%
+    rgba(0, 38, 77, 1) 100%
   );
 }
 
 .side-nav-color {
-  background: rgb(0, 11, 24);
+  background: black;
   background: linear-gradient(
     30deg,
     rgba(0, 11, 24, 1) 0%,
     rgba(0, 23, 45, 1) 25%,
-    rgba(0, 38, 77, 1) 50%,
-    rgba(2, 56, 110, 1) 100%
+    rgba(0, 38, 77, 1) 100%
   );
 }
 .vh {
@@ -65,7 +63,7 @@ html {
 
 .text-primary:hover {
   color: #ff455d !important;
-  transition-duration: 400ms;
+  transition-duration: 300ms;
 }
 
 .navbar-margin {
