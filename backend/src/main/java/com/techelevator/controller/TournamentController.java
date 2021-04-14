@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +34,13 @@ public class TournamentController {
 	}
 	
 	@RequestMapping(path = "/tournaments/{id}", method = RequestMethod.GET)
-	public Tournament getTournament(@PathVariable int id) {
+	public Tournament getTournament(@Valid @PathVariable int id) {
 		return dao.getTournamentById(id);
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/tournaments/create", method = RequestMethod.POST)
-	public void create(@RequestBody Tournament tournament) {
+	public void create(@Valid @RequestBody Tournament tournament) {
 		dao.createTournament(tournament);
 	}
 	
@@ -49,17 +51,17 @@ public class TournamentController {
 	}
 	
 	@RequestMapping( path = "/tournaments/{id}/teams", method = RequestMethod.GET)
-	public List<TeamName> listTeamsByTournament(@PathVariable int id){
+	public List<TeamName> listTeamsByTournament(@Valid @PathVariable int id){
 		return dao.getTeamsByTournamentId(id);
 	}
 	
 	@RequestMapping( path = "/tournaments/{id}/matches", method = RequestMethod.GET)
-	public List<List<Matches>> listMatchesByTournament(@PathVariable int id){
+	public List<List<Matches>> listMatchesByTournament(@Valid @PathVariable int id){
 		return dao.getMatchesBytournamentId(id);
 	}
 	
 	@RequestMapping( path = "/tournaments/host/{id}", method = RequestMethod.GET)
-	public List<Tournament> listTournamentsByHostId(@PathVariable int id){
+	public List<Tournament> listTournamentsByHostId(@Valid @PathVariable int id){
 		return dao.getTournamentsByHostId(id);
 	}
 	

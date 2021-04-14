@@ -1,10 +1,16 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.Positive;
+
 public class Invitation {
 	
+	@Positive(message = "Must be a positive numeric value")
 	private int tournamentId;
+	
+	@Positive(message = "Must be a positive numeric value")
 	private int teamId;
 	private String inviteStatus;
+	
 	public int getTournamentId() {
 		return tournamentId;
 	}

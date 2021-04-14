@@ -16,7 +16,6 @@ import UpdateMatch from '../views/UpdateMatch.vue';
 import Test from '../views/Test.vue';
 import TeamsCreate from '../views/TeamsCreate.vue';
 import TeamDetails from '../views/TeamDetails.vue';
-import InvitationDetails from '../views/InvitationDetails.vue';
 
 Vue.use(Router);
 
@@ -163,15 +162,6 @@ const router = new Router({
       path: 'teams/:teamId',
       name: 'teamDetails',
       component: TeamDetails,
-      meta: {
-        requiresAuth: false,
-      },
-    },
-
-    {
-      path: 'invitation',
-      name: 'invitation',
-      component: InvitationDetails,
       meta: {
         requiresAuth: false,
       },
