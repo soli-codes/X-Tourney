@@ -1,11 +1,11 @@
 <template>
-  <bracket />
+  <the-main-help />
 </template>
 
 <script>
-import Bracket from '../components/Bracket.vue';
+import TheMainHelp from './TheMainHelp.vue';
 export default {
-  components: { Bracket },
+  components: { TheMainHelp },
   name: 'home',
 };
 </script>
