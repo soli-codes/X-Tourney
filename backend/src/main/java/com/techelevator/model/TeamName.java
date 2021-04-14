@@ -1,12 +1,29 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class TeamName {
+	
+	@Positive(message = "must be a positve numeric value")
 	private  int teamId;
+	
+	@NotNull(message = "must contain a name")
 	private String teamName;
+	
+	@Min(value = 0, message = "Must be a non-negative numeric value")
 	private int wins;
+	
+	@Min(value = 0, message = "Must be a non-negative numeric value")
 	private int losses;
+	
+	@Min(value = 0, message = "Must be a non-negative numeric value")
 	private int tournamentWins;
+	
+	@Min(value = 0, message = "Must be a non-negative numeric value")
 	private int tournamentsEntered;
+	
 	private String teamImage;
 	
 	public TeamName() {

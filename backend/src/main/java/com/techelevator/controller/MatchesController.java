@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.techelevator.model.TeamName;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,24 +29,24 @@ public class MatchesController {
 	}
 	
 	@RequestMapping( path = "/matches/{id}", method = RequestMethod.GET)
-	public Matches getMatch(@PathVariable int id) {
+	public Matches getMatch(@Valid @PathVariable int id) {
 		return dao.getMatchById(id);
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping( path = "/matches/create", method = RequestMethod.POST)
-	public BracketInformation createMatch(@RequestBody BracketInformation bracketInfo) {
+	public BracketInformation createMatch(@Valid @RequestBody BracketInformation bracketInfo) {
 		return dao.createMatch(bracketInfo);
 	}
 	
 	@RequestMapping( path = "/matches/update", method = RequestMethod.PUT)
-	public void updateMatch(@RequestBody Matches match) {
+	public void updateMatch(@Valid @RequestBody Matches match) {
 		dao.updateMatch(match);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping( path = "/matches/{id}", method = RequestMethod.DELETE)
-	public void deleteMatch(@PathVariable int id) {
+	public void deleteMatch(@Valid @PathVariable int id) {
 		dao.deleteMatch(id);
 	}
 	

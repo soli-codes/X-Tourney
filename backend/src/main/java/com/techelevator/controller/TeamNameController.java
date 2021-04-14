@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,29 +34,29 @@ public class TeamNameController {
 	}
 	
 	@RequestMapping(path = "/teamnames/user/{id}", method = RequestMethod.GET)
-	public List<TeamName> getTeamsByUserId(@PathVariable int id) {
+	public List<TeamName> getTeamsByUserId(@Valid @PathVariable int id) {
 		return dao.getTeamsByUserId(id);
 	}
 	
 	@RequestMapping(path = "/teamnames/{id}", method = RequestMethod.GET)
-	public TeamName getTeamName(@PathVariable int id){
+	public TeamName getTeamName(@Valid @PathVariable int id){
 		return dao.getTeamNameById(id);
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/teamnames/create", method = RequestMethod.POST)
-	public void create(@RequestBody TeamName teamName) {
+	public void create(@Valid @RequestBody TeamName teamName) {
 		dao.createNewTeam(teamName);
 	}
 	
     @RequestMapping(path = "/teamnames/{id}/update", method = RequestMethod.PUT)
-    public void executeRequest(@RequestBody TeamName teamName,@PathVariable int id ) {
+    public void executeRequest(@Valid @RequestBody TeamName teamName,@PathVariable int id ) {
     	dao.updateTeam(teamName, id);
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(path = "/teamnames/{id}", method = RequestMethod.DELETE)
-	public void deleteTeamName(@PathVariable int id) {
+	public void deleteTeamName(@Valid @PathVariable int id) {
 		dao.deleteTeam(id);
 	}
 	

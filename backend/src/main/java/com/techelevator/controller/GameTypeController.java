@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,19 +33,19 @@ public class GameTypeController {
 	}
 	
 	@RequestMapping(path = "/gametypes/{id}", method = RequestMethod.GET)
-	public GameType getGameType(@PathVariable int id){
+	public GameType getGameType(@Valid @PathVariable int id){
 		return dao.getGameTypeById(id);
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/gametypes/create", method = RequestMethod.POST)
-	public void create(@RequestBody GameType gameType) {
+	public void create(@Valid @RequestBody GameType gameType) {
 		dao.createGameType(gameType);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(path = "/gametypes/{id}", method = RequestMethod.DELETE)
-	public void deleteGameType(@PathVariable int id) {
+	public void deleteGameType(@Valid @PathVariable int id) {
 		dao.deleteGameType(id);
 	}
 	
