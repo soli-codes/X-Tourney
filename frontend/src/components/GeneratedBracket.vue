@@ -1,23 +1,35 @@
 <template>
   <div class="d-flex flex-row">
     <div
-      v-for="round in $store.state.matches"
-      :key="round"
-      class="flex-column p-1 m-2 d-flex justify-content-around"
+      v-for="(round, index) in $store.state.matches"
+      :key="index"
+      class="flex-column py-1 px-0 my-2 mx-0 d-flex justify-content-around"
     >
       <div
-        v-for="match in round"
-        :key="match"
+        v-for="(match, matchIndex) in round"
+        :key="matchIndex"
         class="flex-column p-0 m-1 d-flex"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
         v-on:click="onClick(round, match)"
       >
-        <div style="width: 200px; background-color: #333333">
-          {{ getTeamName(match.teamOneId) }}
-        </div>
-        <div style="width: 200px; background-color: #333333">
-          {{ getTeamName(match.teamTwoId) }}
+        <div class="d-flex flex-row">
+          <div v-if="index != 0">
+            <div class="empty-spacer border-bottom border-4" />
+            <div class="empty-spacer" />
+          </div>
+          <div>
+            <div style="width: 200px; background-color: #333333">
+              {{ getTeamName(match.teamOneId) }}
+            </div>
+            <div style="width: 200px; background-color: #333333">
+              {{ getTeamName(match.teamTwoId) }}
+            </div>
+          </div>
+          <div>
+            <div :class="{ 'border-end' : match.matchId % 2 == 0, 'override-border' : index == $store.state.matches.length - 1, }" class="empty-spacer border-bottom border-4" />
+            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer border-4" />
+          </div>
         </div>
       </div>
     </div>
@@ -121,16 +133,7 @@ export default {
     },
 
     onClick(round, match) {
-      // this.modalMatch.matchId = match.matchId;
-      // this.modalMatch.tournamentId = match.tournamentId;
-      // this.modalMatch.teamOneId = match.teamOneId;
-      // this.modalMatch.teamTwoId = match.teamTwoId;
-      // this.modalMatch.winningTeamId = match.winningTeamId;
-      // this.modalMatch.losingTeamId = match.losingTeamId;
-      // this.modalMatch.winningTeamScore = match.winningTeamScore;
-      // this.modalMatch.losingTeamScore = match.losingTeamScore;
-      // this.modalMatch.matchDate = match.matchDate;
-      // this.modalMatch.matchTime = match.matchTime;
+      
       this.modalMatch = match;
       this.modalMatch.teamOneName = this.getTeamName(match.teamOneId);
       this.modalMatch.teamTwoName = this.getTeamName(match.teamTwoId);
@@ -163,3 +166,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.empty-spacer {
+  width: 50px;
+  height: 27px;
+}
+
+.override-border {
+  border: none !important;
+}
+
+</style>
