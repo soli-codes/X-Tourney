@@ -27,8 +27,20 @@
             </div>
           </div>
           <div>
-            <div :class="{ 'border-end' : match.matchId % 2 == 0, 'override-border' : index == $store.state.matches.length - 1, }" class="empty-spacer border-bottom border-4" />
-            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer border-4" />
+            <div
+              :class="{
+                'border-end': match.matchId % 2 == 0,
+                'override-border': index == $store.state.matches.length - 1,
+              }"
+              class="empty-spacer border-bottom border-4"
+            />
+            <div
+              :class="{
+                'border-end': match.matchId % 2 == 1,
+                'override-border': index == $store.state.matches.length - 1,
+              }"
+              class="empty-spacer border-4"
+            />
           </div>
         </div>
       </div>
@@ -133,7 +145,7 @@ export default {
     },
 
     onClick(round, match) {
-      
+      console.log(this.$store.state.matches[0].length);
       this.modalMatch = match;
       this.modalMatch.teamOneName = this.getTeamName(match.teamOneId);
       this.modalMatch.teamTwoName = this.getTeamName(match.teamTwoId);
@@ -144,7 +156,8 @@ export default {
       ) {
         this.modalMatch.nextMatch = null;
       } else {
-        this.modalMatch.nextMatch = round.length + Math.ceil(match.matchId / 2);
+        this.modalMatch.nextMatch =
+          this.$store.state.matches[0].length + Math.ceil(match.matchId / 2);
       }
     },
 
@@ -168,7 +181,6 @@ export default {
 </script>
 
 <style scoped>
-
 .empty-spacer {
   width: 50px;
   height: 27px;
@@ -177,5 +189,4 @@ export default {
 .override-border {
   border: none !important;
 }
-
 </style>
