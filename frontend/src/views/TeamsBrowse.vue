@@ -17,7 +17,7 @@
       </select>
     </div>
     <div class="d-flex justify-content-around">
-      <div v-for="team in filteredList" :key="team.teamId">
+      <div v-for="team in filteredList" :key="team.teamId" >
         <router-link
           :to="{
             name: 'teamDetails',
@@ -55,6 +55,7 @@ export default {
   created() {
     TeamsService.getTeams().then((response) => {
       this.teams = response.data;
+      this.teams.splice(0, 1);
     });
   },
 
