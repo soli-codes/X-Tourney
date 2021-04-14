@@ -167,7 +167,7 @@ export default {
         description: this.tournament.description,
         gameTypeId: this.tournament.gameTypeId,
         maxTeamCount: this.tournament.maxTeams,
-        hostId: 4,
+        hostId: this.$store.state.user.id,
         startTime: this.tournament.startTime,
         open: this.tournament.open,
         private: this.tournament.private,

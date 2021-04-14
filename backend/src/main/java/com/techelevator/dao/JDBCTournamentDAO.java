@@ -36,7 +36,6 @@ public class JDBCTournamentDAO implements TournamentDAO {
 			tournaments.add(theTournament);
 		}
 		
-		
 		return tournaments;
 	}
 
@@ -167,6 +166,15 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		return tournaments;
 
 	}
+	
+	@Override
+	public void addTeamToTournament(TeamName team, int tournamentId) {
+		
+		String sqlAddTeamToTournament = "INSERT INTO tournament_teams (tournament_id, team_id) VALUES (?, ?);";
+		
+		jdbcTemplate.update(sqlAddTeamToTournament, tournamentId, team.getTeamId());
+	
+	}
 
 
 	
@@ -272,6 +280,8 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		
 	return match;
 	}
+
+	
 
 	
 	

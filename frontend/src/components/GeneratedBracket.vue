@@ -11,7 +11,7 @@
         class="flex-column p-0 m-1 d-flex"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
-        v-on:click="onClick(round, match)"
+        v-on:click="onClick(match)"
       >
         <div class="d-flex flex-row">
           <div v-if="index != 0">
@@ -132,8 +132,8 @@ export default {
       return team.teamName;
     },
 
-    onClick(round, match) {
-      
+    onClick(match) {
+      console.log(this.$store.state.matches[0].length);
       this.modalMatch = match;
       this.modalMatch.teamOneName = this.getTeamName(match.teamOneId);
       this.modalMatch.teamTwoName = this.getTeamName(match.teamTwoId);
@@ -144,7 +144,8 @@ export default {
       ) {
         this.modalMatch.nextMatch = null;
       } else {
-        this.modalMatch.nextMatch = round.length + Math.ceil(match.matchId / 2);
+        this.modalMatch.nextMatch =
+          this.$store.state.matches[0].length + Math.ceil(match.matchId / 2);
       }
     },
 
@@ -160,15 +161,11 @@ export default {
       });
     },
   },
-  created() {
-    console.log(this.$store.state.matches);
-    console.log(this.$store.state.teams);
-  },
+  created() {},
 };
 </script>
 
 <style scoped>
-
 .empty-spacer {
   width: 50px;
   height: 27px;
@@ -188,5 +185,4 @@ export default {
   border: none !important;
   box-shadow: none;
 }
-
 </style>

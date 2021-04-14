@@ -23,5 +23,7 @@ public interface TournamentDAO {
 	public List<Tournament>getTournamentsByHostId(int hostId);
 	
 	public List<Tournament>getTournamentsByUserId(int userId);
+	
+	public void addTeamToTournament(TeamName team, int tournamentId);
 
 }

@@ -104,15 +104,15 @@ const router = new Router({
         requiresAuth: false, // Change to true on prod
       },
     },
-      // CREATE A TEAM
-      {
-        path: '/create/team',
-        name: 'createTeam',
-        component: TeamsCreate,
-        meta: {
-          requiresAuth: false, // Change to true on prod
-        },
+    // CREATE A TEAM
+    {
+      path: '/create/team',
+      name: 'createTeam',
+      component: TeamsCreate,
+      meta: {
+        requiresAuth: false, // Change to true on prod
       },
+    },
     // BROWSE ALL TEAMS
     {
       path: '/teams',
@@ -137,45 +137,45 @@ const router = new Router({
       name: 'profile',
       component: Profile,
       meta: {
+        requiresAuth: true,
+      },
+    },
+
+    {
+      path: '/meettheteam',
+      name: 'meetTheTeam',
+      component: MeetTheTeam,
+      meta: {
         requiresAuth: false,
       },
     },
 
-  {
-    path: '/meettheteam',
-    name: 'meetTheTeam',
-    component: MeetTheTeam,
-    meta: {
-      requiresAuth: false,
-    }
-  },
-    
-  {
-    path: '/tournaments/:tournamentId/:matchId',
-    name: 'updateMatch',
-    component: UpdateMatch,
-    meta: {
-      requiresAuth: false,
-  }
-  },
+    {
+      path: '/tournaments/:tournamentId/:matchId',
+      name: 'updateMatch',
+      component: UpdateMatch,
+      meta: {
+        requiresAuth: false,
+      },
+    },
 
-  {
-    path: 'teams/:teamId',
-    name: 'teamDetails',
-    component: TeamDetails,
-    meta: {
-      requiresAuth: false,
-    }
-  },
+    {
+      path: 'teams/:teamId',
+      name: 'teamDetails',
+      component: TeamDetails,
+      meta: {
+        requiresAuth: false,
+      },
+    },
 
-  {
-    path: 'invitation',
-    name: 'invitation',
-    component: InvitationDetails,
-    meta: {
-      requiresAuth: false,
-    }
-  },
+    {
+      path: 'invitation',
+      name: 'invitation',
+      component: InvitationDetails,
+      meta: {
+        requiresAuth: false,
+      },
+    },
   ],
 });
 
