@@ -67,6 +67,65 @@
       </label>
     </div>
     <div><button @click="logout">Logout</button></div>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-primary text-dark">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Match #{{ modalMatch.matchId }}
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <label>Select Match Winner:</label>
+              <select v-model="modalMatch.winningTeamId">
+                <option :value="modalMatch.teamOneId">{{
+                  modalMatch.teamOneName
+                }}</option>
+                <option :value="modalMatch.teamTwoId">{{
+                  modalMatch.teamTwoName
+                }}</option>
+              </select>
+            </div>
+            <div>
+              <label>Select Match Loser:</label>
+              <select v-model="modalMatch.losingTeamId">
+                <option :value="modalMatch.teamOneId">{{
+                  modalMatch.teamOneName
+                }}</option>
+                <option :value="modalMatch.teamTwoId">{{
+                  modalMatch.teamTwoName
+                }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button
+              v-on:click="putMatch(modalMatch)"
+              type="button"
+              class="btn btn-danger"
+            >
+              Save Updates
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
