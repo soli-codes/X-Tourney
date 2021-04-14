@@ -173,10 +173,7 @@ export default {
       });
     },
   },
-  created() {
-    console.log(this.$store.state.matches);
-    console.log(this.$store.state.teams);
-  },
+  created() {},
 };
 </script>
 

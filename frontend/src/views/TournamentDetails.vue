@@ -62,6 +62,7 @@ import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
 import TournamentTeamService from '../services/TournamentTeamService';
+import TeamsService from '../services/TeamsService';
 
 export default {
   components: { GeneratedBracket },
@@ -90,6 +91,11 @@ export default {
     ).then((response) => {
       this.$store.commit('SET_MATCHES', response.data);
     });
+    TeamsService.getTeamsByUserId(this.$store.state.user.id).then(
+      (response) => {
+        this.$store.commit('SET_MY_TEAMS', response.data);
+      }
+    );
   },
 
   methods: {
