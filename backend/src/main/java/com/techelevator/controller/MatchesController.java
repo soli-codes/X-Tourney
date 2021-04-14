@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.techelevator.model.TeamName;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.techelevator.dao.MatchesDAO;
@@ -33,17 +34,20 @@ public class MatchesController {
 		return dao.getMatchById(id);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping( path = "/matches/create", method = RequestMethod.POST)
 	public BracketInformation createMatch(@Valid @RequestBody BracketInformation bracketInfo) {
 		return dao.createMatch(bracketInfo);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping( path = "/matches/update", method = RequestMethod.PUT)
 	public void updateMatch(@Valid @RequestBody Matches match) {
 		dao.updateMatch(match);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping( path = "/matches/{id}", method = RequestMethod.DELETE)
 	public void deleteMatch(@Valid @PathVariable int id) {
