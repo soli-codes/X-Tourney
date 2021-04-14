@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div>
+        User: {{this.$store.state.user.username}}
+        <img :src="this.$store.state.user.userImage" />
+    </div>
     <div class="title">
       <h3>MY TEAMS</h3>
     </div>
@@ -38,10 +42,10 @@
       <h3>PENDING INVITATIONS</h3>
     </div>
 
-    <div class="d-flex justify-content-around">
-      <div v-for="(invite, index) in myinvitations" :key="index">
+    <div v-if="this.myInvitations.length != 0" class="d-flex justify-content-around">
+      <div v-for="(invite, index) in this.myInvitations" :key="index">
         <router-link :to="{ name: 'invitation' }">
-          <invitation :invite="invite" />
+          <invitation-card :invite="invite" />
         </router-link>
       </div>
     </div>
@@ -61,11 +65,14 @@
 import TeamCard from '../components/TeamCard.vue';
 import TournamentCard from '../components/TournamentCard.vue';
 import UserService from '../services/UserService.js';
+import InvitationService from '../services/InvitationService.js';
+import InvitationCard from '../components/InvitationCard.vue';
 
 export default {
   components: {
     TournamentCard,
     TeamCard,
+    InvitationCard,
   },
   data() {
     return {
@@ -74,12 +81,15 @@ export default {
         id: '',
         userImage: '',
       },
-      myInvitations: [],
+        myInvitations: [],
     };
   },
 
   created() {
         // add in call to invitation service/controller to get all invitations
+        InvitationService.getPendingInvitations(this.$store.state.user.id).then(response => {
+            this.myInvitations = response.data;
+        });
   },
   methods: {
     logout() {

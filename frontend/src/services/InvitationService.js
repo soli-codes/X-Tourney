@@ -5,8 +5,8 @@ export default {
         return axios.post("/teamnames/invite", invitation);
     },
 
-    getPendingInvitations(teamId) {
-        return axios.get(`/teamnames/${teamId}/invitations`);
+    getPendingInvitations(userId) {
+        return axios.get(`/users/${userId}/invitations`);
     },
 
     updateInvitation(invitation) {
