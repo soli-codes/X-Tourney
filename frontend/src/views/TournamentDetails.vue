@@ -8,8 +8,13 @@
         <h1>{{ tournament.name }}</h1>
         <div v-if="$store.state.token != ''">
           <button class="bg-primary">Sign Up Your Team</button>
-          <select>
-            <option v-for="team in myTeams" :key="team">{{ team.teamName }}</option>
+          <select v-model="teamToSignUp">
+            <option
+            v-for="team in $store.state.myTeams"
+            :value="team"
+            :key="team"
+            v-on:click="signUpTeam()"
+            >{{ team.teamName }}</option>
           </select>
         </div>
         <router-link v-else to="login">Login to Sign Up</router-link>
@@ -48,12 +53,14 @@
 import TournamentsService from '../services/TournamentsService';
 import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
+import TournamentTeamService from '../services/TournamentTeamService';
 
 export default {
   components: { GeneratedBracket },
   data() {
     return {
       tournament: {},
+      teamToSignUp: {},
     };
   },
 
@@ -99,6 +106,10 @@ export default {
         });
       }
     },
+
+    signUpTeam() {
+      TournamentTeamService.postTournamentTeam(this.teamToSignUp);
+    },
     // SORTS ALL TEAMS BY WIN / LOSS RATIO AND SAVES TO SEEDARRAY
     generateSeedArray() {
       let seedArray = this.$store.state.teams;
@@ -119,19 +130,7 @@ export default {
     },
   },
 
-  // computed: {
-  //   teams() {
-  //     return this.$store.state.teams;
-  //   },
-  //   matches() {
-  //     return this.$store.state.matches;
-  //   },
-  // },
 
-  // imagePath() {
-  //   if(!this.tournament || !this.tournament.tournamentImage) return '';
-  //   return require(`@/${this.tournament.tournamentImage}`);
-  // },
 };
 </script>
 
