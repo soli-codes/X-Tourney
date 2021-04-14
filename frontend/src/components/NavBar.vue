@@ -2,7 +2,7 @@
   <nav
     class="navbar navbar-expand-lg navbar-primary navbar-dark top-nav-color fixed-top"
   >
-    <router-link :to="{ name: 'help' }">
+    <router-link :to="{ name: 'home' }">
       <img
         src="../assets/vectorBlueLogoXTourney.png"
         alt=""
@@ -146,6 +146,27 @@ li:hover {
   .collapse-size {
     text-align: left;
     padding: 0.2rem 0.2rem;
+  }
+  li {
+    width: 200px;
+  }
+  .sizing {
+    width: 200px;
+  }
+  ul ul {
+    background: transparent !important;
+  }
+  ul ul li {
+    margin: 0px !important;
+    padding: 0px !important;
+    box-shadow: none;
+    border: none;
+  }
+  ul ul li:hover {
+    margin: 0px !important;
+    padding: 0px !important;
+    box-shadow: none;
+    border: none;
   }
 }
 .spinny:hover {

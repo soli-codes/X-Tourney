@@ -46,6 +46,8 @@ li {
   margin: 1px;
   margin-top: 30px;
   text-align: center;
+  width: 180px;
+  white-space: nowrap;
 }
 
 li:hover {
