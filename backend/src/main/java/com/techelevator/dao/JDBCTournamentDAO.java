@@ -152,7 +152,12 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public List<Tournament> getTournamentsByUserId(int userId) {
 		
-		String sqlListAllTournamentsByUserId = "SELECT * FROM tournament JOIN users ON tournament.host_id = users.user_id WHERE user_id = ?;";
+		String sqlListAllTournamentsByUserId = "SELECT tournament.tournament_id, game_type_id, host_id, tournament_winner_id, name, " + 
+				"description, has_started, is_private, is_open, max_teams, elimination_type, " + 
+				"start_date, start_time, end_date, signup_open, signup_close, tournament_image " + 
+				"FROM tournament JOIN tournament_teams ON tournament.tournament_id = tournament_teams.tournament_id " + 
+				"JOIN team_name_users ON tournament_teams.team_id = team_name_users.team_id " + 
+				"WHERE team_name_users.user_id = ? GROUP BY tournament.tournament_id;";
 		
 		List<Tournament> tournaments = new ArrayList<>();
 		

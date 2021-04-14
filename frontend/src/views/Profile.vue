@@ -24,6 +24,7 @@
       </div>
     </div>
 
+  <div v-if="this.$store.state.myTournaments.length != 0">
     <div class="title">
       <h3>MY TOURNAMENTS</h3>
     </div>
@@ -43,7 +44,9 @@
         </router-link>
       </div>
     </div>
+  </div>
 
+  <div v-if="this.myInvitations.length != 0">
     <div class="title">
       <h3>PENDING INVITATIONS</h3>
     </div>
@@ -52,13 +55,14 @@
       v-if="this.myInvitations.length != 0"
       class="d-flex justify-content-around"
     >
-      <div v-for="(invite, index) in this.myInvitations" :key="index">
-        <router-link :to="{ name: 'invitation' }">
+      <div v-for="(invite, index) in this.myInvitations" :key="index"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      v-on:click="onClick(invite)">
           <invitation-card :invite="invite" />
-        </router-link>
       </div>
     </div>
-
+  </div>
     <div>
       <label for="imageURL"
         >Update Your Profile Image URL:
@@ -78,7 +82,7 @@
         <div class="modal-content bg-primary text-dark">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
-              Match #{{ modalMatch.matchId }}
+              Invitation
             </h5>
             <button
               type="button"
@@ -89,25 +93,10 @@
           </div>
           <div class="modal-body">
             <div>
-              <label>Select Match Winner:</label>
-              <select v-model="modalMatch.winningTeamId">
-                <option :value="modalMatch.teamOneId">{{
-                  modalMatch.teamOneName
-                }}</option>
-                <option :value="modalMatch.teamTwoId">{{
-                  modalMatch.teamTwoName
-                }}</option>
-              </select>
-            </div>
-            <div>
-              <label>Select Match Loser:</label>
-              <select v-model="modalMatch.losingTeamId">
-                <option :value="modalMatch.teamOneId">{{
-                  modalMatch.teamOneName
-                }}</option>
-                <option :value="modalMatch.teamTwoId">{{
-                  modalMatch.teamTwoName
-                }}</option>
+              <label>Accept or Decline</label>
+              <select v-model="inviteResponse">
+                <option value="accept">Accept</option>
+                <option value="decline">Decline</option>
               </select>
             </div>
           </div>
@@ -116,11 +105,11 @@
               Close
             </button>
             <button
-              v-on:click="putMatch(modalMatch)"
+              v-on:click="updateInvite"
               type="button"
               class="btn btn-danger"
             >
-              Save Updates
+              Save Response
             </button>
           </div>
         </div>
@@ -137,6 +126,7 @@ import InvitationService from '../services/InvitationService.js';
 import InvitationCard from '../components/InvitationCard.vue';
 import TeamsService from '../services/TeamsService';
 import TournamentsService from '../services/TournamentsService';
+import TournamentTeamService from '../services/TournamentTeamService.js';
 
 export default {
   components: {
@@ -152,12 +142,18 @@ export default {
         userImage: '',
       },
       myInvitations: [],
+      inviteResponse: '',
+      pendingInvite: {
+        tournamentId: '',
+        teamId: '',
+        inviteStatus: '',
+      },
+      inviteTeam: {},
     };
   },
 
   created() {
-    console.log(this.$store.state.myTeams);
-    // add in call to invitation service/controller to get all invitations
+    
     InvitationService.getPendingInvitations(this.$store.state.user.id).then(
       (response) => {
         this.myInvitations = response.data;
@@ -170,9 +166,11 @@ export default {
     );
     TournamentsService.getTournamentsByUser(this.$store.state.user.id).then(
       (response) => {
+        console.log(response.data);
         this.$store.commit('SET_MY_TOURNAMENTS', response.data);
       }
     );
+    console.log(this.$store.state.myTournaments);
   },
   methods: {
     logout() {
@@ -187,6 +185,34 @@ export default {
         if (response.status == 200) {
           this.$router.push({ name: 'home' });
         }
+      });
+    },
+
+    onClick(invite) {
+      this.pendingInvite = invite;
+      TeamsService.getTeamById(this.pendingInvite.teamId).then(response => {
+        this.inviteTeam = response.data;
+      });
+      
+    },
+
+    updateInvite() {
+      this.pendingInvite.inviteStatus = this.inviteResponse;
+      InvitationService.updateInvitation(this.pendingInvite).then(response => {
+         if (response.status == 200) {
+           //add in call to add team to tournament
+          TournamentTeamService.postTournamentTeam(this.pendingInvite.tournamentId, this.inviteTeam)
+          .then(response => {
+            if (response.status == 201) {
+              TournamentsService.getTournamentsByUser(this.$store.state.user.id).then( (response) => {
+              this.$store.commit('SET_MY_TOURNAMENTS', response.data);
+              window.location.reload();
+            });
+              
+            }
+          });
+          
+         }
       });
     },
   },

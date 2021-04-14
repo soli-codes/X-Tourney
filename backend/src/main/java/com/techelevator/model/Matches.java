@@ -1,9 +1,19 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Matches {
+	
+	@NotNull
 	private int matchId;
+	
+	@NotNull
 	private int tournamentId;
+	
+	@NotNull
 	private int teamOneId;
+	
+	@NotNull
 	private int teamTwoId;
 	private int winningTeamId;
 	private int losingTeamId;

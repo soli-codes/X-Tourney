@@ -1,22 +1,62 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class Tournament {
+	
+	@NotNull(message = "Required Field")
+	@Positive(message = "Must be a positive numeric value")
 	private int tournamentId;
+	
 	private boolean isOpen;
+	
+	@NotNull(message = "Required Field")
 	private String eliminationType; 
+	
+	@NotNull (message = "Required Field")
 	private String startDate;
+	
+	@NotNull(message = "Required Field")
 	private String endDate;
+	
+	@NotNull(message = "Required Field")
 	private String signUpOpen;
+	
+	@NotNull(message = "Required Field")
 	private String signUpClose;
+	
+	
 	private boolean isPrivate;
+	
+	@NotNull(message = "Required Field")
 	private String name;
+	
+	
 	private String description;
+	
+	@NotNull(message = "Required Field")
+	@Positive (message = "Must be a positive numeric value")
 	private int gameTypeId;
+	
+	@NotNull(message = "Required Field")
+	@Positive (message = "Must be a positive numeric value")
 	private int maxTeamCount;
+	
+	@NotNull(message = "Required Field")
+	@Positive (message = "Must be a positive numeric value")
 	private int hostId;
+	
+	@NotNull(message = "Required Field")
 	private String startTime;
+	
+	@NotNull(message = "Required Field")
 	private String tournamentImage;
+	
+	
 	private int tournamentWinnerId;
+	
+	
 	private boolean hasStarted;
 	
 
