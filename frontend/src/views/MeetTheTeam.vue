@@ -12,7 +12,7 @@
                     Jake's about section
                 </p>
                 <a href="" target="_blank">LinkedIn</a>
-                 | 
+                | 
                 <a href="" target="_blank">GitHub</a>
             </div>
         </div>
@@ -20,16 +20,20 @@
                     m-4 bg-dark
                     border border-5 border-danger rounded-3">
             <img class ="image" 
-            src="" 
+            src="../assets/korryCowher.jpg"
             alt="Picture of Korry Cowher">
             <div class="p-2">
                 <h3 class="text-center">Korry Cowher</h3>
                 <p class="text-white">
-                    Korry's about section
+                    I'm a full stack developer, with skills in all aspects of the software building process.
+                    My passion for solving problems and finding creative solutions to 
+                    remedy those challenges has lead me to a career in software development. I have 
+                    found that most things I enjoy can be found in the creation of software which includes 
+                    creative thinking, teamwork, problem solving, and design.
                 </p>
-                <a href="" target="_blank">LinkedIn</a>
-                 | 
-                <a href="" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/korry-cowher/" target="_blank">LinkedIn</a>
+                |
+                <a href="https://github.com/Korry-Cowher" target="_blank">GitHub</a>
             </div>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center
@@ -44,7 +48,7 @@
                     Howie's about section
                 </p>
                 <a href="" target="_blank">LinkedIn</a>
-                 | 
+                | 
                 <a href="" target="_blank">GitHub</a>
             </div>
         </div>
@@ -69,7 +73,7 @@
                     on a more individual basis depending on the situation.
                 </p>
                 <a href="https://www.linkedin.com/in/michaelvay/" target="_blank">LinkedIn</a>
-                 | 
+                | 
                 <a href="https://github.com/mtvay" target="_blank">GitHub</a>
             </div>
         </div>

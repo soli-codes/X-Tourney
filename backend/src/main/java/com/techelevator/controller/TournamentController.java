@@ -68,4 +68,10 @@ public class TournamentController {
 		return dao.getTournamentsByUserId(id);
 	}
 	
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(path = "/tournaments/{id}/create", method = RequestMethod.POST)
+	public void addTeamToTournament(@RequestBody TeamName team, @PathVariable int id) {
+		dao.addTeamToTournament(team, id);
+	}
+	
 }
