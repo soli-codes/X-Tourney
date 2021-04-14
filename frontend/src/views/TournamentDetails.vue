@@ -6,7 +6,12 @@
       >
         <img :src="tournament.tournamentImage" class="image" />
         <h1>{{ tournament.name }}</h1>
-        <button class="bg-primary" v-if="$store.state.token != ''">Sign Up</button>
+        <div v-if="$store.state.token != ''">
+          <button class="bg-primary">Sign Up Your Team</button>
+          <select>
+            <option v-for="team in myTeams" :key="team">{{ team.teamName }}</option>
+          </select>
+        </div>
         <router-link v-else to="login">Login to Sign Up</router-link>
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
