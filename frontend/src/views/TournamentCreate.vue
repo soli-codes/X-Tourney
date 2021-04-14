@@ -1,6 +1,22 @@
 <template>
-  <form v-on:submit.prevent="createTournament">
-    <div class="form-group">
+  <form class="d-flex flex-column align-items-center" v-on:submit.prevent="createTournament">
+    <!-- <div class="form-group">
+      <select
+        class="form-select"
+        v-model="tournament.eliminationType"
+        aria-label="Select a game"
+        id="eliminationType"
+      >
+        <option disabled selected value="">Select an elimination type</option>
+        <option value="2">Single Elimination</option>
+        <option value="3">Double Elimination</option>
+      </select>
+    </div> -->
+    <div class="d-flex justify-content-between w-50">
+      <div class="d-flex flex-row align-items-center w-100">
+        <label for="Name">Name:</label>
+        <input type="text" name="name" id="name" v-model="tournament.name" />
+      </div>
       <select
         class="form-select"
         v-model="tournament.gameTypeId"
@@ -17,49 +33,35 @@
         </option>
       </select>
     </div>
-    <!-- <div class="form-group">
-      <select
-        class="form-select"
-        v-model="tournament.eliminationType"
-        aria-label="Select a game"
-        id="eliminationType"
-      >
-        <option disabled selected value="">Select an elimination type</option>
-        <option value="2">Single Elimination</option>
-        <option value="3">Double Elimination</option>
-      </select>
-    </div> -->
-    <div class="form-group">
-      <label for="Name">Name</label>
-      <input type="text" name="name" id="name" v-model="tournament.name" />
-    </div>
-    <div class="form-group">
-      <label for="start-date">
-        Start Date
-      </label>
-      <input
-        type="date"
-        name="start-date"
-        id="start-date"
-        v-model="tournament.startDate"
-      />
-      <input
-        type="time"
-        name="start-time"
-        id="start-time"
-        v-model="tournament.startTime"
-      />
-    </div>
-    <div class="form-group">
-      <label for="end-date">
-        End Date
-      </label>
-      <input
-        type="date"
-        name="end-date"
-        id="end-date"
-        v-model="tournament.endDate"
-      />
+    <div class="d-flex flex-row justfy-contents-between">
+      <div class="form-group">
+        <label for="start-date">
+          Start Date
+        </label>
+        <input
+          type="date"
+          name="start-date"
+          id="start-date"
+          v-model="tournament.startDate"
+        />
+        <input
+          type="time"
+          name="start-time"
+          id="start-time"
+          v-model="tournament.startTime"
+        />
+      </div>
+      <div class="form-group">
+        <label for="end-date">
+          End Date
+        </label>
+        <input
+          type="date"
+          name="end-date"
+          id="end-date"
+          v-model="tournament.endDate"
+        />
+      </div>
     </div>
     <div class="form-group">
       <label for="signup-open">

@@ -1,8 +1,20 @@
 <template>
   <div>
-    <div>
-      User: {{ this.$store.state.user.username }}
-      <img :src="this.$store.state.user.userImage" />
+    <div class="d-flex flex-row align-items-center justify-content-around">
+      <div>
+        <img class="profile-image" :src="$store.state.user.userImage" />
+        <div class="d-flex flex-column">
+          <label style="display: block" for="imageURL"
+          >Update Your Profile Image URL:</label>
+          <label style="display: block">(Relogging May be Required for Display)</label>
+          <div>
+            <input type="text" v-model="imageURL" />
+            <button @click="saveNewImage">Save</button>   
+          </div>
+        </div>
+      </div>
+      <h2 style="display:block" class="text-danger">Welcome {{ this.$store.state.user.username }}!</h2>
+      <div><button @click="logout">Logout</button></div>
     </div>
     <div class="title">
       <h3>MY TEAMS</h3>
@@ -63,14 +75,6 @@
       </div>
     </div>
   </div>
-    <div>
-      <label for="imageURL"
-        >Update Your Profile Image URL:
-        <input type="text" v-model="imageURL" />
-        <button @click="saveNewImage">Save</button>
-      </label>
-    </div>
-    <div><button @click="logout">Logout</button></div>
     <div
       class="modal fade"
       id="exampleModal"
@@ -170,7 +174,6 @@ export default {
         this.$store.commit('SET_MY_TOURNAMENTS', response.data);
       }
     );
-    console.log(this.$store.state.myTournaments);
   },
   methods: {
     logout() {
@@ -180,10 +183,11 @@ export default {
     saveNewImage() {
       this.user.id = this.$store.state.user.id;
       this.user.userImage = this.imageURL;
+      this.$store.commit('SET_USER_IMAGE', this.imageURL);
 
       UserService.updateUser(this.user).then((response) => {
         if (response.status == 200) {
-          this.$router.push({ name: 'home' });
+          console.log(this.$store.state.user.userImage);
         }
       });
     },
@@ -231,5 +235,10 @@ h3 {
 
 a {
   text-decoration: none;
+}
+
+.profile-image {
+  height: 200px;
+  width: 200px;
 }
 </style>
