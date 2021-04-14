@@ -5,7 +5,7 @@
     </div>
 
     <div class="d-flex justify-content-around">
-      <div v-for="team in this.$stroe.state.myTeams" :key="team.teamId">
+      <div v-for="team in this.$store.state.myTeams" :key="team.teamId">
         <router-link
           :to="{
             name: 'teamDetails',
