@@ -58,8 +58,8 @@
           <div class="modal-body">
             <div>
               <label>Select Match Winner:</label>
-              <select v-model="modalMatch.winningTeamId" >
-                <option  :value="modalMatch.teamOneId">{{
+              <select v-model="modalMatch.winningTeamId">
+                <option :value="modalMatch.teamOneId">{{
                   modalMatch.teamOneName
                 }}</option>
                 <option :value="modalMatch.teamTwoId">{{
@@ -69,7 +69,7 @@
             </div>
             <div>
               <label>Select Match Loser:</label>
-              <select v-model="modalMatch.losingTeamId" required>
+              <select v-model="modalMatch.losingTeamId">
                 <option :value="modalMatch.teamOneId">{{
                   modalMatch.teamOneName
                 }}</option>
