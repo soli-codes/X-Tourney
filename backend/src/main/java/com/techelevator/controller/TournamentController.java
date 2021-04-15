@@ -79,4 +79,9 @@ public class TournamentController {
 		dao.addTeamToTournament(team, id);
 	}
 	
+	@RequestMapping( path = "/tournaments/{id}/invitableteams", method = RequestMethod.GET)
+	public List<TeamName> listTeamsWhoAreNotInTournament(@Valid @PathVariable int id){
+		return dao.getAllTeamsThatAreNotInTournament(id);
+	}
+	
 }
