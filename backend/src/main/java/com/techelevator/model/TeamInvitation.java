@@ -2,20 +2,20 @@ package com.techelevator.model;
 
 import javax.validation.constraints.Positive;
 
-public class Invitation {
+public class TeamInvitation {
 	
 	@Positive(message = "Must be a positive numeric value")
-	private int tournamentId;
+	private int userId;
 	
 	@Positive(message = "Must be a positive numeric value")
 	private int teamId;
 	private String inviteStatus;
 	
-	public int getTournamentId() {
-		return tournamentId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setTournamentId(int tournamentId) {
-		this.tournamentId = tournamentId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public int getTeamId() {
 		return teamId;
@@ -29,7 +29,5 @@ public class Invitation {
 	public void setInviteStatus(String inviteStatus) {
 		this.inviteStatus = inviteStatus;
 	}
-	
-	
 	
 }
