@@ -5,7 +5,7 @@
       <div class="d-flex vh row">
         <sidebar class="sidebar position-fixed vh-100 sidebar" id="sidebar" />
         <div
-          class="flex-fill text-info navbar-margin-left navbar-margin-top bg-secondary"
+          class="flex-fill text-info navbar-margin-left navbar-margin-top bg-secondary margin-toggle"
           id="main"
         >
           <div id="marginToggle">
@@ -45,7 +45,6 @@ export default {
       document.getElementById('sidebar').classList.toggle('display');
       document.getElementById('sideArrow').classList.toggle('display');
       document.getElementById('main').classList.toggle('navbar-margin-left');
-      document.getElementById('marginToggle').classList.toggle('margin-toggle');
     },
   },
 };
@@ -63,19 +62,13 @@ $gray-200: #01012b;
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&display=swap');
 
-*{
-  font-family: Inconsolata,Arial, Helvetica, sans-serif;
+* {
+  font-family: Inconsolata, Arial, Helvetica, sans-serif;
 }
 html {
   background-color: #070222 !important;
 }
 
-<<<<<<< HEAD
-.margin-toggle {
-  margin-left: 3000px;
-}
-=======
->>>>>>> ec571e3f37fa5098420f6fc3567278447f514982
 .sideArrow {
   position: fixed;
   color: #b71dde;
@@ -115,12 +108,16 @@ html {
   color: #ff455d !important;
   transition-duration: 300ms;
 }
+.margin-toggle {
+  padding-left: 60px;
+}
 
 .navbar-margin-top {
   margin-top: 112px;
 }
 .navbar-margin-left {
   margin-left: 200px;
+  padding-left: 20px;
 }
 
 .sizing {

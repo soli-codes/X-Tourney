@@ -86,6 +86,7 @@
             </h5>
           </div>
         </router-link>
+        <button @click="teamsCheck">test</button>
       </div>
     </div>
   </div>
@@ -104,6 +105,8 @@ export default {
     return {
       tournament: {},
       teamToSignUp: {},
+      invitableTeams: [],
+      teamIds: [],
     };
   },
 
@@ -130,9 +133,21 @@ export default {
         this.$store.commit('SET_MY_TEAMS', response.data);
       }
     );
+    TeamsService.getTeams().then((response) => {
+      this.$store.commit('SET_ALL_TEAMS', response.data);
+    });
   },
 
   methods: {
+    teamsCheck() {
+      let teamIds = [];
+      this.$store.state.teams.forEach((e) => teamIds.push(e.teamId));
+      console.log(teamIds);
+      this.invitableTeams = this.$store.state.allTeams.filter(
+        (e) => !teamIds.includes(e.teamId)
+      );
+      return this.invitableTeams;
+    },
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
       let tournamentTeams = this.generateSeedArray();

@@ -99,18 +99,18 @@
           <div class="modal-body">
             <div>
               <label>Select Match Winner:</label>
-              <select v-model="modalMatch.winningTeamId">
-                <option :value="modalMatch.teamOneId">{{
+              <select v-model="modalMatch.winningTeamId" :required="!selected">
+                <option :value="modalMatch.teamOneId" @click="buttonEnable">{{
                   modalMatch.teamOneName
                 }}</option>
-                <option :value="modalMatch.teamTwoId">{{
+                <option :value="modalMatch.teamTwoId" @click="buttonEnable">{{
                   modalMatch.teamTwoName
                 }}</option>
               </select>
             </div>
             <div>
               <label>Select Match Loser:</label>
-              <select v-model="modalMatch.losingTeamId">
+              <select v-model="modalMatch.losingTeamId" :required="!selected">
                 <option :value="modalMatch.teamOneId">{{
                   modalMatch.teamOneName
                 }}</option>
@@ -121,13 +121,19 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-dark"
+              data-bs-dismiss="modal"
+              @click="buttonDisable"
+            >
               Close
             </button>
             <button
               v-on:click="putMatch(modalMatch)"
               type="button"
               class="btn btn-danger"
+              :disabled="isDisabled"
             >
               Save Updates
             </button>
@@ -143,10 +149,11 @@
 import MatchServices from '../services/MatchServices';
 
 export default {
-  props: [ 'tournament'],
+  props: ['tournament'],
   data() {
     return {
       array: [],
+      isDisabled: true,
       modalMatch: {
         matchId: '',
         tournamentId: '',
@@ -165,6 +172,12 @@ export default {
     };
   },
   methods: {
+    buttonEnable() {
+      return (this.isDisabled = false);
+    },
+    buttonDisable() {
+      return (this.isDisabled = true);
+    },
     getTeamName(teamId) {
       if (teamId == 1) {
         return 'TO BE DECIDED';
