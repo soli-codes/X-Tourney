@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import com.techelevator.model.TeamName;
+import com.techelevator.model.TeamNameUsers;
 
 @Component
 public class JDBCTeamNameDAO implements TeamNameDAO {
@@ -102,6 +103,14 @@ private JdbcTemplate jdbcTemplate;
 		
 	}
 	
+	@Override
+	public void addUserToTeam(TeamNameUsers teamNameUser) {
+		String sqlAddUserToTeam = "INSERT INTO team_name_users (user_id, team_id) VALUES (?, ?);";
+		
+		jdbcTemplate.update(sqlAddUserToTeam, teamNameUser.getUserId(), teamNameUser.getTeamId());
+		
+	}
+	
 	private TeamName mapTeamNameFromRowSet(SqlRowSet rowset) {
 		
 		TeamName theTeamName = new TeamName();
@@ -129,5 +138,7 @@ private JdbcTemplate jdbcTemplate;
 		
 		return theTeamName;
 	}
+
+	
 
 }
