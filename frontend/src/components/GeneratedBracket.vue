@@ -100,7 +100,7 @@
             <div>
               <label>Select Match Winner:</label>
               <select v-model="modalMatch.winningTeamId">
-                <option :value="modalMatch.teamOneId">{{
+                <option :value="modalMatch.teamOneId" @click="buttonEnable">{{
                   modalMatch.teamOneName
                 }}</option>
                 <option :value="modalMatch.teamTwoId" @click="buttonEnable">{{
@@ -229,7 +229,6 @@ export default {
   background-color: rgb(0, 0, 15);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-
 }
 
 .competitor-two-div {
@@ -237,7 +236,6 @@ export default {
   background-color: #555555;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  
 }
 
 .empty-spacer {
