@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex flex-start">
       <input type="text" v-model="filter.name" placeholder="Filter by Name" />
-      <input type="text" v-model="filter.startDate" placeholder="Start Date" />
+      <input type="date" v-model="filter.startDate" placeholder="Start Date" />
       <input
         type="text"
         v-model="filter.description"
@@ -102,9 +102,9 @@ export default {
 
       if (this.filter.startDate != '') {
         filteredTournaments = filteredTournaments.filter((tournament) => {
-          return tournament.startDate
-            .toLowerCase()
-            .includes(this.filter.startDate.toLowerCase());
+          return (
+            Date.parse(tournament.startDate) > Date.parse(this.filter.startDate)
+          );
         });
       }
 

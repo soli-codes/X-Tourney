@@ -6,8 +6,8 @@
         v-model="filter.teamName"
         placeholder="Filter by Name"
       />
-      <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
-      <input type="text" v-model="filter.losses" placeholder="Losses <= Than" />
+      <input type="text" v-model="filter.wins" placeholder="Minimum Wins" />
+      <input type="text" v-model="filter.losses" placeholder="Max Losses" />
       <p class="ms-1 text-center">Sort By:</p>
       <select class="form-select ms-1" v-model="filter.sortBy">
         <option>None</option>

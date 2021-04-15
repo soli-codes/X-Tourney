@@ -9,7 +9,8 @@
         <div
           v-if="
             $store.state.token != '' &&
-              $store.state.teams.length < tournament.maxTeamCount
+              $store.state.teams.length < tournament.maxTeamCount &&
+              tournament.hasStarted == false
           "
         >
           <button v-on:click="signUpTeam()" class="bg-primary">
@@ -24,7 +25,17 @@
             >
           </select>
         </div>
-        <div v-else-if="$store.state.token != ''">
+        <div
+          v-else-if="$store.state.token != '' && tournament.hasStarted == true"
+        >
+          <h4 class="text-danger">This Tournament has Started!</h4>
+        </div>
+        <div
+          v-else-if="
+            $store.state.token != '' &&
+              $store.state.teams.length == tournament.maxTeamCount
+          "
+        >
           <h4 class="text-danger">This Tournament is Full!</h4>
         </div>
         <router-link v-else :to="{ name: 'login' }"
