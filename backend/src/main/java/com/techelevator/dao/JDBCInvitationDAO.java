@@ -22,7 +22,7 @@ private JdbcTemplate jdbcTemplate;
 	@Override
 	public Invitation createInvitation(Invitation invitation) {
 		
-		String sqlInsertInvitation = "INSERT INTO invitation (tournament_id, team_id, has_accepted) VALUES (?,?,?);";
+		String sqlInsertInvitation = "INSERT INTO tournament_invitation (tournament_id, team_id, has_accepted) VALUES (?,?,?);";
 		
 		jdbcTemplate.update(sqlInsertInvitation, invitation.getTournamentId(), invitation.getTeamId(), invitation.getInviteStatus());
 		
@@ -31,10 +31,10 @@ private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public List<Invitation> getPendingInvitations(int userId) {
-		String sqlGetPendingTransactionsByTeamId = "SELECT tournament_id, invitation.team_id, has_accepted "
-												+ "FROM invitation "
-												+ "JOIN team_name ON team_name.team_id = invitation.team_id "
-												+ "WHERE invitation.team_id IN "
+		String sqlGetPendingTransactionsByTeamId = "SELECT tournament_id, tournament_invitation.team_id, has_accepted "
+												+ "FROM tournament_invitation "
+												+ "JOIN team_name ON team_name.team_id = tournament_invitation.team_id "
+												+ "WHERE tournament_invitation.team_id IN "
 												+ "(SELECT team_name.team_id FROM team_name JOIN team_name_users "
 												+ "ON team_name.team_id = team_name_users.team_id "
 												+ "JOIN users ON team_name_users.user_id = users.user_id "
@@ -45,7 +45,7 @@ private JdbcTemplate jdbcTemplate;
 		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetPendingTransactionsByTeamId, userId);
 		
 		while(rowSet.next()) {
-			Invitation theInvitation = mapInvitationFromRowSet(rowSet);
+			Invitation theInvitation = mapTournamentInvitationFromRowSet(rowSet);
 			pendingInvitations.add(theInvitation);
 		}
 		
@@ -56,13 +56,13 @@ private JdbcTemplate jdbcTemplate;
 	@Override
 	public void updateInvitationToAcceptedorDeclined(Invitation invitation) {
 		
-		String sqlUpdateInvitationStatus = "UPDATE invitation SET has_accepted = ? WHERE tournament_id = ? AND team_id = ?;";
+		String sqlUpdateInvitationStatus = "UPDATE tournament_invitation SET has_accepted = ? WHERE tournament_id = ? AND team_id = ?;";
 		
 		jdbcTemplate.update(sqlUpdateInvitationStatus, invitation.getInviteStatus(), invitation.getTournamentId(), invitation.getTeamId());
 		
 	}
 	
-	private Invitation mapInvitationFromRowSet(SqlRowSet rowset) {
+	private Invitation mapTournamentInvitationFromRowSet(SqlRowSet rowset) {
 		Invitation theInvitation = new Invitation();
 		
 		int tournamentId = rowset.getInt("tournament_id");
