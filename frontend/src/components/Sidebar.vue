@@ -1,14 +1,14 @@
 <template>
   <div class="p-1 text-white side-nav-color">
     <ul class="nav nav-pills flex-column padding">
-      <li class="nav-item">
+      <li class="nav-item bg-dark">
         <div class="shadow">
           <router-link :to="{ name: 'help' }" class="nav-link text-primary">
             FAQ/Help
           </router-link>
         </div>
       </li>
-      <li>
+      <li class="bg-dark">
         <router-link
           :to="{ name: 'tournaments' }"
           class="nav-link text-primary"
@@ -16,12 +16,12 @@
           Browse Tournaments
         </router-link>
       </li>
-      <li>
+      <li class="bg-dark">
         <router-link :to="{ name: 'teams' }" class="nav-link text-primary">
           Browse Teams
         </router-link>
       </li>
-      <li>
+      <li class="bg-dark">
         <router-link
           :to="{ name: 'createTournament' }"
           class="nav-link text-primary"
@@ -29,12 +29,12 @@
           Create Tournament
         </router-link>
       </li>
-      <li>
+      <li class="bg-dark">
         <router-link :to="{ name: 'createTeam' }" class="nav-link text-primary">
           Create Team
         </router-link>
       </li>
-      <li>
+      <li class="bg-dark">
         <div class="nav-link text-primary" @click="noDisplay">
           Toggle Display
         </div>
@@ -68,9 +68,9 @@ li {
 }
 
 li:hover {
-  border: 4px double rgb(255, 251, 0);
-  -webkit-box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
-  box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
+  border: 4px double lime;
+  -webkit-box-shadow: 0px 5px 19px 3px lime;
+  box-shadow: 0px 5px 19px 3px lime;
   margin-top: 30px;
   background: black;
   cursor: pointer;
