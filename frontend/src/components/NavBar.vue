@@ -115,6 +115,12 @@ ul.dropdown-menu > li {
   margin-top: 5px;
   width: 150px;
   justify-content: center;
+  background: linear-gradient(
+    30deg,
+    rgba(0, 11, 24, 1) 0%,
+    rgba(0, 23, 45, 1) 25%,
+    rgba(0, 38, 77, 1) 100%
+  );
 }
 ul.dropdown-menu {
   background: transparent !important;
