@@ -93,7 +93,7 @@
       <div>
         <img
           class="image border-left"
-          src="https://f4.bcbits.com/img/a2721135437_16.jpg"
+          src="https://pyxis.nymag.com/v1/imgs/41a/0dd/1503366ab1d665452cb9f0132647b97f15-03-the-hulk.rsquare.w700.jpg"
         />
       </div>
       <!-- make div into vertical flexbox // will contain StepX title and description -->
@@ -104,7 +104,7 @@
       <div>
         <img
           class="image border-right"
-          src="https://images.hdqwalls.com/download/warrior-fantasy-art-4k-v6-2932x2932.jpg"
+          src="https://ringthedamnbell.files.wordpress.com/2019/12/herjerc.jpg?w=670"
         />
       </div>
     </router-link>
