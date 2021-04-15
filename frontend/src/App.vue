@@ -59,10 +59,15 @@ $secondary: #57ba98;
 $gray-200: #f2f2f2;
 $danger: rgb(163, 73, 164);
 @import '../node_modules/bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&display=swap');
 
+*{
+  font-family: Inconsolata,Arial, Helvetica, sans-serif;
+}
 html {
   background-color: #070222 !important;
 }
+
 .sideArrow {
   position: fixed;
   color: #b71dde;

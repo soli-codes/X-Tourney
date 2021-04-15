@@ -29,20 +29,20 @@ private InvitationDAO dao;
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(path = "/users/{id}/invitations", method = RequestMethod.GET)
+	@RequestMapping(path = "/users/{id}/tournament-invitations", method = RequestMethod.GET)
 	public List<Invitation> listPendingInvitations(@Valid @PathVariable int id){
 		return dao.getPendingInvitations(id);
 	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping(path = "/teamnames/invite", method = RequestMethod.POST)
+	@RequestMapping(path = "/teamnames/tournament-invite", method = RequestMethod.POST)
 	public void create(@Valid @RequestBody Invitation invitation) {
 		dao.createInvitation(invitation);
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	 @RequestMapping(path = "/teamnames/{id}/updateInvite", method = RequestMethod.PUT)
+	 @RequestMapping(path = "/teamnames/{id}/update/tournament-invite", method = RequestMethod.PUT)
 	    public void executeUpdate(@Valid @RequestBody Invitation invitation, @PathVariable int id ) {
 	    	dao.updateInvitationToAcceptedorDeclined(invitation);
 	    }
