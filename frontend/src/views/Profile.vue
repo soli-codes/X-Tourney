@@ -213,6 +213,7 @@ export default {
             if (response.status == 201) {
               TournamentsService.getTournamentsByUser(this.$store.state.user.id).then( (response) => {
               this.$store.commit('SET_MY_TOURNAMENTS', response.data);
+              alert("Thanks for replying!");
               window.location.reload();
             });
               
