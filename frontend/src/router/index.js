@@ -150,7 +150,7 @@ const router = new Router({
     },
 
     {
-      path: 'teams/:teamId',
+      path: '/teams/:teamId',
       name: 'teamDetails',
       component: TeamDetails,
       meta: {
