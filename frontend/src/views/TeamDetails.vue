@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <img :src="team.teamImage" class="mx-auto d-block"/>
+    <div id = "content" class = "d-flex flex-row d-flex flex-wrap d-flex justify-content-center  ">
+        <img :src="team.teamImage"/>
+        <div id = "details" >
         <h2>Team Name: {{ team.teamName }}</h2>
         <h5>Wins: {{ team.wins }}</h5>
         <h5>Losses: {{ team.losses }}</h5>
@@ -16,7 +17,8 @@
         >Update Your Team Image URL:
         <input type="text" v-model="teamImageURL" />
         <button @click="saveNewImage">Save</button>
-      </label>
+        </label>
+        </div>
         </div>
     </div>
 </template>
@@ -65,5 +67,25 @@ export default {
 </script>
 
 <style scoped>
+
+    img{
+        margin-top: 35px;
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+        border-color: #ff455d;
+        border-style: solid;
+        margin-right: 40px;
+    }
+
+    #content{
+        align-items: center;
+        justify-items: center;
+    }
+
+    
+
+
+    
 
 </style>
