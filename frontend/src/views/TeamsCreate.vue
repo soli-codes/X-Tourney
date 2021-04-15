@@ -53,10 +53,16 @@ export default {
       }
       TeamsService.createTeam(this.team).then(response => {
         if (response.status == 201) {
-          alert(`Creation of team ${this.team.teamName} was successful!`);
-          this.$router.push({name: 'teams'});
+          let newTeam = response.data;
+          TeamsService.postUserToTeam(newTeam.teamId, this.$store.state.user.id).then(response => {
+            if(response.status == 201) {
+              alert(`Creation of team ${this.team.teamName} was successful!`);
+              this.$router.push({name: 'teams'});
+            }
+          })   
         }
       });
+      
     }
   },
 }
