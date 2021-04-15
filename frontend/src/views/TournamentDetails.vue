@@ -83,7 +83,7 @@
         v-if="$store.state.teams.length > 0"
       >
         <router-link
-          v-for="(team, index) in sortWinLoss()"
+          v-for="(team, index) in $store.state.teams"
           :key="index"
           :team="team"
           :to="{ name: 'teamDetails', params: { teamId: team.teamId } }"
@@ -132,7 +132,7 @@ export default {
 
     TournamentsService.getTournamentTeams(this.$route.params.tournamentId).then(
       (response) => {
-        this.$store.commit('SET_TEAMS', response.data);
+        this.$store.commit('SET_TEAMS', this.sortWinLoss(response.data));
       }
     );
 
@@ -244,9 +244,8 @@ export default {
       return seededArray;
     },
 
-    sortWinLoss() {
-      let sortedArray = this.$store.state.teams;
-      sortedArray.sort((a, b) => {
+    sortWinLoss(arr) {
+      arr.sort((a, b) => {
         if (isNaN(a.wins / a.losses) && isNaN(b.wins / b.losses)) {
           if (a.losses == 0 && b.losses == 0) {
             return b.wins - a.wins;
@@ -261,7 +260,7 @@ export default {
         }
         return b.wins / b.losses - a.wins / a.losses;
       });
-      return sortedArray;
+      return arr;
     },
 
     getTeamName(teamId) {
