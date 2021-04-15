@@ -19,7 +19,7 @@
         <h2>Create a Profile</h2>
         <p class="text-primary">
           Show off your stats and become eligible to join teams, participate in
-          tournaments and more as an official X-Tourney Community Member
+          tournaments and more as an official X-Tourney Community Member.
         </p>
       </div>
       <div>
@@ -45,7 +45,8 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column align-items-center">
         <h2>Scout the Opposition</h2>
-        <p class="text-primary">lorem ipsum</p>
+        <p class="text-primary">See where you stand by browsing all of the teams on X-Tourney. 
+          See how you compare by checking statistics in our team-details view.</p>
       </div>
       <div>
         <img
@@ -98,7 +99,7 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Host a Tournament</h2>
-        <p class="text-primary">lorem ipsum</p>
+        <p class="text-primary">Ready to do more than just play? Create your own tournament today!</p>
       </div>
       <div>
         <img
