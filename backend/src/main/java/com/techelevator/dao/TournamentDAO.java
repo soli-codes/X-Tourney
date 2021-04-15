@@ -25,5 +25,7 @@ public interface TournamentDAO {
 	public List<Tournament>getTournamentsByUserId(int userId);
 	
 	public void addTeamToTournament(TeamName team, int tournamentId);
+	
+	public List<TeamName> getAllTeamsThatAreNotInTournament(int tournamentId);
 
 }
