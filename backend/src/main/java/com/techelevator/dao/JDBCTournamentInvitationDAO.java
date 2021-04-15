@@ -7,30 +7,30 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import com.techelevator.model.Invitation;
+import com.techelevator.model.TournamnetInvitation;
 import com.techelevator.model.Tournament;
 
 @Component
-public class JDBCInvitationDAO implements InvitationDAO {
+public class JDBCTournamentInvitationDAO implements TournamentInvitationDAO {
 	
 private JdbcTemplate jdbcTemplate;
 	
-	public JDBCInvitationDAO(JdbcTemplate jdbcTemplate) {
+	public JDBCTournamentInvitationDAO(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	@Override
-	public Invitation createInvitation(Invitation invitation) {
+	public TournamnetInvitation createInvitation(TournamnetInvitation tournamnetInvitation) {
 		
 		String sqlInsertInvitation = "INSERT INTO tournament_invitation (tournament_id, team_id, has_accepted) VALUES (?,?,?);";
 		
-		jdbcTemplate.update(sqlInsertInvitation, invitation.getTournamentId(), invitation.getTeamId(), invitation.getInviteStatus());
+		jdbcTemplate.update(sqlInsertInvitation, tournamnetInvitation.getTournamentId(), tournamnetInvitation.getTeamId(), tournamnetInvitation.getInviteStatus());
 		
-		return invitation;
+		return tournamnetInvitation;
 	}
 
 	@Override
-	public List<Invitation> getPendingInvitations(int userId) {
+	public List<TournamnetInvitation> getPendingInvitations(int userId) {
 		String sqlGetPendingTransactionsByTeamId = "SELECT tournament_id, tournament_invitation.team_id, has_accepted "
 												+ "FROM tournament_invitation "
 												+ "JOIN team_name ON team_name.team_id = tournament_invitation.team_id "
@@ -40,12 +40,12 @@ private JdbcTemplate jdbcTemplate;
 												+ "JOIN users ON team_name_users.user_id = users.user_id "
 												+ "WHERE users.user_id = ? AND has_accepted = 'pending');";
 		
-		List<Invitation> pendingInvitations = new ArrayList<>();
+		List<TournamnetInvitation> pendingInvitations = new ArrayList<>();
 		
 		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetPendingTransactionsByTeamId, userId);
 		
 		while(rowSet.next()) {
-			Invitation theInvitation = mapTournamentInvitationFromRowSet(rowSet);
+			TournamnetInvitation theInvitation = mapTournamentInvitationFromRowSet(rowSet);
 			pendingInvitations.add(theInvitation);
 		}
 		
@@ -54,16 +54,16 @@ private JdbcTemplate jdbcTemplate;
 	}
 
 	@Override
-	public void updateInvitationToAcceptedorDeclined(Invitation invitation) {
+	public void updateInvitationToAcceptedorDeclined(TournamnetInvitation tournamnetInvitation) {
 		
 		String sqlUpdateInvitationStatus = "UPDATE tournament_invitation SET has_accepted = ? WHERE tournament_id = ? AND team_id = ?;";
 		
-		jdbcTemplate.update(sqlUpdateInvitationStatus, invitation.getInviteStatus(), invitation.getTournamentId(), invitation.getTeamId());
+		jdbcTemplate.update(sqlUpdateInvitationStatus, tournamnetInvitation.getInviteStatus(), tournamnetInvitation.getTournamentId(), tournamnetInvitation.getTeamId());
 		
 	}
 	
-	private Invitation mapTournamentInvitationFromRowSet(SqlRowSet rowset) {
-		Invitation theInvitation = new Invitation();
+	private TournamnetInvitation mapTournamentInvitationFromRowSet(SqlRowSet rowset) {
+		TournamnetInvitation theInvitation = new TournamnetInvitation();
 		
 		int tournamentId = rowset.getInt("tournament_id");
 		theInvitation.setTournamentId(tournamentId);
