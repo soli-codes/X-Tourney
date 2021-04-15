@@ -15,25 +15,66 @@
       >
         <div class="d-flex flex-row">
           <div v-if="index != 0">
-            <div :class="{ 'border-bottom-lit' : match.teamOneId != 1 || match.teamTwoId != 1 }" class="empty-spacer border-bottom border-4" />
-            <div :class="{ 'empty-spacer-bottom-lit' : match.teamOneId != 1 || match.teamTwoId != 1 }" class="empty-spacer empty-spacer-bottom" />
+            <div
+              :class="{
+                'border-bottom-lit':
+                  match.teamOneId != 1 || match.teamTwoId != 1,
+              }"
+              class="empty-spacer border-bottom border-4"
+            />
+            <div
+              :class="{
+                'empty-spacer-bottom-lit':
+                  match.teamOneId != 1 || match.teamTwoId != 1,
+              }"
+              class="empty-spacer empty-spacer-bottom"
+            />
           </div>
           <div>
-            <div class="competitor-one-div border border-bottom-0 border-3 text-primary d-flex justify-contents-center" :class="{ 'border-lit' : match.winningTeamId != '' && match.winningTeamId != null }">
+            <div
+              class="competitor-one-div border border-bottom-0 border-3 text-primary d-flex justify-contents-center"
+              :class="{
+                'border-lit':
+                  match.winningTeamId != '' && match.winningTeamId != null,
+              }"
+            >
               {{ getTeamName(match.teamOneId) }}
             </div>
-            <div class="competitor-two-div border border-top-0 border-3 text-primary d-flex justify-contents-center" :class="{ 'border-lit' : match.winningTeamId != '' && match.winningTeamId != null }">
+            <div
+              class="competitor-two-div border border-top-0 border-3 text-primary d-flex justify-contents-center"
+              :class="{
+                'border-lit':
+                  match.winningTeamId != '' && match.winningTeamId != null,
+              }"
+            >
               {{ getTeamName(match.teamTwoId) }}
             </div>
           </div>
           <div>
-            <div :class="{ 'border-end' : match.matchId % 2 == 0, 'border-bottom-lit' : match.winningTeamId != '' && match.winningTeamId != null, 'override-border' : index == $store.state.matches.length - 1, }" class="empty-spacer border-bottom border-4" />
-            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'empty-spacer-bottom-lit' : match.winningTeamId != '' && match.winningTeamId != null, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer empty-spacer-bottom border-4" />
+            <div
+              :class="{
+                'border-end': match.matchId % 2 == 0,
+                'border-bottom-lit':
+                  match.winningTeamId != '' && match.winningTeamId != null,
+                'override-border': index == $store.state.matches.length - 1,
+              }"
+              class="empty-spacer border-bottom border-4"
+            />
+            <div
+              :class="{
+                'border-end': match.matchId % 2 == 1,
+                'empty-spacer-bottom-lit':
+                  match.winningTeamId != '' && match.winningTeamId != null,
+                'override-border': index == $store.state.matches.length - 1,
+              }"
+              class="empty-spacer empty-spacer-bottom border-4"
+            />
           </div>
         </div>
       </div>
     </div>
     <!-- MODAL -->
+
     <div
       class="modal fade"
       id="exampleModal"
@@ -205,7 +246,7 @@ export default {
 }
 
 .border-bottom {
-  border-color: grey!important;
+  border-color: grey !important;
 }
 
 .border-bottom-lit {
@@ -215,7 +256,6 @@ export default {
   animation-duration: 1.7s;
   animation-iteration-count: infinite;
   /* animation-direction: alternate; */
-  
 }
 
 .override-border {
@@ -224,15 +264,22 @@ export default {
 }
 
 @keyframes flicker {
-   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
     box-shadow: 0 0 0.5rem #fff, inset 0 0 0.5rem #fff, 0 0 2rem var(lime),
-      inset 0 0 2rem var(lime), 0 0 4rem var(lime),
-      inset 0 0 4rem var(lime);
+      inset 0 0 2rem var(lime), 0 0 4rem var(lime), inset 0 0 4rem var(lime);
   }
 
-  20%, 24%, 55% { 
+  20%,
+  24%,
+  55% {
     box-shadow: none;
   }
 }
-
 </style>

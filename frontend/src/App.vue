@@ -8,7 +8,9 @@
           class="flex-fill text-info navbar-margin-left navbar-margin-top bg-secondary"
           id="main"
         >
-          <router-view />
+          <div id="marginToggle">
+            <router-view />
+          </div>
         </div>
       </div>
     </div>
@@ -43,6 +45,7 @@ export default {
       document.getElementById('sidebar').classList.toggle('display');
       document.getElementById('sideArrow').classList.toggle('display');
       document.getElementById('main').classList.toggle('navbar-margin-left');
+      document.getElementById('marginToggle').classList.toggle('margin-toggle');
     },
   },
 };
@@ -62,6 +65,10 @@ $gray-200: #01012b;
 html {
   background-color: #070222 !important;
 }
+
+.margin-toggle {
+  margin-left: 3000px;
+}
 .sideArrow {
   position: fixed;
   color: #b71dde;
@@ -73,8 +80,6 @@ html {
 }
 .display {
   display: none;
-  width: 0px !important;
-  height: 0px;
 }
 .top-nav-color {
   background: black;
@@ -131,7 +136,8 @@ html {
     padding: 0.2rem 0.2rem;
   }
   .navbar-margin-left {
-    margin-left: 0px;
+    margin-left: 50px;
+    background: #070222;
   }
   .sidebar {
     display: none;
