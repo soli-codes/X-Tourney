@@ -15,8 +15,8 @@
       >
         <div class="d-flex flex-row">
           <div v-if="index != 0">
-            <div class="empty-spacer border-bottom border-4" />
-            <div class="empty-spacer empty-spacer-bottom" />
+            <div :class="{ 'border-bottom-lit' : match.teamOneId != 1 || match.teamTwoId != 1 }" class="empty-spacer border-bottom border-4" />
+            <div :class="{ 'empty-spacer-bottom-lit' : match.teamOneId != 1 || match.teamTwoId != 1 }" class="empty-spacer empty-spacer-bottom" />
           </div>
           <div>
             <div style="width: 200px; background-color: #333333">
@@ -27,8 +27,8 @@
             </div>
           </div>
           <div>
-            <div :class="{ 'border-end' : match.matchId % 2 == 0, 'override-border' : index == $store.state.matches.length - 1, }" class="empty-spacer border-bottom border-4" />
-            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer empty-spacer-bottom border-4" />
+            <div :class="{ 'border-end' : match.matchId % 2 == 0, 'border-bottom-lit' : match.winningTeamId != '' && match.winningTeamId != null, 'override-border' : index == $store.state.matches.length - 1, }" class="empty-spacer border-bottom border-4" />
+            <div :class="{ 'border-end' : match.matchId % 2 == 1, 'empty-spacer-bottom-lit' : match.winningTeamId != '' && match.winningTeamId != null, 'override-border' : index == $store.state.matches.length - 1 }" class="empty-spacer empty-spacer-bottom border-4" />
           </div>
         </div>
       </div>
@@ -169,16 +169,22 @@ export default {
 .empty-spacer {
   width: 50px;
   height: 27px;
-  border-color: lime !important;
+  border-color: grey !important;
 }
 
-.empty-spacer-bottom {
+.empty-spacer-bottom-lit {
   box-shadow: 0px -9px 10px -7px lime;
+  border-color: lime !important;
 }
 
 .border-bottom {
-  border-color: lime !important;
+  border-color: grey!important;
+}
+
+.border-bottom-lit {
   box-shadow: 0px 6px 10px -7px lime;
+  border-color: lime !important;
+  
 }
 
 .override-border {
