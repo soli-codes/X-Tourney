@@ -229,6 +229,7 @@ export default {
   background-color: rgb(0, 0, 15);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+
 }
 
 .competitor-two-div {
@@ -236,6 +237,7 @@ export default {
   background-color: #555555;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  
 }
 
 .empty-spacer {
