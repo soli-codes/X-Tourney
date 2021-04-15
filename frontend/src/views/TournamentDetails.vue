@@ -20,7 +20,19 @@
             <option
               v-for="team in $store.state.myTeams"
               :value="team"
-              :key="team"
+              :key="team.teamId"
+              >{{ team.teamName }}</option
+            >
+          </select>
+
+          <button v-on:click="inviteTeam" class="bg-primary">
+            Invite Teams:
+          </button>
+          <select style="display: block" v-model="teamToInvite">
+            <option
+              v-for="team in invitableTeams"
+              :value="team"
+              :key="team.teamId"
               >{{ team.teamName }}</option
             >
           </select>
@@ -98,6 +110,7 @@ import MatchServices from '../services/MatchServices';
 import GeneratedBracket from '../components/GeneratedBracket.vue';
 import TournamentTeamService from '../services/TournamentTeamService';
 import TeamsService from '../services/TeamsService';
+import InvitationService from '../services/InvitationService.js';
 
 export default {
   components: { GeneratedBracket },
@@ -105,8 +118,8 @@ export default {
     return {
       tournament: {},
       teamToSignUp: {},
+      teamToInvite: {},
       invitableTeams: [],
-      teamIds: [],
     };
   },
 
@@ -133,8 +146,11 @@ export default {
         this.$store.commit('SET_MY_TEAMS', response.data);
       }
     );
-    TeamsService.getTeams().then((response) => {
-      this.$store.commit('SET_ALL_TEAMS', response.data);
+
+    TournamentTeamService.getInvitableTeams(
+      this.$route.params.tournamentId
+    ).then((response) => {
+      this.invitableTeams = response.data;
     });
   },
 
@@ -182,6 +198,20 @@ export default {
           window.location.reload();
         } else {
           console.log('error');
+        }
+      });
+    },
+
+    inviteTeam() {
+      let invite = {
+        teamId: this.teamToInvite.teamId,
+        tournamentId: this.$route.params.tournamentId,
+        inviteStatus: 'pending',
+      };
+      InvitationService.createInvitation(invite).then((response) => {
+        if (response.status == 201) {
+          alert(`Invite sent!`);
+          window.location.reload();
         }
       });
     },

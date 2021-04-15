@@ -1,17 +1,17 @@
 <template>
-  <div class="card m-3 border border-5 border-danger bg-dark">
+  <div class="card m-3 border border-5 border-danger">
     <img
       class="card-img-top"
       :src="tournament.tournamentImage"
     />
     <div class="card-body">
-      <h5 class="card-title text-center">
+      <h5 class="card-title text-center text-primary fs-6">
         {{ tournament.name }}
       </h5>
-      <p class="card-text text-center text-primary">
+      <p class="card-text text-center text-warning">
         {{ tournament.startDate }}
       </p>
-      <p class="card-text text-center text-primary">
+      <p class="card-text text-center text-warning">
         {{ tournament.description }}
       </p>
     </div>
@@ -34,6 +34,8 @@ export default {
 
 .card {
   width: 210px;
+  background-color: rgb(0,0,15)
+
 }
 
 .card-title {
@@ -49,11 +51,11 @@ export default {
 
 .border {
   border-radius: 25px !important;
-  /* box-shadow: 0px 0px 5px 2px #ff455d; */
+  box-shadow: 0px 0px 5px 2px lime;
 }
 
 .border:hover {
-  box-shadow: 0px 0px 5px 2px #ff455d;
+  box-shadow: 0px 0px 5px 2px lime;
   animation: flicker 1.5s infinite alternate;
 }
 
@@ -66,9 +68,9 @@ export default {
   54%,
   56%,
   100% {
-    box-shadow: 0 0 0.5rem #fff, inset 0 0 0.5rem #fff, 0 0 2rem var(#ff455d),
-      inset 0 0 2rem var(#ff455d), 0 0 4rem var(#ff455d),
-      inset 0 0 4rem var(#ff455d);
+    box-shadow: 0 0 0.5rem #fff, inset 0 0 0.5rem #fff, 0 0 2rem var(lime),
+      inset 0 0 2rem var(lime), 0 0 4rem var(lime),
+      inset 0 0 4rem var(lime);
   }
 
   20%,

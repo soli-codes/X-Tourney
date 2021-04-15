@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-secondary">
+  <div class="bg-dark">
     <div
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
-                    border border-5 border-danger rounded-3"
+                    border border-5 border-warning rounded-3"
     >
       <img
         class="image"
@@ -23,7 +23,7 @@
     <div
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
-                    border border-5 border-danger rounded-3"
+                    border border-5 border-warning rounded-3"
     >
       <img
         class="image"
@@ -50,7 +50,7 @@
     <div
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
-                    border border-5 border-danger rounded-3"
+                    border border-5 border-warning rounded-3"
     >
       <img
         class="image"
@@ -77,7 +77,7 @@
     <div
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
-                    border border-5 border-danger rounded-3"
+                    border border-5 border-warning rounded-3"
     >
       <img
         class="image"

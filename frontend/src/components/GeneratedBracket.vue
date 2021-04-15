@@ -99,8 +99,8 @@
           <div class="modal-body">
             <div>
               <label>Select Match Winner:</label>
-              <select v-model="modalMatch.winningTeamId" :required="!selected">
-                <option :value="modalMatch.teamOneId" @click="buttonEnable">{{
+              <select v-model="modalMatch.winningTeamId">
+                <option :value="modalMatch.teamOneId">{{
                   modalMatch.teamOneName
                 }}</option>
                 <option :value="modalMatch.teamTwoId" @click="buttonEnable">{{
@@ -110,7 +110,7 @@
             </div>
             <div>
               <label>Select Match Loser:</label>
-              <select v-model="modalMatch.losingTeamId" :required="!selected">
+              <select v-model="modalMatch.losingTeamId" required>
                 <option :value="modalMatch.teamOneId">{{
                   modalMatch.teamOneName
                 }}</option>
@@ -226,12 +226,16 @@ export default {
 <style scoped>
 .competitor-one-div {
   width: 200px;
-  background-color: #333333;
+  background-color: rgb(0, 0, 15);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .competitor-two-div {
   width: 200px;
   background-color: #555555;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .empty-spacer {
@@ -242,7 +246,6 @@ export default {
 
 .border {
   border-color: grey !important;
-  border-radius: 2px;
 }
 
 .border-lit {

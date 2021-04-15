@@ -5,7 +5,7 @@
       <div class="d-flex vh row">
         <sidebar class="sidebar position-fixed vh-100 sidebar" id="sidebar" />
         <div
-          class="flex-fill text-info navbar-margin-left navbar-margin-top bg-secondary margin-toggle"
+          class="flex-fill text-info navbar-margin-left navbar-margin-top bg-dark"
           id="main"
         >
           <div id="marginToggle">
@@ -52,13 +52,14 @@ export default {
 
 <style lang="scss">
 // Include any default variable overrides here (though functions won't be available)
-$dark: #01012b;
-$primary: #d1f7ff;
+$dark: #182628;
+$primary: #65ccb8;
 $info: #00fff2;
-$danger: #ff455d;
-$muted: #005678;
-$secondary: #020222;
-$gray-200: #01012b;
+$warning: lime;
+$muted: #3b945e;
+$secondary: #57ba98;
+$gray-200: #f2f2f2;
+$danger: rgb(163, 73, 164);
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&display=swap');
 
@@ -82,23 +83,23 @@ html {
   display: none;
 }
 .top-nav-color {
-  background: black;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 11, 24, 1) 0%,
-    rgba(0, 23, 45, 1) 25%,
-    rgba(0, 38, 77, 1) 100%
-  );
+  background: #57ba98;
+  // background: linear-gradient(
+  //   180deg,
+  //   #57ba98 0%,
+  //   #51ad8d 25%,
+  //   #3b945e 100%
+  // );
 }
 
 .side-nav-color {
-  background: black;
-  background: linear-gradient(
-    30deg,
-    rgba(0, 11, 24, 1) 0%,
-    rgba(0, 23, 45, 1) 25%,
-    rgba(0, 38, 77, 1) 100%
-  );
+  background: #57ba98;
+  // background: linear-gradient(
+  //   30deg,
+  //   rgba(0, 11, 24, 1) 0%,
+  //   rgba(0, 23, 45, 1) 25%,
+  //   rgba(0, 38, 77, 1) 100%
+  // );
 }
 .vh {
   height: 100vh;

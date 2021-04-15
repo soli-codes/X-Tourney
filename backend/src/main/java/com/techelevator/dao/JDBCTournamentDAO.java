@@ -180,6 +180,33 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		jdbcTemplate.update(sqlAddTeamToTournament, tournamentId, team.getTeamId());
 	
 	}
+	
+	@Override
+	public List<TeamName> getAllTeamsThatAreNotInTournament(int tournamentId) {
+		
+		String sqlGetAllTeamsNotInTournament = "SELECT team_name.team_id, team_name, wins, losses, tournament_wins, tournaments_entered, team_image "
+											+ "FROM team_name "
+											+ "JOIN tournament_teams "
+											+ "ON team_name.team_id = tournament_teams.team_id WHERE team_name.team_id "
+											+ "NOT IN "
+											+ "(SELECT team_name.team_id FROM team_name "
+											+ "JOIN tournament_teams "
+											+ "ON team_name.team_id = tournament_teams.team_id "
+											+ "JOIN tournament "
+											+ "ON tournament_teams.tournament_id = tournament.tournament_id WHERE tournament.tournament_id = ?)"
+											+ "GROUP BY team_name.team_id;";
+		
+		List<TeamName> teams = new ArrayList<>();
+
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlGetAllTeamsNotInTournament, tournamentId);
+
+		while(rowSet.next()) {
+			TeamName theTeamName = mapTeamNameFromRowSet(rowSet);
+			teams.add(theTeamName);
+		}
+		
+		return teams;
+	}
 
 
 	
@@ -285,6 +312,8 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		
 	return match;
 	}
+
+	
 
 	
 
