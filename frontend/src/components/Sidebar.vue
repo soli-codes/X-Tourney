@@ -34,9 +34,26 @@
           Create Team
         </router-link>
       </li>
+      <li>
+        <div class="nav-link text-primary" @click="noDisplay">
+          Toggle Display
+        </div>
+      </li>
     </ul>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    noDisplay() {
+      document.getElementById('sidebar').classList.toggle('display');
+      document.getElementById('sideArrow').classList.toggle('display');
+      document.getElementById('main').classList.toggle('navbar-margin-left');
+    },
+  },
+};
+</script>
 
 <style scoped>
 li {
@@ -56,6 +73,7 @@ li:hover {
   box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
   margin-top: 30px;
   background: black;
+  cursor: pointer;
 }
 .fixed {
   display: inline;
