@@ -50,10 +50,6 @@ export default {
       document.getElementById('sidebar').classList.toggle('display');
       document.getElementById('sideArrow').classList.toggle('display');
       document.getElementById('main').classList.toggle('navbar-margin-left');
-      document.getElementById('navbarImage').classList.toggle('image-size');
-      document
-        .getElementById('topButtonAlignment')
-        .classList.toggle('topButtonAlignment');
     },
   },
 };

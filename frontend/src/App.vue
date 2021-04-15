@@ -45,10 +45,6 @@ export default {
       document.getElementById('sidebar').classList.toggle('display');
       document.getElementById('sideArrow').classList.toggle('display');
       document.getElementById('main').classList.toggle('navbar-margin-left');
-      document.getElementById('navbarImage').classList.toggle('image-size');
-      document
-        .getElementById('topButtonAlignment')
-        .classList.toggle('topButtonAlignment');
     },
   },
 };
@@ -149,7 +145,7 @@ html {
     padding: 0.2rem 0.2rem;
   }
   .navbar-margin-left {
-    margin-left: 50px;
+    margin-left: 0px;
     background: #070222;
   }
   .sidebar {
