@@ -6,5 +6,9 @@ export default {
     postTournamentTeam(tournamentId, teamToSignUp) {
         return axios.post(`/tournaments/${tournamentId}/create`, teamToSignUp);
     },
+
+    getInvitableTeams(tournamentId) {
+        return axios.get(`/tournaments/${tournamentId}/invitableteams`);
+    },
     
 }

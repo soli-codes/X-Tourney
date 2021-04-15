@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-secondary">
+  <div class="bg-dark">
     <!-- make each div into a row flexbox // each will be a StepX button-->
     <router-link
       :to="{ name: 'login' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
-                    m-4 bg-dark
+                    m-4 step-card
                     border border-5 border-danger rounded-3"
     >
       <div>
@@ -33,7 +33,7 @@
       :to="{ name: 'teams' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
-                    m-4 bg-dark
+                    m-4 step-card
                     border border-5 border-danger rounded-3"
     >
       <div>
@@ -58,7 +58,7 @@
       :to="{ name: 'createTeam' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
-                m-4 bg-dark
+                m-4 step-card
                 border border-5 border-danger rounded-3"
     >
       <div>
@@ -86,7 +86,7 @@
       :to="{ name: 'createTournament' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
-                m-4 bg-dark
+                m-4 step-card
                 border border-5 border-danger rounded-3"
     >
       <div>
@@ -119,6 +119,10 @@ export default {
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 
+.step-card {
+  background-color: rgb(0,0,15)
+}
+
 .image {
   height: 175px;
   width: 175px;
@@ -126,11 +130,11 @@ export default {
 
 .border {
   border-radius: 25px !important;
-  box-shadow: 0px 0px 2px 2px #ff455d;
+  box-shadow: 0px 0px 2px 2px lime;
 }
 
 .border:hover {
-  box-shadow: 0px 0px 5px 5px #ff455d;
+  box-shadow: 0px 0px 5px 5px lime;
   transition-duration: 100ms;
 }
 
