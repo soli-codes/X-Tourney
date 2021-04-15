@@ -66,7 +66,7 @@ private JdbcTemplate jdbcTemplate;
 	public TeamName createNewTeam(TeamName teamName) {
 		String sqlInsertTeam = "INSERT INTO team_name (team_name, team_image) VALUES (?, ?) RETURNING team_id;";
 		
-		int teamId = jdbcTemplate.queryForObject(sqlInsertTeam, Integer.class, teamName.getTeamName());
+		int teamId = jdbcTemplate.queryForObject(sqlInsertTeam, Integer.class, teamName.getTeamName(), teamName.getTeamImage());
 		
 		teamName.setTeamId(teamId);
 		
