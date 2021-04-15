@@ -48,8 +48,8 @@ public class TeamNameController {
 	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/teamnames/create", method = RequestMethod.POST)
-	public void create(@Valid @RequestBody TeamName teamName) {
-		dao.createNewTeam(teamName);
+	public TeamName create(@Valid @RequestBody TeamName teamName) {
+		return dao.createNewTeam(teamName);
 	}
 	
 	@PreAuthorize("isAuthenticated()")
