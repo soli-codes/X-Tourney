@@ -2,7 +2,7 @@
   <div class="bg-secondary">
     <!-- make each div into a row flexbox // each will be a StepX button-->
     <router-link
-      :to = "{name: 'login'}"
+      :to="{ name: 'login' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
@@ -30,7 +30,7 @@
       </div>
     </router-link>
     <router-link
-      :to = "{name: 'teams'}"
+      :to="{ name: 'teams' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                     m-4 bg-dark
@@ -55,7 +55,7 @@
       </div>
     </router-link>
     <router-link
-      :to = "{name: 'createTeam'}"
+      :to="{ name: 'createTeam' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                 m-4 bg-dark
@@ -71,8 +71,8 @@
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Manage a Team</h2>
         <p class="text-primary">
-          Ready to manage your very own squad? Our creation tool makes it easy to
-          build, manage, and enroll your team in competitions.
+          Ready to manage your very own squad? Our creation tool makes it easy
+          to build, manage, and enroll your team in competitions.
         </p>
       </div>
       <div>
@@ -83,7 +83,7 @@
       </div>
     </router-link>
     <router-link
-      :to = "{name: 'createTournament'}"
+      :to="{ name: 'createTournament' }"
       tag="div"
       class="d-flex flex-row justify-content-between align-items-center
                 m-4 bg-dark

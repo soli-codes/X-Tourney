@@ -108,6 +108,23 @@ export default {
 </script>
 
 <style scoped>
+ul.dropdown-menu > li {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  width: 150px;
+  justify-content: center;
+  background: linear-gradient(
+    30deg,
+    rgba(0, 11, 24, 1) 0%,
+    rgba(0, 23, 45, 1) 25%,
+    rgba(0, 38, 77, 1) 100%
+  );
+}
+ul.dropdown-menu {
+  background: transparent !important;
+}
 li {
   -webkit-box-shadow: 0px 5px 19px 4px rgba(183, 29, 222, 0.75);
   box-shadow: 0px 5px 19px 4px rgba(183, 29, 222, 0.75);

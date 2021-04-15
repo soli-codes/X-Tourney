@@ -6,8 +6,8 @@
         v-model="filter.teamName"
         placeholder="Filter by Name"
       />
-      <input type="text" v-model="filter.wins" placeholder="Wins >= Than" />
-      <input type="text" v-model="filter.losses" placeholder="Losses <= Than" />
+      <input type="text" v-model="filter.wins" placeholder="Minimum Wins" />
+      <input type="text" v-model="filter.losses" placeholder="Max Losses" />
       <p class="ms-1 text-center">Sort By:</p>
       <select class="form-select ms-1" v-model="filter.sortBy">
         <option>None</option>
@@ -17,7 +17,7 @@
       </select>
     </div>
     <div class="d-flex justify-content-around">
-      <div v-for="team in filteredList" :key="team.teamId" >
+      <div v-for="team in filteredList" :key="team.teamId">
         <router-link
           :to="{
             name: 'teamDetails',
@@ -25,7 +25,7 @@
           }"
           :team="team"
         >
-        <team-card :team="team" />
+          <team-card :team="team" />
         </router-link>
       </div>
     </div>
@@ -114,6 +114,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 .justify-content-around {
   height: 100vh;
   flex-wrap: wrap;

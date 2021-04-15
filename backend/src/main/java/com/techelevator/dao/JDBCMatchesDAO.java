@@ -63,7 +63,7 @@ public class JDBCMatchesDAO implements MatchesDAO {
 			}
 			else jdbcTemplate.update(sqlCreateMatch, i, bracketInformation.getTournamentId(), 1, 1);
 		}
-
+		jdbcTemplate.update("UPDATE tournament SET has_started = true WHERE tournament_id = ?", bracketInformation.getTournamentId());
 		return bracketInformation;
 	}
 

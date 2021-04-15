@@ -91,7 +91,7 @@ const router = new Router({
       name: 'createTournament',
       component: TournamentCreate,
       meta: {
-        requiresAuth: false, // Change to true on prod
+        requiresAuth: true, // Change to true on prod
       },
     },
     // CREATE A TEAM
@@ -100,7 +100,7 @@ const router = new Router({
       name: 'createTeam',
       component: TeamsCreate,
       meta: {
-        requiresAuth: false, // Change to true on prod
+        requiresAuth: true, // Change to true on prod
       },
     },
     // BROWSE ALL TEAMS
