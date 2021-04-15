@@ -193,7 +193,12 @@ export default {
     },
 
     inviteTeam() {
-      InvitationService.createInvitation(this.teamToInvite).then(response => {
+      let invite = {
+        teamId: this.teamToInvite.teamId,
+        tournamentId: this.$route.params.tournamentId,
+        inviteStatus: 'pending',
+      };
+      InvitationService.createInvitation(invite).then(response => {
         if (response.status == 201) {
           alert(`Invite sent!`);
           window.location.reload();
