@@ -261,11 +261,17 @@ export default {
 .tournament-image {
   height: 150px;
   width: 150px;
+  border-style: solid;
+  border-color: #ff455d;
+  border-radius: 10px;
 }
 
 .team-image {
   height: 75px;
   width: 75px;
+  border-style: solid;
+  border-color: #ff455d;
+  border-radius: 5px;
 }
 
 .team-border {
