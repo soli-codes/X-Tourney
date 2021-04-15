@@ -173,13 +173,13 @@ export default {
       let seedArray = this.$store.state.teams;
       let seedLength = seedArray.length;
       seedArray.sort((a, b) => {
-        if (!isFinite(a.wins / a.losses) && !isFinite(b.wins / b.losses)) {
+        if (isNaN(a.wins / a.losses) && isNaN(b.wins / b.losses)) {
           return 0;
         }
-        if (!isFinite(a.wins / a.losses)) {
+        if (isNaN(a.wins / a.losses)) {
           return 1;
         }
-        if (!isFinite(b.wins / b.losses)) {
+        if (isNaN(b.wins / b.losses)) {
           return -1;
         }
         return b.wins / b.losses - a.wins / a.losses;
@@ -197,13 +197,13 @@ export default {
     sortWinLoss() {
       let sortedArray = this.$store.state.teams;
       sortedArray.sort((a, b) => {
-        if (!isFinite(a.wins / a.losses) && !isFinite(b.wins / b.losses)) {
+        if (isNaN(a.wins / a.losses) && isNaN(b.wins / b.losses)) {
           return 0;
         }
-        if (!isFinite(a.wins / a.losses)) {
+        if (isNaN(a.wins / a.losses)) {
           return 1;
         }
-        if (!isFinite(b.wins / b.losses)) {
+        if (isNaN(b.wins / b.losses)) {
           return -1;
         }
         return b.wins / b.losses - a.wins / a.losses;
