@@ -17,7 +17,7 @@
       </select>
     </div>
     <div class="d-flex justify-content-around">
-      <div v-for="team in filteredList" :key="team.teamId" >
+      <div v-for="team in filteredList" :key="team.teamId">
         <router-link
           :to="{
             name: 'teamDetails',
@@ -25,7 +25,7 @@
           }"
           :team="team"
         >
-        <team-card :team="team" />
+          <team-card :team="team" />
         </router-link>
       </div>
     </div>
@@ -114,6 +114,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 .justify-content-around {
   height: 100vh;
   flex-wrap: wrap;

@@ -54,7 +54,10 @@
         />
       </div>
       <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
-      <div class="d-flex flex-column align-items-center">
+      <div
+        class="d-flex flex-column align-items-center"
+        v-if="$store.state.teams.length > 0"
+      >
         <router-link
           v-for="(team, index) in sortWinLoss()"
           :key="index"
@@ -119,18 +122,19 @@ export default {
   methods: {
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
+      let tournamentTeams = this.generateSeedArray();
       const axiosObject = {
         tournamentSize: tournamentSize,
         tournamentId: parseInt(this.$route.params.tournamentId),
-        teams: this.generateSeedArray(),
+        teams: tournamentTeams,
       };
       if (
         this.$store.state.teams != null &&
         this.$store.state.teams.length > 0
       ) {
+        console.log(axiosObject.teams);
         MatchServices.postMatch(axiosObject).then((response) => {
           if (response.status == 201) {
-            console.log(response);
             window.location.reload();
           } else {
             console.log('error');
@@ -158,9 +162,16 @@ export default {
       let seedArray = this.$store.state.teams;
       let seedLength = seedArray.length;
       seedArray.sort((a, b) => {
-        if (a.wins / a.losses > b.wins / b.losses) {
+        if (!isFinite(a.wins / a.losses) && !isFinite(b.wins / b.losses)) {
+          return 0;
+        }
+        if (!isFinite(a.wins / a.losses)) {
           return 1;
-        } else return -1;
+        }
+        if (!isFinite(b.wins / b.losses)) {
+          return -1;
+        }
+        return b.wins / b.losses - a.wins / a.losses;
       });
       let seededArray = [];
       for (let i = 0; i < seedLength; i++) {
@@ -175,9 +186,16 @@ export default {
     sortWinLoss() {
       let sortedArray = this.$store.state.teams;
       sortedArray.sort((a, b) => {
-        if (a.wins / a.losses < b.wins / b.losses) {
+        if (!isFinite(a.wins / a.losses) && !isFinite(b.wins / b.losses)) {
+          return 0;
+        }
+        if (!isFinite(a.wins / a.losses)) {
           return 1;
-        } else return -1;
+        }
+        if (!isFinite(b.wins / b.losses)) {
+          return -1;
+        }
+        return b.wins / b.losses - a.wins / a.losses;
       });
       return sortedArray;
     },
@@ -204,6 +222,4 @@ export default {
 a {
   text-decoration: none;
 }
-
-
 </style>
