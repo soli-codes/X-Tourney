@@ -104,10 +104,26 @@ private JdbcTemplate jdbcTemplate;
 	}
 	
 	@Override
-	public void addUserToTeam(TeamNameUsers teamNameUser) {
-		String sqlAddUserToTeam = "INSERT INTO team_name_users (user_id, team_id) VALUES (?, ?);";
+	public boolean addUserToTeam(TeamNameUsers teamNameUser) {
 		
-		jdbcTemplate.update(sqlAddUserToTeam, teamNameUser.getUserId(), teamNameUser.getTeamId());
+		List<TeamName> currentTeams = getTeamsByUserId(teamNameUser.getUserId());
+		
+		boolean alreadyJoined = false;
+		
+		for( TeamName team : currentTeams) {
+			if (team.getTeamId() == teamNameUser.getTeamId()) {
+				alreadyJoined = true;
+			}
+		};
+		
+		if (alreadyJoined == false) {
+		
+			String sqlAddUserToTeam = "INSERT INTO team_name_users (user_id, team_id) VALUES (?, ?);";
+			
+			jdbcTemplate.update(sqlAddUserToTeam, teamNameUser.getUserId(), teamNameUser.getTeamId());
+		};
+		
+		return alreadyJoined;
 		
 	}
 	
