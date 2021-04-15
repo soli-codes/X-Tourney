@@ -11,8 +11,6 @@ export default {
     return axios.get(`/teamnames/${id}`);
   },
 
-  // RETURN TEAMS BY USER
-
   // create team
   createTeam(team) {
     return axios.post('/teamnames/create', team);
@@ -28,7 +26,17 @@ export default {
     return axios.delete(`/teamnames/${teamID}`);
   },
 
+  // RETURN ALL TEAMS WITH THE GIVEN USER ID
   getTeamsByUserId(userId) {
     return axios.get(`/teamnames/user/${userId}`);
   },
+
+  // ADD USER TO A TEAM
+  postUserToTeam(thisTeamId, thisUserId) {
+    let teamNameUser = {
+      teamId: thisTeamId,
+      userId: thisUserId,
+    };
+    return axios.post('/teamnameusers/create', teamNameUser);
+  }
 };
