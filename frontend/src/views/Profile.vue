@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex flex-row align-items-center justify-content-around">
+    <div class="d-flex flex-row align-items-center justify-content-between">
       <div>
         <img class="profile-image" :src="$store.state.user.userImage" />
         <div class="d-flex flex-column">
@@ -16,48 +16,51 @@
       <h2 style="display:block" class="text-danger">Welcome {{ this.$store.state.user.username }}!</h2>
       <div><button @click="logout">Logout</button></div>
     </div>
-    <div class="title">
-      <h3>MY TEAMS</h3>
-    </div>
-
-    <div
-      class="d-flex justify-content-around"
-      v-if="this.$store.state.myTeams.length > 0"
-    >
-      <div v-for="team in this.$store.state.myTeams" :key="team.teamId">
-        <router-link
-          :to="{
-            name: 'teamDetails',
-            params: { teamId: team.teamId },
-          }"
-        >
-          <team-card :team="team" />
-        </router-link>
+  <div class="d-flex flex-row justify-contents-around flex-wrap">
+    <div>
+      <div class="title">
+        <h3>MY TEAMS</h3>
+      </div>
+      <div
+        class="d-flex justify-content-around flex-wrap"
+        v-if="this.$store.state.myTeams.length > 0"
+      >
+        <div v-for="team in this.$store.state.myTeams" :key="team.teamId">
+          <router-link
+            :to="{
+              name: 'teamDetails',
+              params: { teamId: team.teamId },
+            }"
+          >
+            <team-card :team="team" />
+          </router-link>
+        </div>
       </div>
     </div>
+  
 
-  <div v-if="this.$store.state.myTournaments.length != 0">
-    <div class="title">
-      <h3>MY TOURNAMENTS</h3>
-    </div>
+    <div v-if="this.$store.state.myTournaments.length != 0">
+      <div class="title">
+        <h3>MY TOURNAMENTS</h3>
+      </div>
 
-    <div class="d-flex justify-content-around">
-      <div
-        v-for="tournament in this.$store.state.myTournaments"
-        :key="tournament.tournamentId"
-      >
-        <router-link
-          :to="{
-            name: 'tournamentDetails',
-            params: { tournamentId: tournament.tournamentId },
-          }"
+      <div class="d-flex justify-content-around flex-wrap">
+        <div
+          v-for="tournament in this.$store.state.myTournaments"
+          :key="tournament.tournamentId"
         >
-          <tournament-card :tournament="tournament" />
-        </router-link>
+          <router-link
+            :to="{
+              name: 'tournamentDetails',
+              params: { tournamentId: tournament.tournamentId },
+            }"
+          >
+            <tournament-card :tournament="tournament" />
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
-
   <div v-if="this.myInvitations.length != 0">
     <div class="title">
       <h3>PENDING INVITATIONS</h3>
