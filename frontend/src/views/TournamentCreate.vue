@@ -1,22 +1,25 @@
 <template>
-  <form class="d-flex flex-column align-items-center" v-on:submit.prevent="createTournament">
-    <!-- <div class="form-group">
-      <select
-        class="form-select"
-        v-model="tournament.eliminationType"
-        aria-label="Select a game"
-        id="eliminationType"
-      >
-        <option disabled selected value="">Select an elimination type</option>
-        <option value="2">Single Elimination</option>
-        <option value="3">Double Elimination</option>
-      </select>
-    </div> -->
-    <div class="d-flex justify-content-between w-50">
-      <div class="d-flex flex-row align-items-center w-100">
-        <label for="Name">Name:</label>
-        <input type="text" name="name" id="name" v-model="tournament.name" />
+<div class="d-flex flex-column align-items-center">
+  <div class="d-flex flex-row justify-contents-around">
+    <div>
+      <h5 class="m-3">Default Tournament Image: </h5>
+      <img src="http://localhost:8081/img/vectorBlueLogoXTourney.bbc29c6e.png"> 
+    </div>
+    <div>
+      <h5 class="m-3">Tournament Image Preview: </h5>
+      <img :src="tournament.tournamentImage" alt="Paste in an image URL and watch the magic!">
+    </div>
+  </div>
+  <form class="bg-primary text-dark p-5 rounded mt-3" 
+  v-on:submit.prevent="createTournament"> 
+    <div class="row">
+      <div class="col">
+        <label style="display: block" for="Name">Tournament Name: 
+          <input style="display: block" type="text" name="name" id="name" v-model="tournament.name" />
+        </label>
       </div>
+      <div class="col">
+        <label for="gameType">Game Selection
       <select
         class="form-select"
         v-model="tournament.gameTypeId"
@@ -32,93 +35,112 @@
           {{ game.gameType }}
         </option>
       </select>
+      </label>
+      </div>
     </div>
-    <div class="d-flex flex-row justfy-contents-between">
-      <div class="form-group">
-        <label for="start-date">
-          Start Date
-        </label>
+    <div class="row">
+      <label style="display: block" for="tournamentImage">Tournament Image URL: 
+        <input style="display: block" type="text" name="tournamentImage" 
+        id="tournamentImage" v-model="tournament.tournamentImage"
+        placeholder="Its cool to be square!">
+      </label> 
+      <p>TIP: Be sure to use a square photo to avoid distorting your team image.</p>
+      </div>
+    <div class="row">
+      <div class="col">
+        <label for="start-date">Start Date 
         <input
           type="date"
           name="start-date"
           id="start-date"
           v-model="tournament.startDate"
         />
+        </label>
+      </div>
+      <div class="col">
+        <label style="display: block" for="start-time">Start Time
         <input
+          style="display: block"
           type="time"
           name="start-time"
           id="start-time"
           v-model="tournament.startTime"
         />
-      </div>
-      <div class="form-group">
-        <label for="end-date">
-          End Date
         </label>
+      </div>
+      <div class="col">
+        <label for="end-date">End Date 
         <input
           type="date"
           name="end-date"
           id="end-date"
           v-model="tournament.endDate"
         />
+        </label>
       </div>
     </div>
-    <div class="form-group">
-      <label for="signup-open">
-        Signup Date
-      </label>
-      <input
-        type="date"
-        name="signup-open"
-        id="signup-open"
-        v-model="tournament.signupOpen"
-      />
-    </div>
-    <div class="form-group">
-      <label for="signup-close">
-        Close Signup
-      </label>
-      <input
-        type="date"
-        name="signup-close"
-        id="signup-close"
-        v-model="tournament.signupClose"
-      />
+    <div class="row">
+      <div class="col">
+        <label style="display: block" for="signup-open">Signups Open 
+        <input
+          style="display: block"
+          type="date"
+          name="signup-open"
+          id="signup-open"
+          v-model="tournament.signupOpen"
+        />
+        </label>
+      </div>
+      <div class="col">
+        <label style="display: block" for="signup-close">Signups Close
+        <input
+          style="display: block"
+          type="date"
+          name="signup-close"
+          id="signup-close"
+          v-model="tournament.signupClose"
+        />
+        </label>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="Description">Description</label>
+    <div class="row">
+      <label for="Description">Description:
       <textarea
+        class="form-control"
         name="description"
         id="description"
-        cols="30"
-        rows="10"
+        rows="5"
         v-model="tournament.description"
       ></textarea>
+      </label>
     </div>
-    <div class="form-group">
-      <label for="Open registration">Open registration</label>
+    <div class="row">
+      <label for="Open registration">Check if tournament is private (invite only) 
       <input
         type="checkbox"
         name="Open registration"
         id="openRegistration"
         v-model="tournament.private"
       />
+      </label>
     </div>
-    <div class="form-group">
-      <label for="Open tournament">Open Tournament</label>
+    <!-- <div class="row">
+      <label for="Open tournament">Open Tournament 
       <input
         type="checkbox"
         name="Open Tournament"
         id="openTournament"
         v-model="tournament.open"
       />
-    </div>
+      </label>
+    </div> -->
+    <div class="col-xs-4">
     <select
       class="form-select"
       v-model="tournament.maxTeams"
       aria-label="Select amount of teams participating"
-      id="maxTeams"
+      id="maxTeams" 
     >
       <option disabled selected value=""
         >Select amount of teams participating</option
@@ -129,8 +151,10 @@
       <option>32</option>
       <option>64</option>
     </select>
+    </div>
     <button type="submit">Submit</button>
   </form>
+  </div>
 </template>
 
 <script>
@@ -153,6 +177,7 @@ export default {
         eliminationType: 'Single Elimination',
         private: '',
         tournamentID: null,
+        tournamentImage: '',
       },
       gameTypes: [],
     };
@@ -172,16 +197,20 @@ export default {
         hostId: this.$store.state.user.id,
         startTime: this.tournament.startTime,
         open: this.tournament.open,
-        private: this.tournament.private,
+        private: this.tournament.private, 
       };
-      if (newTournament.tournamentImage == null) {
-        newTournament.tournamentImage = '..src/assets/X-Tourney_Logo.png';
+      if (this.tournament.tournamentImage == '' || this.team.teamImage == undefined || this.team.teamImage == null) {
+        newTournament.tournamentImage = 'http://localhost:8081/img/vectorBlueLogoXTourney.bbc29c6e.png';
+      } else {
+        newTournament.tournamentImage = this.tournament.tournamentImage;
       }
       console.log(newTournament);
       TournamentService.createTournament(newTournament)
         .then((response) => {
           if (response.status === 201) {
             console.log('wow we did it');
+            alert(`Creation of tournament ${newTournament.name} was successful!`);
+            this.$router.push({name: 'tournaments'});
           }
         })
         .catch((error) => {
@@ -196,3 +225,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.rounded {
+  border-radius: 10px !important;
+}
+</style>

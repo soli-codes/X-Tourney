@@ -5,8 +5,8 @@ import javax.validation.constraints.Positive;
 
 public class Tournament {
 	
-	@NotNull(message = "Required Field")
-	@Positive(message = "Must be a positive numeric value")
+//	@NotNull(message = "Required Field")
+//	@Positive(message = "Must be a positive numeric value")
 	private int tournamentId;
 	
 	private boolean isOpen;

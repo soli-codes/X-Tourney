@@ -6,7 +6,7 @@ import javax.validation.constraints.Positive;
 
 public class TeamName {
 	
-	@Positive(message = "must be a positve numeric value")
+	//@Positive(message = "must be a positve numeric value")
 	private  int teamId;
 	
 	@NotNull(message = "must contain a name")
