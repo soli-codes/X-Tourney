@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.util.List;
 
 import com.techelevator.model.TeamName;
+import com.techelevator.model.TeamNameUsers;
 
 public interface TeamNameDAO {
 	
@@ -17,4 +18,6 @@ public interface TeamNameDAO {
 	void updateTeam(TeamName teamName, int teamId);
 	
 	void deleteTeam(int id);
+	
+	void addUserToTeam(TeamNameUsers teamNameUser);
 }
