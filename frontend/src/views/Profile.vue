@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex flex-row align-items-center justify-content-between">
       <div>
-        <img class="profile-image" :src="$store.state.user.userImage" />
+        <img  class="profile-image" :src="$store.state.user.userImage" />
         <div class="d-flex flex-column">
           <label style="display: block" for="imageURL"
           >Update Your Profile Image URL:</label>
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-      <h2 style="display:block" class="text-danger">Welcome {{ this.$store.state.user.username }}!</h2>
+      <h1 id = "title" style="display:block" class="text-danger">Welcome {{ this.$store.state.user.username }}!</h1>
       <div><button @click="logout">Logout</button></div>
     </div>
   <div class="d-flex flex-row justify-contents-around flex-wrap">
@@ -232,6 +232,10 @@ div.title {
   margin: auto;
 }
 
+#title{
+  font-size: 75px;
+}
+
 h3 {
   text-align: center;
 }
@@ -240,8 +244,14 @@ a {
   text-decoration: none;
 }
 
+
 .profile-image {
   height: 200px;
   width: 200px;
+  margin-top: 40px;
+  margin-left: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #ff455d;
 }
 </style>

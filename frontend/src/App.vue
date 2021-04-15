@@ -58,10 +58,15 @@ $muted: #005678;
 $secondary: #020222;
 $gray-200: #01012b;
 @import '../node_modules/bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&display=swap');
 
+*{
+  font-family: Inconsolata,Arial, Helvetica, sans-serif;
+}
 html {
   background-color: #070222 !important;
 }
+
 .sideArrow {
   position: fixed;
   color: #b71dde;
