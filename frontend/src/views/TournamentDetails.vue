@@ -263,6 +263,16 @@ export default {
       });
       return sortedArray;
     },
+
+    getTeamName(teamId) {
+      if (teamId == 1) {
+        return 'TO BE DECIDED';
+      }
+      let team = this.$store.state.teams.find((team) => {
+        return team.teamId == teamId;
+      });
+      return team.teamName;
+    },
   },
 };
 </script>

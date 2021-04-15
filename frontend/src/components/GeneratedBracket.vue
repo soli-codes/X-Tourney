@@ -110,7 +110,7 @@
             </div>
             <div>
               <label>Select Match Loser:</label>
-              <select v-model="modalMatch.losingTeamId" required>
+              <select v-model="modalMatch.losingTeamId">
                 <option :value="modalMatch.teamOneId">{{
                   modalMatch.teamOneName
                 }}</option>
