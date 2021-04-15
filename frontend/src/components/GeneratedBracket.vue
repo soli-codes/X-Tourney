@@ -19,10 +19,10 @@
             <div :class="{ 'empty-spacer-bottom-lit' : match.teamOneId != 1 || match.teamTwoId != 1 }" class="empty-spacer empty-spacer-bottom" />
           </div>
           <div>
-            <div style="width: 200px; background-color: #333333">
+            <div class="competitor-one-div border border-bottom-0 border-3 text-primary d-flex justify-contents-center" :class="{ 'border-lit' : match.winningTeamId != '' && match.winningTeamId != null }">
               {{ getTeamName(match.teamOneId) }}
             </div>
-            <div style="width: 200px; background-color: #333333">
+            <div class="competitor-two-div border border-top-0 border-3 text-primary d-flex justify-contents-center" :class="{ 'border-lit' : match.winningTeamId != '' && match.winningTeamId != null }">
               {{ getTeamName(match.teamTwoId) }}
             </div>
           </div>
@@ -166,15 +166,42 @@ export default {
 </script>
 
 <style scoped>
+.competitor-one-div {
+  width: 200px;
+  background-color: #333333;
+}
+
+.competitor-two-div {
+  width: 200px;
+  background-color: #555555;
+}
+
 .empty-spacer {
   width: 50px;
   height: 27px;
   border-color: grey !important;
 }
 
+.border {
+  border-color: grey !important;
+  border-radius: 2px;
+}
+
+.border-lit {
+  border-color: lime !important;
+  box-shadow: 0 0 10px 0px lime;
+  animation-name: flicker;
+  animation-duration: 1.7s;
+  animation-iteration-count: infinite;
+}
+
 .empty-spacer-bottom-lit {
   box-shadow: 0px -9px 10px -7px lime;
   border-color: lime !important;
+  animation-name: flicker;
+  animation-duration: 1.7s;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
 }
 
 .border-bottom {
@@ -184,6 +211,10 @@ export default {
 .border-bottom-lit {
   box-shadow: 0px 6px 10px -7px lime;
   border-color: lime !important;
+  animation-name: flicker;
+  animation-duration: 1.7s;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
   
 }
 
@@ -191,4 +222,17 @@ export default {
   border: none !important;
   box-shadow: none;
 }
+
+@keyframes flicker {
+   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    box-shadow: 0 0 0.5rem #fff, inset 0 0 0.5rem #fff, 0 0 2rem var(lime),
+      inset 0 0 2rem var(lime), 0 0 4rem var(lime),
+      inset 0 0 4rem var(lime);
+  }
+
+  20%, 24%, 55% { 
+    box-shadow: none;
+  }
+}
+
 </style>
