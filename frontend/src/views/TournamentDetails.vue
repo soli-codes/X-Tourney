@@ -32,7 +32,10 @@
         >
         <!-- add condition for if currentUser Id is equal to tournament host Id -->
         <button
-          v-if="$store.state.matches.length == 0 && tournament.hostId == $store.state.user.id"
+          v-if="
+            $store.state.matches.length == 0 &&
+              tournament.hostId == $store.state.user.id
+          "
           id="generateBracket"
           v-on:click="generateBracket()"
         >
@@ -52,12 +55,13 @@
       </div>
       <!-- LIST OF ALL TEAMS SIGNED UP BY SEED -->
       <div class="d-flex flex-column align-items-center">
-      <router-link
-        v-for="(team, index) in sortWinLoss()"
-        :key="index"
-        :team="team"
-        :to="{ name: 'teamDetails', params: { teamId: team.teamId }}"
-        class="d-flex justify-content-around align-items-center team-border m-3 w-75">
+        <router-link
+          v-for="(team, index) in sortWinLoss()"
+          :key="index"
+          :team="team"
+          :to="{ name: 'teamDetails', params: { teamId: team.teamId } }"
+          class="d-flex justify-content-around align-items-center team-border m-3 w-75"
+        >
           <div class="d-flex flex-row align-items-center">
             <h4 class="text-danger">#{{ index + 1 }}</h4>
             <img class="team-image" :src="team.teamImage" />
