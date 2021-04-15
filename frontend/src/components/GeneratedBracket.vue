@@ -76,6 +76,7 @@
     <!-- MODAL -->
 
     <div
+      v-if="tournament.hostId == $store.state.user.id"
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
@@ -142,6 +143,7 @@
 import MatchServices from '../services/MatchServices';
 
 export default {
+  props: [ 'tournament'],
   data() {
     return {
       array: [],
@@ -202,7 +204,9 @@ export default {
       });
     },
   },
-  created() {},
+  created() {
+    console.log(this.tournament);
+  },
 };
 </script>
 

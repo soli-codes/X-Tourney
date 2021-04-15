@@ -61,14 +61,21 @@ $muted: #005678;
 $secondary: #020222;
 $gray-200: #01012b;
 @import '../node_modules/bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&display=swap');
 
+*{
+  font-family: Inconsolata,Arial, Helvetica, sans-serif;
+}
 html {
   background-color: #070222 !important;
 }
 
+<<<<<<< HEAD
 .margin-toggle {
   margin-left: 3000px;
 }
+=======
+>>>>>>> ec571e3f37fa5098420f6fc3567278447f514982
 .sideArrow {
   position: fixed;
   color: #b71dde;
