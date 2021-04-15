@@ -7,7 +7,7 @@
         <img
           src="../assets/vectorBlueLogoXTourney.png"
           alt=""
-          class="image-resize image-size spinny navbar-brand"
+          class="image-size spinny navbar-brand"
           id="navbarImage"
         />
       </div>
@@ -25,10 +25,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li
-          class="nav-item sizing collapse-size topButtonAlignment"
-          id="topButtonAlignment"
-        >
+        <li class="nav-item sizing collapse-size homeButtonAlignment">
           <router-link
             :to="{ name: 'home' }"
             class="nav-link text-primary"
@@ -146,11 +143,10 @@ li:hover {
   border: 4px double lime;
   -webkit-box-shadow: 0px 5px 19px 3px lime;
   box-shadow: 0px 5px 19px 3px lime;
-  margin-left: 10px;
   background: black;
 }
 
-.topButtonAlignment {
+.homeButtonAlignment {
   margin-left: 220px;
 }
 
@@ -165,10 +161,7 @@ li:hover {
   width: 150px;
   text-align: center;
 }
-.image-resize {
-  width: 125px;
-  height: 125px;
-}
+
 .image-size {
   width: 175px;
   height: 175px;
