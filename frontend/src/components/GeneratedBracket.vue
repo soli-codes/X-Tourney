@@ -172,12 +172,16 @@ export default {
 <style scoped>
 .competitor-one-div {
   width: 200px;
-  background-color: #333333;
+  background-color: rgb(0,0,15);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .competitor-two-div {
   width: 200px;
   background-color: #555555;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .empty-spacer {
@@ -188,7 +192,6 @@ export default {
 
 .border {
   border-color: grey !important;
-  border-radius: 2px;
 }
 
 .border-lit {

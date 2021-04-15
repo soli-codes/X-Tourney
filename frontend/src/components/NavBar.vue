@@ -126,19 +126,20 @@ ul.dropdown-menu {
   background: transparent !important;
 }
 li {
-  -webkit-box-shadow: 0px 5px 19px 4px rgba(183, 29, 222, 0.75);
-  box-shadow: 0px 5px 19px 4px rgba(183, 29, 222, 0.75);
-  border: 4px double #b71dde;
+  -webkit-box-shadow: 0px 5px 19px 4px rgba(163,73,164, 0.75);
+  box-shadow: 0px 5px 19px 4px rgba(163,73,164, 0.75);
+  border: 4px double rgba(163,73,164, 0.75);
   margin: 1px;
   margin-left: 10px;
   text-align: center;
   list-style-type: none !important;
+  background-color: #182628;
 }
 
 li:hover {
-  border: 4px double rgb(255, 251, 0);
-  -webkit-box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
-  box-shadow: 0px 5px 19px 3px rgb(255, 251, 0);
+  border: 4px double lime;
+  -webkit-box-shadow: 0px 5px 19px 3px lime;
+  box-shadow: 0px 5px 19px 3px lime;
   margin-left: 10px;
   background: black;
 }
