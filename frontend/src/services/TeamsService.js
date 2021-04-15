@@ -37,6 +37,7 @@ export default {
       teamId: thisTeamId,
       userId: thisUserId,
     };
+    console.log(teamNameUser);
     return axios.post('/teamnameusers/create', teamNameUser);
   }
 };
