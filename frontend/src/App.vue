@@ -1,14 +1,16 @@
 <template>
   <div id="app">
     <div class="container-fluid">
-      <NavBar />
+      <NavBar id="navbar" />
       <div class="d-flex vh row">
-        <sidebar class="sidebar position-fixed vh-100 sidebar" id="sidebar" />
+        <sidebar class="position-fixed vh-100 sidebar" id="sidebar" />
         <div
-          class="flex-fill text-info navbar-margin-left navbar-margin-top bg-dark"
+          class="flex-fill text-info navbar-margin-left margin-toggle navbar-margin-top bg-dark"
           id="main"
         >
-          <router-view />
+          <div id="marginToggle">
+            <router-view />
+          </div>
         </div>
       </div>
     </div>
@@ -43,6 +45,10 @@ export default {
       document.getElementById('sidebar').classList.toggle('display');
       document.getElementById('sideArrow').classList.toggle('display');
       document.getElementById('main').classList.toggle('navbar-margin-left');
+      document.getElementById('navbarImage').classList.toggle('image-size');
+      document
+        .getElementById('topButtonAlignment')
+        .classList.toggle('topButtonAlignment');
     },
   },
 };
@@ -50,7 +56,7 @@ export default {
 
 <style lang="scss">
 // Include any default variable overrides here (though functions won't be available)
-$dark: #182628;
+$dark: #181818;
 $primary: #65ccb8;
 $info: #00fff2;
 $warning: lime;
@@ -61,11 +67,11 @@ $danger: rgb(163, 73, 164);
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&display=swap');
 
-*{
-  font-family: Inconsolata,Arial, Helvetica, sans-serif;
+* {
+  font-family: Inconsolata, Arial, Helvetica, sans-serif;
 }
 html {
-  background-color: #070222 !important;
+  background-color: #202020 !important;
 }
 
 .sideArrow {
@@ -79,27 +85,25 @@ html {
 }
 .display {
   display: none;
-  width: 0px !important;
-  height: 0px;
 }
 .top-nav-color {
-  background: #57ba98;
-  // background: linear-gradient(
-  //   180deg,
-  //   #57ba98 0%,
-  //   #51ad8d 25%,
-  //   #3b945e 100%
-  // );
+  background: rgb(16, 16, 16);
+  background: linear-gradient(
+    152deg,
+    rgba(16, 16, 16, 1) 0%,
+    rgba(16, 16, 16, 1) 50%,
+    #65bbc8 100%
+  );
 }
 
 .side-nav-color {
-  background: #57ba98;
-  // background: linear-gradient(
-  //   30deg,
-  //   rgba(0, 11, 24, 1) 0%,
-  //   rgba(0, 23, 45, 1) 25%,
-  //   rgba(0, 38, 77, 1) 100%
-  // );
+  background: rgb(16, 16, 16);
+  background: linear-gradient(
+    152deg,
+    rgba(16, 16, 16, 1) 0%,
+    rgba(16, 16, 16, 1) 50%,
+    #65bbc8 100%
+  );
 }
 .vh {
   height: 100vh;
@@ -109,12 +113,20 @@ html {
   color: #ff455d !important;
   transition-duration: 300ms;
 }
+.margin-toggle {
+  padding-left: 70px;
+}
 
 .navbar-margin-top {
-  margin-top: 112px;
+  margin-top: 100px;
 }
 .navbar-margin-left {
   margin-left: 200px;
+  padding-left: 20px;
+}
+
+#navbar {
+  height: 100px;
 }
 
 .sizing {
@@ -137,7 +149,8 @@ html {
     padding: 0.2rem 0.2rem;
   }
   .navbar-margin-left {
-    margin-left: 0px;
+    margin-left: 50px;
+    background: #070222;
   }
   .sidebar {
     display: none;

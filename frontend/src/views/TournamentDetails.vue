@@ -98,6 +98,7 @@
             </h5>
           </div>
         </router-link>
+        <button @click="teamsCheck">test</button>
       </div>
     </div>
   </div>
@@ -146,14 +147,23 @@ export default {
       }
     );
 
-    TournamentTeamService.getInvitableTeams(this.$route.params.tournamentId)
-    .then(response => {
+    TournamentTeamService.getInvitableTeams(
+      this.$route.params.tournamentId
+    ).then((response) => {
       this.invitableTeams = response.data;
     });
-
   },
 
   methods: {
+    teamsCheck() {
+      let teamIds = [];
+      this.$store.state.teams.forEach((e) => teamIds.push(e.teamId));
+      console.log(teamIds);
+      this.invitableTeams = this.$store.state.allTeams.filter(
+        (e) => !teamIds.includes(e.teamId)
+      );
+      return this.invitableTeams;
+    },
     generateBracket() {
       let tournamentSize = this.tournament.maxTeamCount;
       let tournamentTeams = this.generateSeedArray();
@@ -198,7 +208,7 @@ export default {
         tournamentId: this.$route.params.tournamentId,
         inviteStatus: 'pending',
       };
-      InvitationService.createInvitation(invite).then(response => {
+      InvitationService.createInvitation(invite).then((response) => {
         if (response.status == 201) {
           alert(`Invite sent!`);
           window.location.reload();
