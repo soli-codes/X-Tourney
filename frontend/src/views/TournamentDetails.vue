@@ -59,6 +59,7 @@
       <!-- empty bracket if not generated yet, populated automatically updated bracket if it has been generated -->
       <div class="d-flex">
         <generated-bracket
+          :tournament="tournament"
           v-if="
             $store.state.matches.length > 0 && $store.state.teams.length > 0
           "
