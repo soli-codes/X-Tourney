@@ -74,15 +74,16 @@
           :key="index"
           :team="team"
           :to="{ name: 'teamDetails', params: { teamId: team.teamId } }"
-          class="d-flex justify-content-around align-items-center team-border m-3 w-75"
+          class="d-flex justify-content-center row team-border m-3 w-75"
         >
           <div class="d-flex flex-row align-items-center">
-            <h4 class="text-danger">#{{ index + 1 }}</h4>
-            <img class="team-image" :src="team.teamImage" />
+            <h4 class="text-danger col-1">#{{ index + 1 }}</h4>
+            <img class="team-image col-2" :src="team.teamImage" />
+            <h5 class="text-end col-9">
+              {{ team.teamName }} W/L:
+              {{ (team.wins / team.losses).toFixed(2) }}
+            </h5>
           </div>
-          <h5>
-            {{ team.teamName }} W/L: {{ (team.wins / team.losses).toFixed(2) }}
-          </h5>
         </router-link>
       </div>
     </div>
@@ -174,6 +175,9 @@ export default {
       let seedLength = seedArray.length;
       seedArray.sort((a, b) => {
         if (isNaN(a.wins / a.losses) && isNaN(b.wins / b.losses)) {
+          if (a.losses == 0 && b.losses == 0) {
+            return b.wins - a.wins;
+          }
           return 0;
         }
         if (isNaN(a.wins / a.losses)) {
@@ -198,6 +202,9 @@ export default {
       let sortedArray = this.$store.state.teams;
       sortedArray.sort((a, b) => {
         if (isNaN(a.wins / a.losses) && isNaN(b.wins / b.losses)) {
+          if (a.losses == 0 && b.losses == 0) {
+            return b.wins - a.wins;
+          }
           return 0;
         }
         if (isNaN(a.wins / a.losses)) {
