@@ -2,10 +2,10 @@
   <nav
     class="navbar navbar-expand-lg navbar-primary navbar-dark top-nav-color fixed-top"
   >
-    <router-link :to="{ name: 'home' }">
+    <router-link class="navbar-brand" :to="{ name: 'home' }">
       <img
         src="../assets/vectorBlueLogoXTourney.png"
-        alt=""
+        alt="X-Tourney Logo"
         class="image-size p-0 m-0 spinny"
       />
     </router-link>
