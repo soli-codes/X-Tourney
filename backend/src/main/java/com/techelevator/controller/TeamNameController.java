@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.TeamNameDAO;
 import com.techelevator.model.TeamName;
+import com.techelevator.model.TeamNameUsers;
 
 
 @RestController
@@ -47,8 +48,8 @@ public class TeamNameController {
 	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/teamnames/create", method = RequestMethod.POST)
-	public void create(@Valid @RequestBody TeamName teamName) {
-		dao.createNewTeam(teamName);
+	public TeamName create(@Valid @RequestBody TeamName teamName) {
+		return dao.createNewTeam(teamName);
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -64,4 +65,10 @@ public class TeamNameController {
 		dao.deleteTeam(id);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
+	@ResponseStatus(HttpStatus.CREATED)
+	@RequestMapping(path = "/teamnameusers/create", method = RequestMethod.POST)
+	public void addUserToTeam(@Valid @RequestBody TeamNameUsers teamNameUser) {
+		dao.addUserToTeam(teamNameUser);
+	}
 }
