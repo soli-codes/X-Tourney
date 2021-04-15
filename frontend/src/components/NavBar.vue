@@ -2,12 +2,15 @@
   <nav
     class="navbar navbar-expand-lg navbar-primary navbar-dark top-nav-color fixed-top"
   >
-    <router-link :to="{ name: 'home' }">
-      <img
-        src="../assets/vectorBlueLogoXTourney.png"
-        alt=""
-        class="image-size p-0 m-0 spinny"
-      />
+    <router-link :to="{ name: 'home' }" class="m-0 p-0">
+      <div class="m-0 p-0">
+        <img
+          src="../assets/vectorBlueLogoXTourney.png"
+          alt=""
+          class="image-resize image-size spinny navbar-brand"
+          id="navbarImage"
+        />
+      </div>
     </router-link>
     <button
       class="navbar-toggler"
@@ -22,7 +25,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item sizing collapse-size">
+        <li
+          class="nav-item sizing collapse-size topButtonAlignment"
+          id="topButtonAlignment"
+        >
           <router-link
             :to="{ name: 'home' }"
             class="nav-link text-primary"
@@ -126,9 +132,9 @@ ul.dropdown-menu {
   background: transparent !important;
 }
 li {
-  -webkit-box-shadow: 0px 5px 19px 4px rgba(163,73,164, 0.75);
-  box-shadow: 0px 5px 19px 4px rgba(163,73,164, 0.75);
-  border: 4px double rgba(163,73,164, 0.75);
+  -webkit-box-shadow: 0px 5px 19px 4px rgba(163, 73, 164, 0.75);
+  box-shadow: 0px 5px 19px 4px rgba(163, 73, 164, 0.75);
+  border: 4px double rgba(163, 73, 164, 0.75);
   margin: 1px;
   margin-left: 10px;
   text-align: center;
@@ -144,6 +150,10 @@ li:hover {
   background: black;
 }
 
+.topButtonAlignment {
+  margin-left: 220px;
+}
+
 .right {
   margin-right: 10px;
 }
@@ -155,10 +165,15 @@ li:hover {
   width: 150px;
   text-align: center;
 }
-
+.image-resize {
+  width: 125px;
+  height: 125px;
+}
 .image-size {
-  width: 100px;
-  height: 100px;
+  width: 175px;
+  height: 175px;
+  position: absolute;
+  top: -28%;
 }
 @media (max-width: 1000px) {
   .collapse-size {

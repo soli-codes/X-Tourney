@@ -13,9 +13,15 @@
       <div class="p-2">
         <h3 class="text-center">Jacob Burton</h3>
         <p class="text-white">
-          I've learned that systems make or break any effort no matter how well-intentioned. I came to technology knowing this career will allow me to take my passion for elevating others to an all new scale. I’m eager to  join an ambitious development team, create tools that help others actualize their strengths, and ultimately make a difference.
+          I've learned that systems make or break any effort no matter how
+          well-intentioned. I came to technology knowing this career will allow
+          me to take my passion for elevating others to an all new scale. I’m
+          eager to join an ambitious development team, create tools that help
+          others actualize their strengths, and ultimately make a difference.
         </p>
-        <a href="https://www.linkedin.com/in/jacobburton412/" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/jacobburton412/" target="_blank"
+          >LinkedIn</a
+        >
         |
         <a href="https://github.com/jmburton13" target="_blank">GitHub</a>
       </div>
@@ -116,7 +122,9 @@ export default {};
 .card {
   width: 400px;
 }
-
+.border {
+  box-shadow: lime 0 0 20px -3px;
+}
 .image {
   height: 100%;
   width: 200px;
