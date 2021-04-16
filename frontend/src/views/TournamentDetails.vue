@@ -98,7 +98,6 @@
             </h5>
           </div>
         </router-link>
-        <button @click="teamsCheck">test</button>
       </div>
     </div>
   </div>
