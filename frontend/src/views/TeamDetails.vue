@@ -39,28 +39,14 @@
 import TeamsService from '../services/TeamsService.js';
 
 export default {
-    data() {
-        return {
-            team: {},
-            teamImageURL: '',
-        };
-    },
-    created() {
-        console.log("created")
-        TeamsService.getTeamById(this.$route.params.teamId).then(response => {
-            this.team = response.data;
-        });
-
-    },
-    computed: {
-        isMyTeam() {
-
-            let isMyTeam = this.$store.state.myTeams.filter(myTeam => {
-                return myTeam.teamId == this.team.teamId;
-            });
-
+  data() {
+    return {
+      team: {},
+      teamImageURL: '',
+    };
+  },
   created() {
-    console.log('test');
+    console.log('created');
     TeamsService.getTeamById(this.$route.params.teamId).then((response) => {
       this.team = response.data;
     });
@@ -90,20 +76,22 @@ export default {
     },
 
     joinTeam() {
-        TeamsService.postUserToTeam(this.team.teamId, this.$store.state.user.id).then(response => {
-            console.log(response.data);
-            if (response.data == false) {
-                window.alert("Congrats, You're On The Team!");
-            } else if (response.data == true) {
-                window.alert("You're already on this team!");
-            } else {
-                window.alert("Uh oh, something went wrong.");
-            }
-        })
-    }
-
+      TeamsService.postUserToTeam(
+        this.team.teamId,
+        this.$store.state.user.id
+      ).then((response) => {
+        console.log(response.data);
+        if (response.data == false) {
+          window.alert("Congrats, You're On The Team!");
+        } else if (response.data == true) {
+          window.alert("You're already on this team!");
+        } else {
+          window.alert('Uh oh, something went wrong.');
+        }
+      });
     },
-}
+  },
+};
 </script>
 
 <style scoped>
