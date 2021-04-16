@@ -45,8 +45,10 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column align-items-center">
         <h2>Scout the Opposition</h2>
-        <p class="text-primary">See where you stand by browsing all of the teams on X-Tourney. 
-          See how you compare by checking statistics in our team-details view.</p>
+        <p class="text-primary">
+          See where you stand by browsing all of the teams on X-Tourney. See how
+          you compare by checking statistics in our team-details view.
+        </p>
       </div>
       <div>
         <img
@@ -99,7 +101,9 @@
       <!-- make div into vertical flexbox // will contain StepX title and description -->
       <div class="d-flex flex-column justify-content-around align-items-center">
         <h2>Host a Tournament</h2>
-        <p class="text-primary">Ready to do more than just play? Create your own tournament today!</p>
+        <p class="text-primary">
+          Ready to do more than just play? Create your own tournament today!
+        </p>
       </div>
       <div>
         <img
@@ -121,7 +125,7 @@ export default {
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 
 .step-card {
-  background-color: rgb(0,0,15)
+  background-color: rgb(0, 0, 15);
 }
 
 .image {
@@ -159,5 +163,10 @@ p {
 
 h2 {
   color: #00fff2;
+}
+@media (max-width: 500px) {
+  img {
+    display: none;
+  }
 }
 </style>
