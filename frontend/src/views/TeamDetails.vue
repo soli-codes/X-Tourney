@@ -1,6 +1,9 @@
 <template>
-  <div class="container">
-    <div id="content" class="flex-row flex-wrap d-flex justify-content-center">
+  <div>
+    <div
+      id="content"
+      class="d-flex flex-row flex-wrap justify-content-center  "
+    >
       <img :src="team.teamImage" />
       <div id="details">
         <h2>Team Name: {{ team.teamName }}</h2>
@@ -9,7 +12,7 @@
         <h5>
           Match Win Loss Percentage:
           {{
-            team.wins == 0 && team.losses == 0
+            team.win == 0 && team.losses == 0
               ? 0
               : (team.wins / team.losses).toFixed(2)
           }}
@@ -26,7 +29,9 @@
         </div>
       </div>
     </div>
-    <button>Join Team</button>
+    <div class="d-flex justify-contents-center mt-3">
+      <button class="button bg-primary" @click="joinTeam()">Join Team</button>
+    </div>
   </div>
 </template>
 
@@ -34,12 +39,25 @@
 import TeamsService from '../services/TeamsService.js';
 
 export default {
-  data() {
-    return {
-      team: {},
-      teamImageURL: '',
-    };
-  },
+    data() {
+        return {
+            team: {},
+            teamImageURL: '',
+        };
+    },
+    created() {
+        console.log("created")
+        TeamsService.getTeamById(this.$route.params.teamId).then(response => {
+            this.team = response.data;
+        });
+
+    },
+    computed: {
+        isMyTeam() {
+
+            let isMyTeam = this.$store.state.myTeams.filter(myTeam => {
+                return myTeam.teamId == this.team.teamId;
+            });
 
   created() {
     console.log('test');
@@ -70,8 +88,22 @@ export default {
         }
       });
     },
-  },
-};
+
+    joinTeam() {
+        TeamsService.postUserToTeam(this.team.teamId, this.$store.state.user.id).then(response => {
+            console.log(response.data);
+            if (response.data == false) {
+                window.alert("Congrats, You're On The Team!");
+            } else if (response.data == true) {
+                window.alert("You're already on this team!");
+            } else {
+                window.alert("Uh oh, something went wrong.");
+            }
+        })
+    }
+
+    },
+}
 </script>
 
 <style scoped>
@@ -85,8 +117,23 @@ img {
   margin-right: 40px;
 }
 
+img {
+  margin-top: 35px;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  border-color: #ff455d;
+  border-style: solid;
+  margin-right: 40px;
+}
+
 #content {
   align-items: center;
   justify-items: center;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

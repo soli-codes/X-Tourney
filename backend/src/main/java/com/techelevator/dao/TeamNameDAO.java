@@ -19,5 +19,5 @@ public interface TeamNameDAO {
 	
 	void deleteTeam(int id);
 	
-	void addUserToTeam(TeamNameUsers teamNameUser);
+	boolean addUserToTeam(TeamNameUsers teamNameUser);
 }

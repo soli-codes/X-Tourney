@@ -68,7 +68,7 @@ public class TeamNameController {
 	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/teamnameusers/create", method = RequestMethod.POST)
-	public void addUserToTeam(@Valid @RequestBody TeamNameUsers teamNameUser) {
-		dao.addUserToTeam(teamNameUser);
+	public boolean addUserToTeam(@Valid @RequestBody TeamNameUsers teamNameUser) {
+		return dao.addUserToTeam(teamNameUser);
 	}
 }
